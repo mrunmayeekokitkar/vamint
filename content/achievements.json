@@ -1,0 +1,28 @@
+[
+  {
+    "year": "2026",
+    "achievements": [
+      {
+        "title": "1st Place - National Smart Web Hackathon",
+        "description": "Won the top prize for compiling an offline-first crisis relief mapper with peer-to-peer data syncing."
+      },
+      {
+        "title": "Top 10 Finalist - Global AI Agent Contest",
+        "description": "Competed against international teams to build highly responsive, self-healing local multi-agent environments."
+      }
+    ]
+  },
+  {
+    "year": "2025",
+    "achievements": [
+      {
+        "title": "2nd Place - Inter-College Cyber Defense Rally",
+        "description": "Secured the runner-up position in real-time server defense, handling zero-day exploits across microservice stacks."
+      },
+      {
+        "title": "GitHub Campus Program Integration",
+        "description": "Formally integrated VAMINT projects into the official GitHub Campus Registry, providing cloud access for student devs."
+      }
+    ]
+  }
+]

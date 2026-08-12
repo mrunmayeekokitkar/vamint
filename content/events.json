@@ -1,0 +1,56 @@
+[
+  {
+    "slug": "syntax-showdown-2026",
+    "title": "Syntax Showdown 2026",
+    "date": "2026-09-15T10:00:00.000Z",
+    "location": "Main Seminar Hall & Online",
+    "type": "Hackathon",
+    "status": "upcoming",
+    "description": "The annual flagship coding hackathon of VAMINT. 24 hours of intense problem solving, building, and pitching. Open to all branches and years.",
+    "organizers": ["Technical Team", "Events Committee"],
+    "prerequisites": "Basic understanding of programming, Git, and web technologies.",
+    "whatToBring": "Laptop, charger, college ID, and lots of enthusiasm.",
+    "image": "/images/syntax_showdown.jpg"
+  },
+  {
+    "slug": "ai-ml-agents-crash-course",
+    "title": "AI & ML Agents Crash Course",
+    "date": "2026-08-25T14:30:00.000Z",
+    "location": "Lab 4, IT Block",
+    "type": "Workshop",
+    "status": "upcoming",
+    "description": "Learn how to build autonomous agents using modern Large Language Model APIs. Walk away with a functioning agent running on your local machine.",
+    "organizers": ["AI/ML Lead"],
+    "prerequisites": "Python programming knowledge (loops, functions, classes).",
+    "whatToBring": "Laptop with Python 3.10+ and VS Code installed.",
+    "image": "/images/ai_agents.jpg"
+  },
+  {
+    "slug": "bytecraft-web-hack-2026",
+    "title": "ByteCraft Web Hack",
+    "date": "2026-04-12T09:00:00.000Z",
+    "location": "Seminar Hall A",
+    "type": "Hackathon",
+    "status": "past",
+    "description": "A 12-hour web design and development competition focused on building high-performance modern web apps.",
+    "organizers": ["Design & Web Leads"],
+    "prerequisites": "HTML, CSS, JS",
+    "whatToBring": "None (completed)",
+    "image": "/images/bytecraft.jpg",
+    "outcome": "Over 150 participants built stellar responsive designs. Winners built a local student resource sharing system using Next.js."
+  },
+  {
+    "slug": "competitive-programming-sprint",
+    "title": "CP Sprint - Division 3",
+    "date": "2026-03-20T18:00:00.000Z",
+    "location": "HackerRank Platform",
+    "type": "Contest",
+    "status": "past",
+    "description": "A fast-paced algorithm sprint featuring 6 problems ranging from basic implementation to graph search algorithms.",
+    "organizers": ["CP Lead"],
+    "prerequisites": "Algorithms and Data Structures",
+    "whatToBring": "None (completed)",
+    "image": "/images/cp_sprint.jpg",
+    "outcome": "Top positions were secured by sophomore CS students, scoring perfect points across all test cases."
+  }
+]

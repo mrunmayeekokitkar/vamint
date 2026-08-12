@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+:root {
+  /* Color system - VAMINT Mint & Dark theme */
+  --background: #0A0D0C;
+  --foreground: #F3F6F4;
+  
+  --bg-primary: #0A0D0C;
+  --bg-surface: #121613;
+  --bg-surface-raised: #181D19;
+  --border-subtle: #232A25;
+  
+  --text-primary: #F3F6F4;
+  --text-secondary: #99A69E;
+  --text-tertiary: #5C6A62;
+  
+  --mint-500: #35E2A6;
+  --mint-400: #6FF0C2;
+  --mint-700: #14805E;
+  
+  --amber-500: #FFB454;
+  --error-500: #F06565;
+}
+
+/* Light mode support */
+.light-mode {
+  --background: #F3F6F4;
+  --foreground: #0A0D0C;
+  
+  --bg-primary: #F3F6F4;
+  --bg-surface: #E8EDE9;
+  --bg-surface-raised: #DCE3DE;
+  --border-subtle: #C6D1CA;
+  
+  --text-primary: #0A0D0C;
+  --text-secondary: #4A5650;
+  --text-tertiary: #7D8D85;
+  
+  --mint-500: #14805E;
+  --mint-400: #35E2A6;
+  --mint-700: #0B4734;
+}
+
+@theme {
+  /* Register colors for Tailwind utility usage */
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-surface: var(--bg-surface);
+  --color-bg-surface-raised: var(--bg-surface-raised);
+  --color-border-subtle: var(--border-subtle);
+  
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  
+  --color-mint-500: var(--mint-500);
+  --color-mint-400: var(--mint-400);
+  --color-mint-700: var(--mint-700);
+  
+  --color-amber-500: var(--amber-500);
+  --color-error-500: var(--error-500);
+
+  /* Register fonts */
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-space-grotesk);
+  --font-mono: var(--font-jetbrains-mono);
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-inter), sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+}
+
+/* Core Typographic Rules */
+.font-display {
+  font-family: var(--font-space-grotesk), sans-serif;
+}
+
+.font-mono {
+  font-family: var(--font-jetbrains-mono), monospace;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-tertiary);
+}
+
+/* Custom Micro-animations */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.animate-blink {
+  animation: blink 1.2s infinite;
+}
+
+/* Custom utility styles */
+.gradient-border-glow:hover {
+  box-shadow: 0 0 15px rgba(53, 226, 166, 0.15);
+  border-color: var(--mint-500);
+}
+
+.text-glow {
+  text-shadow: 0 0 10px rgba(53, 226, 166, 0.3);
+}

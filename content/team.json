@@ -1,0 +1,52 @@
+[
+  {
+    "name": "Sanjay Kumar",
+    "role": "Club President",
+    "bio": "Specializes in systems design and WebAssembly compiler optimization. Quiet coder by day, club lead by night.",
+    "funFact": "Once debugged a production segfault on a flight with 5% battery left.",
+    "github": "https://github.com",
+    "linkedin": "https://linkedin.com",
+    "image": "/images/team_president.jpg",
+    "category": "Core Committee"
+  },
+  {
+    "name": "Mrunmayee Kokitkar",
+    "role": "Vice President",
+    "bio": "Web architecture expert. Passionate about building modular component systems and high-fidelity frontends.",
+    "funFact": "Has 12 browser windows open, each with at least 50 tabs.",
+    "github": "https://github.com",
+    "linkedin": "https://linkedin.com",
+    "image": "/images/team_vp.jpg",
+    "category": "Core Committee"
+  },
+  {
+    "name": "Devansh Shah",
+    "role": "Technical Lead (AI/ML)",
+    "bio": "Researches local agentic workflows and transformer architecture optimizations.",
+    "funFact": "Trained a tiny model to write commit messages in his exact typing pattern.",
+    "github": "https://github.com",
+    "linkedin": "https://linkedin.com",
+    "image": "/images/team_technical.jpg",
+    "category": "Core Committee"
+  },
+  {
+    "name": "Ananya Hegde",
+    "role": "Design Lead",
+    "bio": "Bridges technical layouts with visual hierarchies. Believes strongly in typography and minimal space.",
+    "funFact": "Can identify any Google Font within three milliseconds of scanning.",
+    "github": "https://github.com",
+    "linkedin": "https://linkedin.com",
+    "image": "/images/team_design.jpg",
+    "category": "Core Committee"
+  },
+  {
+    "name": "Dr. Vivek Murthy",
+    "role": "Faculty Coordinator",
+    "bio": "Professor of Computer Science & Engineering. Supports student innovation and open-source contributions.",
+    "funFact": "Taught the first C programming course at the university back in 1998.",
+    "github": "",
+    "linkedin": "https://linkedin.com",
+    "image": "/images/team_faculty.jpg",
+    "category": "Advisory"
+  }
+]
