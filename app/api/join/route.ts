@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+// import { prisma } from '@/lib/prisma';
 import { z } from 'zod';
 
 // Validation schema
@@ -29,19 +29,19 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Store in database
-    const submission = await prisma.joinSubmission.create({
-      data: {
-        name: validatedData.name,
-        email: validatedData.email,
-        rollNo: validatedData.rollNo,
-        year: validatedData.year,
-        branch: validatedData.branch,
-        domains: JSON.stringify(validatedData.domains),
-        github: validatedData.github || null,
-        reason: validatedData.reason,
-      },
-    });
+    // TODO: Store in database when Prisma is set up
+    // const submission = await prisma.joinSubmission.create({
+    //   data: {
+    //     name: validatedData.name,
+    //     email: validatedData.email,
+    //     rollNo: validatedData.rollNo,
+    //     year: validatedData.year,
+    //     branch: validatedData.branch,
+    //     domains: JSON.stringify(validatedData.domains),
+    //     github: validatedData.github || null,
+    //     reason: validatedData.reason,
+    //   },
+    // });
 
     // TODO: Send notification email to committee using Resend
     // if (process.env.RESEND_API_KEY) {
@@ -53,8 +53,10 @@ export async function POST(request: NextRequest) {
     //   });
     // }
 
+    console.log('Join submission (database disabled):', validatedData);
+
     return NextResponse.json(
-      { success: true, id: submission.id },
+      { success: true, message: "Database not configured - submission logged to console" },
       { status: 201 }
     );
   } catch (error) {

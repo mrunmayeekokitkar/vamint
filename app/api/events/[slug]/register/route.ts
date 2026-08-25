@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+// import { prisma } from '@/lib/prisma';
 import { z } from 'zod';
 
 // Validation schema
@@ -20,24 +20,24 @@ export async function POST(
     // Validate input
     const validatedData = registrationSchema.parse(body);
     
-    // Get event details
-    const event = await prisma.event.findUnique({
-      where: { slug },
-    });
+    // TODO: Get event details from database when Prisma is set up
+    // const event = await prisma.event.findUnique({
+    //   where: { slug },
+    // });
 
-    if (!event) {
-      return NextResponse.json(
-        { error: "Event not found" },
-        { status: 404 }
-      );
-    }
+    // if (!event) {
+    //   return NextResponse.json(
+    //     { error: "Event not found" },
+    //     { status: 404 }
+    //   );
+    // }
 
-    if (event.status !== 'upcoming') {
-      return NextResponse.json(
-        { error: "Registration is closed for this event" },
-        { status: 400 }
-      );
-    }
+    // if (event.status !== 'upcoming') {
+    //   return NextResponse.json(
+    //     { error: "Registration is closed for this event" },
+    //     { status: 400 }
+    //   );
+    // }
 
     // Check for spam
     if ('honeypot' in body && body.honeypot) {
@@ -47,29 +47,21 @@ export async function POST(
       );
     }
 
-    // Store registration
-    const registration = await prisma.eventRegistration.create({
-      data: {
-        eventId: event.id,
-        eventName: event.title,
-        name: validatedData.name,
-        email: validatedData.email,
-        rollNumber: validatedData.rollNumber || null,
-      },
-    });
+    // TODO: Store registration in database when Prisma is set up
+    // const registration = await prisma.eventRegistration.create({
+    //   data: {
+    //     eventId: event.id,
+    //     eventName: event.title,
+    //     name: validatedData.name,
+    //     email: validatedData.email,
+    //     rollNumber: validatedData.rollNumber || null,
+    //   },
+    // });
 
-    // TODO: Send confirmation email
-    // if (process.env.RESEND_API_KEY) {
-    //   await resend.emails.send({
-    //     from: 'VAMINT <noreply@vamint.club>',
-    //     to: validatedData.email,
-    //     subject: `Registration Confirmed: ${event.title}`,
-    //     html: `<p>You're registered for ${event.title}!</p>`,
-    //   });
-    // }
+    console.log('Event registration (database disabled):', { slug, validatedData });
 
     return NextResponse.json(
-      { success: true, id: registration.id },
+      { success: true, message: "Database not configured - registration logged to console" },
       { status: 201 }
     );
   } catch (error) {
