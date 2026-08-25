@@ -109,10 +109,10 @@ body {
 
 /* Custom utility styles */
 .gradient-border-glow:hover {
-  box-shadow: 0 0 15px rgba(53, 226, 166, 0.15);
-  border-color: var(--mint-500);
+  box-shadow: 0 0 15px rgba(242, 185, 15, 0.15);
+  border-color: var(--mustard-500);
 }
 
 .text-glow {
-  text-shadow: 0 0 10px rgba(53, 226, 166, 0.3);
+  text-shadow: 0 0 10px rgba(242, 185, 15, 0.3);
 }

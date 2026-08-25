@@ -1,0 +1,83 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Join Us form submissions
+model JoinSubmission {
+  id          String   @id @default(cuid())
+  name        String
+  email       String
+  rollNo      String
+  year        String
+  branch      String
+  domains     String   // Stored as JSON array string
+  github      String?
+  reason      String
+  submittedAt DateTime @default(now())
+  
+  @@index([email])
+  @@index([submittedAt])
+}
+
+// Event registrations
+model EventRegistration {
+  id          String   @id @default(cuid())
+  eventId     String
+  eventName   String
+  name        String
+  email       String
+  rollNumber  String?
+  submittedAt DateTime @default(now())
+  
+  @@index([eventId])
+  @@index([email])
+}
+
+// Events (managed by admin)
+model Event {
+  id           String   @id @default(cuid())
+  slug         String   @unique
+  title        String
+  date         DateTime
+  location     String
+  type         String
+  status       String   // "upcoming" or "past"
+  description  String
+  organizers   String   // Stored as JSON array string
+  prerequisites String?
+  whatToBring   String?
+  image        String?
+  outcome      String?  // For past events
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  
+  registrations EventRegistration[]
+  
+  @@index([status])
+  @@index([date])
+}
+
+// Team members (managed by admin)
+model TeamMember {
+  id        String   @id @default(cuid())
+  name      String
+  role      String
+  bio       String?
+  funFact   String?
+  github    String?
+  linkedin  String?
+  image     String?
+  category  String   // "Core Committee" or "Advisory"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@index([category])
+}

@@ -72,7 +72,7 @@ export default function Navbar() {
           <span className="font-display font-semibold text-lg tracking-wider text-text-primary">
             [ vamint ]
           </span>
-          <span className="w-1.5 h-4 bg-mint-500 animate-blink"></span>
+          <span className="w-1.5 h-4 bg-mustard-500 animate-blink"></span>
         </Link>
 
         {/* Desktop Nav */}
@@ -85,13 +85,13 @@ export default function Navbar() {
                 href={item.path}
                 className={`relative font-sans text-sm font-medium tracking-wide transition-colors py-1 ${
                   isActive
-                    ? "text-mint-500"
+                    ? "text-mustard-500"
                     : "text-text-secondary hover:text-text-primary"
                 }`}
               >
                 {item.name}
                 {isActive && (
-                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-mint-500 rounded-full" />
+                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-mustard-500 rounded-full" />
                 )}
               </Link>
             );
@@ -109,7 +109,7 @@ export default function Navbar() {
           </button>
           <Link
             href="/join"
-            className="px-4 py-2 border border-mint-500/30 hover:border-mint-500 bg-mint-500/5 hover:bg-mint-500/15 text-mint-500 rounded-md font-sans text-sm font-semibold transition-all duration-200"
+            className="px-4 py-2 border border-mustard-500/30 hover:border-mustard-500 bg-mustard-500/5 hover:bg-mustard-500/15 text-mustard-500 rounded-md font-sans text-sm font-semibold transition-all duration-200"
           >
             Join Us
           </Link>
@@ -146,11 +146,11 @@ export default function Navbar() {
                   href={item.path}
                   onClick={() => setIsOpen(false)}
                   className={`font-display text-2xl font-medium tracking-wide py-2 border-b border-border-subtle/50 flex justify-between items-center ${
-                    isActive ? "text-mint-500" : "text-text-secondary"
+                    isActive ? "text-mustard-500" : "text-text-secondary"
                   }`}
                 >
                   <span>{item.name}</span>
-                  {isActive && <span className="w-2 h-2 bg-mint-500 rounded-full" />}
+                  {isActive && <span className="w-2 h-2 bg-mustard-500 rounded-full" />}
                 </Link>
               );
             })}
@@ -160,7 +160,7 @@ export default function Navbar() {
             <Link
               href="/join"
               onClick={() => setIsOpen(false)}
-              className="w-full text-center py-4 bg-mint-500 text-bg-primary rounded-md font-sans font-semibold transition-all duration-200 hover:bg-mint-400"
+              className="w-full text-center py-4 bg-mustard-500 text-bg-primary rounded-md font-sans font-semibold transition-all duration-200 hover:bg-mustard-400"
             >
               Join VAMINT
             </Link>

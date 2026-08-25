@@ -28,7 +28,7 @@ export default function About() {
       <main className="flex-grow pt-32 pb-24 max-w-[1280px] mx-auto px-6 md:px-12">
         {/* Hero Info */}
         <div className="max-w-3xl mb-20">
-          <div className="font-mono text-xs text-mint-500 uppercase tracking-wider mb-3">
+          <div className="font-mono text-xs text-mustard-500 uppercase tracking-wider mb-3">
             [ Origin & Story ]
           </div>
           <h1 className="font-display font-semibold text-4xl md:text-6xl tracking-tight text-text-primary mb-6">
@@ -42,21 +42,21 @@ export default function About() {
         {/* Mission / Values Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
           <Card className="flex flex-col space-y-3">
-            <Rocket className="text-mint-500 mb-2" size={24} />
+            <Rocket className="text-mustard-500 mb-2" size={24} />
             <h3 className="font-display font-semibold text-lg text-text-primary">Peer Mentorship</h3>
             <p className="font-sans text-sm text-text-secondary leading-relaxed">
               We bridge academic gaps by teaming junior developers with seniors shipping functional web systems and compiler engines.
             </p>
           </Card>
           <Card className="flex flex-col space-y-3">
-            <GraduationCap className="text-mint-500 mb-2" size={24} />
+            <GraduationCap className="text-mustard-500 mb-2" size={24} />
             <h3 className="font-display font-semibold text-lg text-text-primary">Practical Systems</h3>
             <p className="font-sans text-sm text-text-secondary leading-relaxed">
               No generic theory. Every semester is centered around shipping 2-3 production-grade open-source tools to GitHub campus registry.
             </p>
           </Card>
           <Card className="flex flex-col space-y-3">
-            <Users2 className="text-mint-500 mb-2" size={24} />
+            <Users2 className="text-mustard-500 mb-2" size={24} />
             <h3 className="font-display font-semibold text-lg text-text-primary">Clean Collaboration</h3>
             <p className="font-sans text-sm text-text-secondary leading-relaxed">
               We cultivate a community that is confident, quiet, and collaborative. We communicate in pull requests and clean code.
@@ -73,8 +73,8 @@ export default function About() {
             {milestones.map((m, index) => (
               <div key={index} className="relative">
                 {/* Timeline dot */}
-                <span className="absolute -left-[31px] md:-left-[47px] top-1.5 w-3 h-3 rounded-full bg-mint-500 ring-4 ring-bg-primary"></span>
-                <span className="font-mono text-xs text-mint-500 mb-1 block">{m.year}</span>
+                <span className="absolute -left-[31px] md:-left-[47px] top-1.5 w-3 h-3 rounded-full bg-mustard-500 ring-4 ring-bg-primary"></span>
+                <span className="font-mono text-xs text-mustard-500 mb-1 block">{m.year}</span>
                 <h3 className="font-display font-semibold text-lg text-text-primary mb-2">{m.title}</h3>
                 <p className="font-sans text-sm text-text-secondary leading-relaxed max-w-xl">{m.desc}</p>
               </div>
@@ -85,20 +85,20 @@ export default function About() {
         {/* Achievements Section */}
         <div id="achievements" className="mb-24 scroll-mt-24">
           <h2 className="font-display font-semibold text-2xl md:text-3xl text-text-primary mb-8 flex items-center gap-2">
-            <Award size={24} className="text-mint-500" />
+            <Award size={24} className="text-mustard-500" />
             Club Achievements
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {achievements.map((group, index) => (
               <Card key={index} className="space-y-6">
-                <div className="font-mono text-xs font-semibold text-mint-500 border-b border-border-subtle/50 pb-2">
+                <div className="font-mono text-xs font-semibold text-mustard-500 border-b border-border-subtle/50 pb-2">
                   Year {group.year}
                 </div>
                 <div className="space-y-4">
                   {group.achievements.map((a: any, i: number) => (
                     <div key={i} className="space-y-1">
                       <h4 className="font-display font-semibold text-sm text-text-primary flex items-center gap-1.5">
-                        <Trophy size={14} className="text-mint-500" />
+                        <Trophy size={14} className="text-mustard-500" />
                         {a.title}
                       </h4>
                       <p className="font-sans text-xs text-text-secondary leading-relaxed pl-5">

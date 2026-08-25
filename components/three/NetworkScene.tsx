@@ -112,7 +112,7 @@ function ParticleNetwork({ scrollProgress }: { scrollProgress: number }) {
         </bufferGeometry>
         <PointMaterial
           transparent
-          color="#35E2A6"
+          color="#FFD700"
           size={0.12}
           sizeAttenuation={true}
           depthWrite={false}
@@ -124,7 +124,7 @@ function ParticleNetwork({ scrollProgress }: { scrollProgress: number }) {
       <lineSegments ref={lineSegmentsRef}>
         <bufferGeometry />
         <lineBasicMaterial
-          color="#35E2A6"
+          color="#FFD700"
           transparent
           opacity={0.15 + scrollProgress * 0.25}
           linewidth={1}
@@ -159,7 +159,7 @@ export default function NetworkScene() {
   if (prefersReducedMotion) {
     return (
       <div className="absolute inset-0 flex items-center justify-center opacity-25 pointer-events-none">
-        <svg width="100%" height="100%" className="w-full h-full max-w-lg text-mint-500/20">
+        <svg width="100%" height="100%" className="w-full h-full max-w-lg text-mustard-500/20">
           <circle cx="20%" cy="30%" r="4" fill="currentColor" />
           <circle cx="45%" cy="40%" r="5" fill="currentColor" />
           <circle cx="75%" cy="60%" r="3" fill="currentColor" />

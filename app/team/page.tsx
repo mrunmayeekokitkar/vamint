@@ -25,7 +25,7 @@ export default function Team() {
       <main className="flex-grow pt-32 pb-24 max-w-[1280px] mx-auto px-6 md:px-12 w-full">
         {/* Header */}
         <div className="max-w-3xl mb-16">
-          <div className="font-mono text-xs text-mint-500 uppercase tracking-wider mb-3">
+          <div className="font-mono text-xs text-mustard-500 uppercase tracking-wider mb-3">
             [ Core Committee ]
           </div>
           <h1 className="font-display font-semibold text-4xl md:text-6xl tracking-tight text-text-primary mb-6">
@@ -56,7 +56,7 @@ export default function Team() {
                     <h3 className="font-display font-semibold text-lg text-text-primary">
                       {member.name}
                     </h3>
-                    <p className="font-mono text-xs text-mint-500 mt-1">{member.role}</p>
+                    <p className="font-mono text-xs text-mustard-500 mt-1">{member.role}</p>
                   </div>
                   <p className="font-sans text-xs text-text-secondary leading-relaxed">
                     {member.bio}
@@ -64,9 +64,9 @@ export default function Team() {
                 </div>
 
                 {/* Fun Fact overlay on hover */}
-                <div className="absolute inset-0 bg-bg-surface-raised p-6 flex flex-col justify-between border border-mint-500/30 rounded-lg translate-y-[100%] transition-transform duration-300 ease-in-out group-hover:translate-y-0">
+                <div className="absolute inset-0 bg-bg-surface-raised p-6 flex flex-col justify-between border border-mustard-500/30 rounded-lg translate-y-[100%] transition-transform duration-300 ease-in-out group-hover:translate-y-0">
                   <div className="space-y-3">
-                    <div className="flex items-center space-x-2 text-mint-500">
+                    <div className="flex items-center space-x-2 text-mustard-500">
                       <MessageSquareCode size={16} />
                       <span className="font-mono text-[10px] uppercase tracking-wider">LOCAL_FACT.LOG</span>
                     </div>
@@ -145,7 +145,7 @@ export default function Team() {
                       <h3 className="font-display font-semibold text-lg text-text-primary">
                         {member.name}
                       </h3>
-                      <p className="font-mono text-xs text-mint-500 mt-0.5">{member.role}</p>
+                      <p className="font-mono text-xs text-mustard-500 mt-0.5">{member.role}</p>
                     </div>
                     <p className="font-sans text-xs text-text-secondary leading-relaxed">
                       {member.bio}

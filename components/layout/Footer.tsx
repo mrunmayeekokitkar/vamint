@@ -14,10 +14,10 @@ export default function Footer() {
               <span className="font-display font-semibold text-lg tracking-wider text-text-primary">
                 [ vamint ]
               </span>
-              <span className="w-1.5 h-4 bg-mint-500 animate-blink"></span>
+              <span className="w-1.5 h-4 bg-mustard-500 animate-blink"></span>
             </Link>
-            <p className="font-sans text-xs text-text-secondary leading-relaxed max-w-[240px]">
-              The technical coding club. Confident, quiet, technical. Building digital systems that compilation demands.
+            <p className="font-serif text-xs text-text-secondary leading-relaxed max-w-[240px]">
+              Code. Collaborate. Evolve. Building together, learning together.
             </p>
           </div>
 
@@ -28,22 +28,22 @@ export default function Footer() {
             </h4>
             <ul className="space-y-3 font-sans text-sm">
               <li>
-                <Link href="/about" className="text-text-secondary hover:text-text-primary transition-colors">
+                <Link href="/about" className="text-text-secondary hover:text-mustard-500 transition-colors">
                   About
                 </Link>
               </li>
               <li>
-                <Link href="/events" className="text-text-secondary hover:text-text-primary transition-colors">
+                <Link href="/events" className="text-text-secondary hover:text-mustard-500 transition-colors">
                   Events
                 </Link>
               </li>
               <li>
-                <Link href="/projects" className="text-text-secondary hover:text-text-primary transition-colors">
+                <Link href="/projects" className="text-text-secondary hover:text-mustard-500 transition-colors">
                   Projects
                 </Link>
               </li>
               <li>
-                <Link href="/team" className="text-text-secondary hover:text-text-primary transition-colors">
+                <Link href="/team" className="text-text-secondary hover:text-mustard-500 transition-colors">
                   Team
                 </Link>
               </li>
@@ -56,23 +56,23 @@ export default function Footer() {
             </h4>
             <ul className="space-y-3 font-sans text-sm">
               <li>
-                <Link href="/gallery" className="text-text-secondary hover:text-text-primary transition-colors">
+                <Link href="/gallery" className="text-text-secondary hover:text-mustard-500 transition-colors">
                   Gallery
                 </Link>
               </li>
               <li>
-                <Link href="/faq" className="text-text-secondary hover:text-text-primary transition-colors">
+                <Link href="/faq" className="text-text-secondary hover:text-mustard-500 transition-colors">
                   FAQ
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-text-secondary hover:text-text-primary transition-colors">
+                <Link href="/contact" className="text-text-secondary hover:text-mustard-500 transition-colors">
                   Contact
                 </Link>
               </li>
               <li>
-                <Link href="/about#achievements" className="text-text-secondary hover:text-text-primary transition-colors flex items-center gap-1">
-                  Achievements <ExternalLink size={12} className="text-mint-500" />
+                <Link href="/about#achievements" className="text-text-secondary hover:text-mustard-500 transition-colors flex items-center gap-1">
+                  Achievements <ExternalLink size={12} className="text-mustard-500" />
                 </Link>
               </li>
             </ul>
@@ -88,7 +88,7 @@ export default function Footer() {
                 href="https://github.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 bg-bg-surface border border-border-subtle rounded text-text-secondary hover:text-mint-500 hover:border-mint-500/30 transition-all duration-200"
+                className="p-2 bg-bg-surface border border-border-subtle rounded text-text-secondary hover:text-mustard-500 hover:border-mustard-500/30 transition-all duration-200"
                 aria-label="GitHub"
               >
                 <Globe size={18} />
@@ -97,7 +97,7 @@ export default function Footer() {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 bg-bg-surface border border-border-subtle rounded text-text-secondary hover:text-mint-500 hover:border-mint-500/30 transition-all duration-200"
+                className="p-2 bg-bg-surface border border-border-subtle rounded text-text-secondary hover:text-mustard-500 hover:border-mustard-500/30 transition-all duration-200"
                 aria-label="LinkedIn"
               >
                 <Globe size={18} />
@@ -106,7 +106,7 @@ export default function Footer() {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 bg-bg-surface border border-border-subtle rounded text-text-secondary hover:text-mint-500 hover:border-mint-500/30 transition-all duration-200"
+                className="p-2 bg-bg-surface border border-border-subtle rounded text-text-secondary hover:text-mustard-500 hover:border-mustard-500/30 transition-all duration-200"
                 aria-label="Instagram"
               >
                 <Globe size={18} />
@@ -114,7 +114,7 @@ export default function Footer() {
             </div>
             <p className="font-sans text-xs text-text-secondary">
               Contact:{" "}
-              <a href="mailto:hello@vamint.club" className="text-text-primary hover:text-mint-500 transition-colors">
+              <a href="mailto:hello@vamint.club" className="text-text-primary hover:text-mustard-500 transition-colors">
                 hello@vamint.club
               </a>
             </p>
@@ -128,11 +128,6 @@ export default function Footer() {
             <Link href="/legal" className="hover:text-text-primary transition-colors">
               Code of Conduct & Privacy
             </Link>
-            <span className="text-text-tertiary">|</span>
-            <span className="flex items-center gap-1 text-text-tertiary">
-              Built with precision by{" "}
-              <span className="text-text-secondary font-mono">VAMINT Dev</span>
-            </span>
           </div>
         </div>
       </div>

@@ -57,11 +57,31 @@ export default function Join() {
 
   const onSubmit = async (data: JoinFormValues) => {
     setIsSubmitting(true);
-    // Simulate submission
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    setIsSubmitting(false);
-    setSubmitSuccess(true);
-    reset();
+    setError(null);
+
+    try {
+      const response = await fetch("/api/join", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...data,
+          domains: selectedDomains,
+          honeypot: "", // Empty for real users, bots will fill this
+        }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setSubmitSuccess(true);
+      } else {
+        setError(result.error || "Something went wrong");
+      }
+    } catch (err) {
+      setError("Failed to submit. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const domainOptions = ["Web Dev", "AI/ML", "Competitive Programming", "Cybersecurity"];
@@ -76,7 +96,7 @@ export default function Join() {
           {/* Why Join & Info */}
           <div className="lg:col-span-2 space-y-12">
             <div className="space-y-4">
-              <div className="font-mono text-xs text-mint-500 uppercase tracking-wider">
+              <div className="font-mono text-xs text-mustard-500 uppercase tracking-wider">
                 [ Recruitment Drive ]
               </div>
               <h1 className="font-display font-semibold text-4xl md:text-5xl tracking-tight text-text-primary">
@@ -94,21 +114,21 @@ export default function Join() {
               </h3>
               <ol className="space-y-4 font-sans text-sm">
                 <li className="flex gap-4">
-                  <span className="font-mono text-mint-500 font-bold">01.</span>
+                  <span className="font-mono text-mustard-500 font-bold">01.</span>
                   <div>
                     <h4 className="font-display font-semibold text-text-primary text-sm">Online Application</h4>
                     <p className="text-text-secondary text-xs mt-1">Submit your profile, branch, and preferred compile interests.</p>
                   </div>
                 </li>
                 <li className="flex gap-4">
-                  <span className="font-mono text-mint-500 font-bold">02.</span>
+                  <span className="font-mono text-mustard-500 font-bold">02.</span>
                   <div>
                     <h4 className="font-display font-semibold text-text-primary text-sm">Practical Sprint</h4>
                     <p className="text-text-secondary text-xs mt-1">Complete a short, offline logical code challenge or UI assembly.</p>
                   </div>
                 </li>
                 <li className="flex gap-4">
-                  <span className="font-mono text-mint-500 font-bold">03.</span>
+                  <span className="font-mono text-mustard-500 font-bold">03.</span>
                   <div>
                     <h4 className="font-display font-semibold text-text-primary text-sm">Interview conversational</h4>
                     <p className="text-text-secondary text-xs mt-1">Talk to execution leads about compiler optimization and team roles.</p>
@@ -123,7 +143,7 @@ export default function Join() {
             <Card className="border border-border-subtle p-8">
               {submitSuccess ? (
                 <div className="py-16 text-center space-y-6">
-                  <CheckCircle2 className="text-mint-500 mx-auto" size={56} />
+                  <CheckCircle2 className="text-mustard-500 mx-auto" size={56} />
                   <h3 className="font-display font-semibold text-2xl text-text-primary">
                     Application queued
                   </h3>
@@ -145,7 +165,7 @@ export default function Join() {
                       </label>
                       <input
                         type="text"
-                        className="w-full bg-bg-primary border border-border-subtle rounded px-4 py-2 text-sm text-text-primary focus:border-mint-500 focus:outline-none transition-colors"
+                        className="w-full bg-bg-primary border border-border-subtle rounded px-4 py-2 text-sm text-text-primary focus:border-mustard-500 focus:outline-none transition-colors"
                         placeholder="Sanjay Kumar"
                         {...register("name")}
                       />
@@ -163,7 +183,7 @@ export default function Join() {
                       </label>
                       <input
                         type="email"
-                        className="w-full bg-bg-primary border border-border-subtle rounded px-4 py-2 text-sm text-text-primary focus:border-mint-500 focus:outline-none transition-colors"
+                        className="w-full bg-bg-primary border border-border-subtle rounded px-4 py-2 text-sm text-text-primary focus:border-mustard-500 focus:outline-none transition-colors"
                         placeholder="sanjay@college.edu"
                         {...register("email")}
                       />
@@ -184,7 +204,7 @@ export default function Join() {
                       </label>
                       <input
                         type="text"
-                        className="w-full bg-bg-primary border border-border-subtle rounded px-4 py-2 text-sm text-text-primary focus:border-mint-500 focus:outline-none transition-colors"
+                        className="w-full bg-bg-primary border border-border-subtle rounded px-4 py-2 text-sm text-text-primary focus:border-mustard-500 focus:outline-none transition-colors"
                         placeholder="24CSE0123"
                         {...register("rollNo")}
                       />
@@ -202,7 +222,7 @@ export default function Join() {
                       </label>
                       <input
                         type="text"
-                        className="w-full bg-bg-primary border border-border-subtle rounded px-4 py-2 text-sm text-text-primary focus:border-mint-500 focus:outline-none transition-colors"
+                        className="w-full bg-bg-primary border border-border-subtle rounded px-4 py-2 text-sm text-text-primary focus:border-mustard-500 focus:outline-none transition-colors"
                         placeholder="Computer Science & Eng"
                         {...register("branch")}
                       />
@@ -221,7 +241,7 @@ export default function Join() {
                       Current Year
                     </label>
                     <select
-                      className="w-full bg-bg-primary border border-border-subtle rounded px-4 py-2.5 text-sm text-text-primary focus:border-mint-500 focus:outline-none transition-colors"
+                      className="w-full bg-bg-primary border border-border-subtle rounded px-4 py-2.5 text-sm text-text-primary focus:border-mustard-500 focus:outline-none transition-colors"
                       {...register("year")}
                     >
                       <option value="">Select academic year</option>
@@ -253,7 +273,7 @@ export default function Join() {
                             onClick={() => handleDomainToggle(domain)}
                             className={`px-3 py-1.5 border rounded font-sans text-xs font-semibold tracking-wide transition-all ${
                               isSelected
-                                ? "bg-mint-500/10 border-mint-500 text-mint-500"
+                                ? "bg-mustard-500/10 border-mustard-500 text-mustard-500"
                                 : "bg-bg-primary border-border-subtle text-text-secondary hover:text-text-primary"
                             }`}
                           >
@@ -277,7 +297,7 @@ export default function Join() {
                     </label>
                     <input
                       type="text"
-                      className="w-full bg-bg-primary border border-border-subtle rounded px-4 py-2 text-sm text-text-primary focus:border-mint-500 focus:outline-none transition-colors"
+                      className="w-full bg-bg-primary border border-border-subtle rounded px-4 py-2 text-sm text-text-primary focus:border-mustard-500 focus:outline-none transition-colors"
                       placeholder="https://github.com/username"
                       {...register("github")}
                     />
@@ -296,7 +316,7 @@ export default function Join() {
                     </label>
                     <textarea
                       rows={4}
-                      className="w-full bg-bg-primary border border-border-subtle rounded px-4 py-2 text-sm text-text-primary focus:border-mint-500 focus:outline-none transition-colors resize-none"
+                      className="w-full bg-bg-primary border border-border-subtle rounded px-4 py-2 text-sm text-text-primary focus:border-mustard-500 focus:outline-none transition-colors resize-none"
                       placeholder="Share your interests or projects you've compiled..."
                       {...register("reason")}
                     />
