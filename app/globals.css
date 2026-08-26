@@ -1,26 +1,52 @@
 @import "tailwindcss";
 
 :root {
-  /* Neo-brutalism design tokens for VAMINT */
-  --background: #FFF9EC;
-  --foreground: #000000;
+  /* Color system - VAMINT Mint & Dark theme */
+  --background: #0A0D0C;
+  --foreground: #F3F6F4;
   
-  --bg-primary: #FFF9EC;
-  --bg-surface: #FFF9EC;
-  --bg-surface-raised: #FFF9EC;
-  --border-subtle: #000000;
+  --bg-primary: #0A0D0C;
+  --bg-surface: #121613;
+  --bg-surface-raised: #181D19;
+  --border-subtle: #232A25;
   
-  --text-primary: #000000;
-  --text-secondary: #2C2C2C;
-  --text-tertiary: #555555;
+  --text-primary: #F3F6F4;
+  --text-secondary: #99A69E;
+  --text-tertiary: #5C6A62;
   
-  --yellow-primary: #FAD02E;
-  --ink: #000000;
-  --warm-cream: #FFF9EC;
-  --coral: #FF5A36;
-  --teal: #1FAF9E;
+  --mint-500: #35E2A6;
+  --mint-400: #6FF0C2;
+  --mint-700: #14805E;
   
-  --error-500: #FF5A36;
+  --mustard-500: #F2B90F;
+  --mustard-400: #F9C83B;
+  --mustard-600: #D4A10B;
+  
+  --amber-500: #FFB454;
+  --error-500: #F06565;
+}
+
+/* Light mode support */
+.light-mode {
+  --background: #F3F6F4;
+  --foreground: #0A0D0C;
+  
+  --bg-primary: #F3F6F4;
+  --bg-surface: #E8EDE9;
+  --bg-surface-raised: #DCE3DE;
+  --border-subtle: #C6D1CA;
+  
+  --text-primary: #0A0D0C;
+  --text-secondary: #4A5650;
+  --text-tertiary: #7D8D85;
+  
+  --mint-500: #14805E;
+  --mint-400: #35E2A6;
+  --mint-700: #0B4734;
+
+  --mustard-500: #B38600;
+  --mustard-400: #D4A10B;
+  --mustard-600: #8F6B00;
 }
 
 @theme {
@@ -34,25 +60,28 @@
   --color-text-secondary: var(--text-secondary);
   --color-text-tertiary: var(--text-tertiary);
   
-  --color-yellow-primary: var(--yellow-primary);
-  --color-ink: var(--ink);
-  --color-warm-cream: var(--warm-cream);
-  --color-coral: var(--coral);
-  --color-teal: var(--teal);
+  --color-mint-500: var(--mint-500);
+  --color-mint-400: var(--mint-400);
+  --color-mint-700: var(--mint-700);
+
+  --color-mustard-500: var(--mustard-500);
+  --color-mustard-400: var(--mustard-400);
+  --color-mustard-600: var(--mustard-600);
   
+  --color-amber-500: var(--amber-500);
   --color-error-500: var(--error-500);
 
   /* Register fonts */
-  --font-sans: var(--font-plus-jakarta-sans);
+  --font-sans: var(--font-inter);
   --font-display: var(--font-space-grotesk);
-  --font-serif: var(--font-fraunces);
-  --font-mono: var(--font-space-mono);
+  --font-mono: var(--font-jetbrains-mono);
 }
 
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-family: var(--font-inter), sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
   overflow-x: hidden;
 }
 
@@ -62,59 +91,22 @@ body {
 }
 
 .font-mono {
-  font-family: var(--font-space-mono), monospace;
-}
-
-.font-serif {
-  font-family: var(--font-fraunces), serif;
-}
-
-/* Neo-brutalism Utilities */
-.neo-border-thick {
-  border: 3px solid #000000;
-}
-
-.neo-border {
-  border: 2px solid #000000;
-}
-
-.neo-shadow {
-  box-shadow: 4px 4px 0px 0px #000000;
-}
-
-.neo-shadow-lg {
-  box-shadow: 8px 8px 0px 0px #000000;
-}
-
-.neo-shadow-hover {
-  transition: all 0.15s ease-in-out;
-}
-
-.neo-shadow-hover:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0px 0px #000000;
-}
-
-.neo-shadow-btn {
-  transition: all 0.1s ease-in-out;
-}
-
-.neo-shadow-btn:active {
-  transform: translate(2px, 2px);
-  box-shadow: 0px 0px 0px 0px #000000;
+  font-family: var(--font-jetbrains-mono), monospace;
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
   background: var(--bg-primary);
-  border-left: 2px solid #000000;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--yellow-primary);
-  border: 2px solid #000000;
+  background: var(--border-subtle);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-tertiary);
 }
 
 /* Custom Micro-animations */
@@ -125,4 +117,14 @@ body {
 
 .animate-blink {
   animation: blink 1.2s infinite;
+}
+
+/* Custom utility styles */
+.gradient-border-glow:hover {
+  box-shadow: 0 0 15px rgba(242, 185, 15, 0.15);
+  border-color: var(--mustard-500);
+}
+
+.text-glow {
+  text-shadow: 0 0 10px rgba(242, 185, 15, 0.3);
 }
