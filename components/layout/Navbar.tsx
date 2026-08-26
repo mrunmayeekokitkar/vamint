@@ -32,16 +32,19 @@ export default function Navbar() {
 
   // Sync theme with DOM
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "light") {
-      setIsLight(true);
-      document.documentElement.classList.add("light-mode");
-      document.documentElement.classList.remove("dark");
-    } else {
-      setIsLight(false);
-      document.documentElement.classList.remove("light-mode");
-      document.documentElement.classList.add("dark");
-    }
+    const timer = setTimeout(() => {
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "light") {
+        setIsLight(true);
+        document.documentElement.classList.add("light-mode");
+        document.documentElement.classList.remove("dark");
+      } else {
+        setIsLight(false);
+        document.documentElement.classList.remove("light-mode");
+        document.documentElement.classList.add("dark");
+      }
+    }, 0);
+    return () => clearTimeout(timer);
   }, []);
 
   const toggleTheme = () => {

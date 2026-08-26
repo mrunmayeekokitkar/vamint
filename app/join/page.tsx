@@ -26,6 +26,7 @@ type JoinFormValues = z.infer<typeof joinSchema>;
 export default function Join() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const {
     register,
@@ -156,6 +157,12 @@ export default function Join() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                  {error && (
+                    <div className="p-4 bg-error-500/10 border border-error-500/30 rounded text-error-500 font-mono text-xs flex items-center gap-2">
+                      <AlertCircle size={16} />
+                      <span>{error}</span>
+                    </div>
+                  )}
                   
                   {/* Row: Name & Email */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

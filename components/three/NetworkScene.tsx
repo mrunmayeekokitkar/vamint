@@ -141,7 +141,9 @@ export default function NetworkScene() {
   useEffect(() => {
     // Reduced motion check
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setPrefersReducedMotion(mediaQuery.matches);
+    const timer = setTimeout(() => {
+      setPrefersReducedMotion(mediaQuery.matches);
+    }, 0);
     
     const handleScroll = () => {
       const scrollY = window.scrollY;
@@ -152,7 +154,10 @@ export default function NetworkScene() {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   // Fallback if user prefers reduced motion

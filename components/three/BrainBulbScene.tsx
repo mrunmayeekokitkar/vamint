@@ -14,7 +14,14 @@ function BrainBulbParticles() {
   const particleCount = 150;
   
   // Define three states: Code (sparse), Collaborate (connecting), Evolve (bulb shape)
-  const [positionsData] = useState(() => {
+  const positionsDataRef = useRef<{
+    code: Float32Array;
+    collaborate: Float32Array;
+    evolve: Float32Array;
+    current: Float32Array;
+  } | null>(null);
+
+  if (!positionsDataRef.current) {
     // State 1: Code - sparse scattered particles
     const codeState = [];
     for (let i = 0; i < particleCount; i++) {
@@ -61,13 +68,15 @@ function BrainBulbParticles() {
       }
     }
     
-    return {
+    positionsDataRef.current = {
       code: new Float32Array(codeState),
       collaborate: new Float32Array(collaborateState),
       evolve: new Float32Array(evolveState),
       current: new Float32Array(codeState),
     };
-  });
+  }
+
+  const positionsData = positionsDataRef.current;
 
   useFrame((state) => {
     if (!pointsRef.current || !lineSegmentsRef.current) return;
@@ -81,6 +90,14 @@ function BrainBulbParticles() {
     let targetPositions: Float32Array;
     let connectionThreshold = 1.5;
     const scrollProgress = scroll.offset;
+    
+    // Update line segments material opacity
+    if (lineSegmentsRef.current) {
+      const material = lineSegmentsRef.current.material as THREE.LineBasicMaterial;
+      if (material) {
+        material.opacity = 0.2 + scrollProgress * 0.3;
+      }
+    }
     
     if (scrollProgress < 0.33) {
       const localProgress = scrollProgress / 0.33;
@@ -182,7 +199,7 @@ function BrainBulbParticles() {
         <lineBasicMaterial
           color="#F2B90F"
           transparent
-          opacity={0.2 + scrollProgress * 0.3}
+          opacity={0.2}
           linewidth={1}
         />
       </lineSegments>
@@ -195,7 +212,10 @@ export default function BrainBulbScene() {
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setPrefersReducedMotion(mediaQuery.matches);
+    const timer = setTimeout(() => {
+      setPrefersReducedMotion(mediaQuery.matches);
+    }, 0);
+    return () => clearTimeout(timer);
   }, []);
 
   if (prefersReducedMotion) {
