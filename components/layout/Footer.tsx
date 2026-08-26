@@ -1,138 +1,92 @@
 import Link from "next/link";
-import Image from "next/image";
-import { ExternalLink } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-bg-primary border-t border-border-subtle mt-auto">
-      <div className="max-w-[1280px] mx-auto px-6 md:px-12 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8 mb-12">
+    <footer className="bg-warm-cream border-t-2 border-ink mt-auto">
+      <div className="max-w-[1280px] mx-auto px-6 md:px-12 py-14">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
           {/* Brand Col */}
-          <div className="md:col-span-1 flex flex-col space-y-4">
+          <div className="md:col-span-1 flex flex-col gap-4">
             <Link href="/" aria-label="VAMINT Home">
-              <Image
-                src="/logo.jpg"
-                alt="VAMINT"
-                width={100}
-                height={40}
-                className="h-9 w-auto object-contain"
-              />
+              <span className="font-display font-bold text-2xl text-ink tracking-tight">VAMINT</span>
             </Link>
-            <p className="font-sans text-xs text-text-secondary leading-relaxed max-w-[240px]">
-              Code. Collaborate. Evolve. A student tech community building together, learning together.
+            <p className="font-serif italic text-base text-text-secondary leading-relaxed max-w-[240px]">
+              Code. Collaborate. Evolve.
+            </p>
+            <p className="font-sans text-sm text-text-secondary leading-relaxed max-w-[280px]">
+              The student tech community at our college — building things, breaking things, and learning along the way since July 2025.
             </p>
           </div>
 
-          {/* Sitemaps */}
+          {/* Navigation */}
           <div>
-            <h4 className="font-mono text-xs font-semibold text-text-tertiary tracking-wider uppercase mb-4">
-              Navigation
+            <h4 className="font-mono text-xs font-bold text-ink tracking-widest uppercase mb-5 border-b-2 border-ink pb-2">
+              Site
             </h4>
             <ul className="space-y-3 font-sans text-sm">
-              <li>
-                <Link href="/about" className="text-text-secondary hover:text-mustard-500 transition-colors">
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link href="/events" className="text-text-secondary hover:text-mustard-500 transition-colors">
-                  Events
-                </Link>
-              </li>
-              <li>
-                <Link href="/projects" className="text-text-secondary hover:text-mustard-500 transition-colors">
-                  Projects
-                </Link>
-              </li>
-              <li>
-                <Link href="/team" className="text-text-secondary hover:text-mustard-500 transition-colors">
-                  Team
-                </Link>
-              </li>
+              {[
+                { label: "About", path: "/about" },
+                { label: "Events", path: "/events" },
+                { label: "Projects", path: "/projects" },
+                { label: "Team", path: "/team" },
+                { label: "FAQ", path: "/faq" },
+                { label: "Join Us", path: "/join" },
+                { label: "Legal", path: "/legal" },
+              ].map((l) => (
+                <li key={l.path}>
+                  <Link href={l.path} className="text-text-secondary hover:text-ink font-medium transition-colors underline-offset-2 hover:underline">
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
+          {/* Connect */}
           <div>
-            <h4 className="font-mono text-xs font-semibold text-text-tertiary tracking-wider uppercase mb-4">
-              Resources
-            </h4>
-            <ul className="space-y-3 font-sans text-sm">
-              <li>
-                <Link href="/gallery" className="text-text-secondary hover:text-mustard-500 transition-colors">
-                  Gallery
-                </Link>
-              </li>
-              <li>
-                <Link href="/faq" className="text-text-secondary hover:text-mustard-500 transition-colors">
-                  FAQ
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="text-text-secondary hover:text-mustard-500 transition-colors">
-                  Contact
-                </Link>
-              </li>
-              <li>
-                <Link href="/join" className="text-text-secondary hover:text-mustard-500 transition-colors flex items-center gap-1">
-                  Join Us <ExternalLink size={12} className="text-mustard-500" />
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Connect / Socials */}
-          <div>
-            <h4 className="font-mono text-xs font-semibold text-text-tertiary tracking-wider uppercase mb-4">
+            <h4 className="font-mono text-xs font-bold text-ink tracking-widest uppercase mb-5 border-b-2 border-ink pb-2">
               Connect
             </h4>
-            <div className="flex flex-col space-y-3 mb-4">
+            <div className="flex flex-col gap-3 mb-6">
               <a
                 href="https://www.linkedin.com/company/vamint-community/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-sans text-sm text-text-secondary hover:text-mustard-500 transition-colors"
+                className="font-sans text-sm text-text-secondary hover:text-ink font-medium transition-colors underline-offset-2 hover:underline"
                 aria-label="VAMINT on LinkedIn"
               >
-                LinkedIn
+                LinkedIn ↗
               </a>
               <a
                 href="https://www.instagram.com/vamintcommunity/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-sans text-sm text-text-secondary hover:text-mustard-500 transition-colors"
+                className="font-sans text-sm text-text-secondary hover:text-ink font-medium transition-colors underline-offset-2 hover:underline"
                 aria-label="VAMINT on Instagram"
               >
-                Instagram
-              </a>
-              <a
-                href="https://github.com/mrunmayeekokitkar/vamint"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-sans text-sm text-text-secondary hover:text-mustard-500 transition-colors"
-                aria-label="VAMINT on GitHub"
-              >
-                GitHub
+                Instagram ↗
               </a>
             </div>
-            <p className="font-sans text-xs text-text-secondary">
-              Email:{" "}
-              <a href="mailto:vamintcommunity@gmail.com" className="text-text-primary hover:text-mustard-500 transition-colors">
-                vamintcommunity@gmail.com
-              </a>
-            </p>
+            <p className="font-mono text-xs text-text-tertiary mb-1">Email us</p>
+            <a
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=vamintcommunity@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-sans text-sm text-ink font-semibold hover:underline underline-offset-2"
+            >
+              vamintcommunity@gmail.com
+            </a>
           </div>
         </div>
 
-        {/* Bottom Credits */}
-        <div className="border-t border-border-subtle/50 pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-text-secondary gap-4">
-          <p>&copy; {currentYear} VAMINT. All rights reserved.</p>
-          <div className="flex space-x-6">
-            <Link href="/legal" className="hover:text-text-primary transition-colors">
-              Code of Conduct &amp; Privacy
-            </Link>
-          </div>
+        {/* Bottom strip */}
+        <div className="border-t-2 border-ink pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs text-text-secondary gap-3">
+          <p className="font-mono">© {currentYear} VAMINT. All rights reserved.</p>
+          <Link href="/legal" className="font-mono hover:text-ink transition-colors underline underline-offset-2">
+            Code of Conduct &amp; Privacy
+          </Link>
         </div>
       </div>
     </footer>

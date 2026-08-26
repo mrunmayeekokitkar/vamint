@@ -2,150 +2,103 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, Sun, Moon } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 const navItems = [
   { name: "About", path: "/about" },
   { name: "Events", path: "/events" },
   { name: "Projects", path: "/projects" },
   { name: "Team", path: "/team" },
+  { name: "FAQ", path: "/faq" },
 ];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isLight, setIsLight] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 50);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Sync theme with DOM
+  // Close mobile menu on route change
   useEffect(() => {
-    const timer = setTimeout(() => {
-      const savedTheme = localStorage.getItem("theme");
-      if (savedTheme === "light") {
-        setIsLight(true);
-        document.documentElement.classList.add("light-mode");
-        document.documentElement.classList.remove("dark");
-      } else {
-        setIsLight(false);
-        document.documentElement.classList.remove("light-mode");
-        document.documentElement.classList.add("dark");
-      }
-    }, 0);
-    return () => clearTimeout(timer);
-  }, []);
-
-  const toggleTheme = () => {
-    if (isLight) {
-      document.documentElement.classList.remove("light-mode");
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-      setIsLight(false);
-    } else {
-      document.documentElement.classList.add("light-mode");
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-      setIsLight(true);
-    }
-  };
+    setIsOpen(false);
+  }, [pathname]);
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
         isScrolled
-          ? "bg-bg-surface/90 backdrop-blur-md border-b border-border-subtle py-4"
-          : "bg-transparent py-6"
+          ? "bg-warm-cream border-b-2 border-ink py-3"
+          : "bg-transparent py-5"
       }`}
     >
       <div className="max-w-[1280px] mx-auto px-6 md:px-12 flex items-center justify-between">
-        {/* Logo */}
-        <Link href="/" className="flex items-center group" aria-label="VAMINT Home">
-          <Image
-            src="/logo.jpg"
-            alt="VAMINT"
-            width={120}
-            height={48}
-            className="h-10 w-auto object-contain"
-            priority
-          />
+        {/* Logo — text wordmark */}
+        <Link href="/" className="flex items-center gap-2 group" aria-label="VAMINT Home">
+          <span className="font-display font-bold text-xl text-ink tracking-tight leading-none">
+            VAMINT
+          </span>
+          <span className="hidden sm:inline-block text-[10px] font-mono text-ink/50 border border-ink/20 px-1 py-0.5 leading-tight">
+            v1.0
+          </span>
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center space-x-8">
+        <nav className="hidden md:flex items-center gap-7">
           {navItems.map((item) => {
             const isActive = pathname === item.path;
             return (
               <Link
                 key={item.path}
                 href={item.path}
-                className={`relative font-sans text-sm font-medium tracking-wide transition-colors py-1 ${
+                className={`relative font-sans text-sm font-semibold tracking-wide transition-colors py-1 ${
                   isActive
-                    ? "text-mustard-500"
-                    : "text-text-secondary hover:text-text-primary"
+                    ? "text-ink"
+                    : "text-text-secondary hover:text-ink"
                 }`}
               >
                 {item.name}
                 {isActive && (
-                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-mustard-500 rounded-full" />
+                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-yellow-primary" />
                 )}
               </Link>
             );
           })}
         </nav>
 
-        {/* Desktop Action Buttons */}
-        <div className="hidden md:flex items-center space-x-4">
-          <button
-            onClick={toggleTheme}
-            className="p-2 text-text-secondary hover:text-text-primary transition-colors focus:outline-none"
-            aria-label="Toggle Theme"
-          >
-            {isLight ? <Moon size={20} /> : <Sun size={20} />}
-          </button>
+        {/* Desktop CTA */}
+        <div className="hidden md:flex items-center">
           <Link
             href="/join"
-            className="px-4 py-2 border border-mustard-500/30 hover:border-mustard-500 bg-mustard-500/5 hover:bg-mustard-500/15 text-mustard-500 rounded-md font-sans text-sm font-semibold transition-all duration-200"
+            className="px-4 py-2 bg-yellow-primary text-ink border-2 border-ink font-sans text-sm font-bold neo-shadow neo-shadow-hover"
           >
-            Join Us
+            Join Us →
           </Link>
         </div>
 
-        {/* Mobile Nav Button */}
-        <div className="flex md:hidden items-center space-x-4">
-          <button
-            onClick={toggleTheme}
-            className="p-2 text-text-secondary hover:text-text-primary transition-colors focus:outline-none"
-            aria-label="Toggle Theme"
-          >
-            {isLight ? <Moon size={18} /> : <Sun size={18} />}
-          </button>
+        {/* Mobile Hamburger */}
+        <div className="flex md:hidden items-center">
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="p-2 text-text-secondary hover:text-text-primary transition-colors focus:outline-none"
+            className="p-2 text-ink border-2 border-ink bg-warm-cream"
             aria-label="Toggle Menu"
           >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+            {isOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
       </div>
 
       {/* Mobile Menu Overlay */}
       {isOpen && (
-        <div className="fixed inset-0 top-[73px] bg-bg-primary/98 z-40 md:hidden flex flex-col justify-between p-8 border-t border-border-subtle">
-          <nav className="flex flex-col space-y-6 mt-8">
+        <div className="fixed inset-0 top-[57px] bg-warm-cream z-40 md:hidden flex flex-col p-8 border-t-2 border-ink">
+          <nav className="flex flex-col mt-4">
             {navItems.map((item) => {
               const isActive = pathname === item.path;
               return (
@@ -153,24 +106,24 @@ export default function Navbar() {
                   key={item.path}
                   href={item.path}
                   onClick={() => setIsOpen(false)}
-                  className={`font-display text-2xl font-medium tracking-wide py-2 border-b border-border-subtle/50 flex justify-between items-center ${
-                    isActive ? "text-mustard-500" : "text-text-secondary"
+                  className={`font-display text-2xl font-bold tracking-wide py-4 border-b-2 border-ink flex justify-between items-center ${
+                    isActive ? "text-ink" : "text-text-secondary"
                   }`}
                 >
                   <span>{item.name}</span>
-                  {isActive && <span className="w-2 h-2 bg-mustard-500 rounded-full" />}
+                  {isActive && <span className="w-3 h-3 bg-yellow-primary border-2 border-ink" />}
                 </Link>
               );
             })}
           </nav>
 
-          <div className="flex flex-col space-y-4 mb-16">
+          <div className="mt-8">
             <Link
               href="/join"
               onClick={() => setIsOpen(false)}
-              className="w-full text-center py-4 bg-mustard-500 text-bg-primary rounded-md font-sans font-semibold transition-all duration-200 hover:bg-mustard-400"
+              className="w-full block text-center py-4 bg-yellow-primary text-ink border-2 border-ink font-display font-bold text-lg neo-shadow"
             >
-              Join VAMINT
+              Join VAMINT →
             </Link>
           </div>
         </div>
