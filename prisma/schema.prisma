@@ -10,17 +10,35 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Join Us form submissions
-model JoinSubmission {
+// Club membership form submissions
+model ClubMembership {
   id          String   @id @default(cuid())
   name        String
-  email       String
   rollNo      String
-  year        String
   branch      String
+  year        String
+  email       String
+  phone       String
   domains     String   // Stored as JSON array string
-  github      String?
+  referral    String
+  submittedAt DateTime @default(now())
+  
+  @@index([email])
+  @@index([submittedAt])
+}
+
+// Committee/Core-team application submissions
+model CommitteeApplication {
+  id          String   @id @default(cuid())
+  name        String
+  rollNo      String
+  branch      String
+  year        String
+  email       String
+  phone       String
+  position    String
   reason      String
+  experience  String
   submittedAt DateTime @default(now())
   
   @@index([email])
@@ -31,6 +49,7 @@ model JoinSubmission {
 model EventRegistration {
   id          String   @id @default(cuid())
   eventId     String
+  event       Event    @relation(fields: [eventId], references: [id])
   eventName   String
   name        String
   email       String

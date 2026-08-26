@@ -18,6 +18,10 @@
   --mint-400: #6FF0C2;
   --mint-700: #14805E;
   
+  --mustard-500: #F2B90F;
+  --mustard-400: #F9C83B;
+  --mustard-600: #D4A10B;
+  
   --amber-500: #FFB454;
   --error-500: #F06565;
 }
@@ -39,6 +43,10 @@
   --mint-500: #14805E;
   --mint-400: #35E2A6;
   --mint-700: #0B4734;
+
+  --mustard-500: #B38600;
+  --mustard-400: #D4A10B;
+  --mustard-600: #8F6B00;
 }
 
 @theme {
@@ -55,6 +63,10 @@
   --color-mint-500: var(--mint-500);
   --color-mint-400: var(--mint-400);
   --color-mint-700: var(--mint-700);
+
+  --color-mustard-500: var(--mustard-500);
+  --color-mustard-400: var(--mustard-400);
+  --color-mustard-600: var(--mustard-600);
   
   --color-amber-500: var(--amber-500);
   --color-error-500: var(--error-500);

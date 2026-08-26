@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# VAMINT Community Website
 
-## Getting Started
+![VAMINT Logo](public/logo.jpg)
 
-First, run the development server:
+Official website of **VAMINT**, the student tech community of our college.
 
+Live Site: [https://vamintcommunity.vercel.app/](https://vamintcommunity.vercel.app/)
+Repository: [https://github.com/mrunmayeekokitkar/vamint](https://github.com/mrunmayeekokitkar/vamint)
+
+## Tech Stack
+
+* **Frontend Framework**: Next.js 16 (App Router)
+* **Styling**: Tailwind CSS v4 & Vanilla CSS
+* **3D Graphics**: React Three Fiber & Three.js (dynamic scroll CLI terminal)
+* **Database**: PostgreSQL (Prisma ORM)
+* **Form Validation**: React Hook Form & Zod
+* **Icons**: Lucide React
+
+## Key Features
+
+1. **3D Scroll Terminal**: A stylized, floating CLI window that progressively types commands matching our brand identity as you scroll, utilizing window scroll events without causing layout double scrollbars.
+2. **Double Recruitment Flow**:
+   * **Club Membership Form**: For students wishing to join events, workshops, hackathons, and debates.
+   * **Committee Application Form**: A detailed application for joining the core executive committee.
+3. **Protected Admin Dashboard**: Dashboard at `/admin/dashboard` allowing core members to securely review application entries across both forms separately, verified using `ADMIN_PASSWORD` cookies.
+4. **Real Content Integration**: Updated calendar schedules with past campus events (Smart India Hackathon internal selections, Sitecraft 2025, Technobash 2026, Debate Competition 2026) and core committee rosters.
+
+## Setup Instructions
+
+### Prerequisites
+
+Ensure you have [Node.js](https://nodejs.org) (v18+) and [npm](https://npmjs.com) installed.
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/mrunmayeekokitkar/vamint.git
+   cd vamint
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Setup environment variables:
+   Create a `.env` file in the root directory and copy values from `.env.example`:
+   ```bash
+   cp .env.example .env
+   ```
+   Define your Postgres database string:
+   ```env
+   DATABASE_URL="postgresql://user:password@host:port/database"
+   ADMIN_PASSWORD="your_secure_admin_password_here"
+   ```
+
+4. Run Prisma database migrations to create the tables locally:
+   ```bash
+   npx prisma db push
+   ```
+
+5. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+6. Open [http://localhost:3000](http://localhost:3000) to view the application.
+
+## Vercel Deployment
+
+Configure the environment variables in your Vercel project settings:
+* `DATABASE_URL` (e.g. from Vercel Postgres or Neon)
+* `ADMIN_PASSWORD`
+* `NEXT_PUBLIC_APP_URL`
+
+Run the build command:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Community Socials
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+* **LinkedIn**: [VAMINT Community](https://www.linkedin.com/company/vamint-community/)
+* **Instagram**: [@vamintcommunity](https://www.instagram.com/vamintcommunity/)
+* **Email**: [vamintcommunity@gmail.com](mailto:vamintcommunity@gmail.com)

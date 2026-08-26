@@ -4,9 +4,9 @@
     "role": "President",
     "bio": "// TODO(content): bio",
     "funFact": "// TODO(content): fun fact",
-    "github": "// TODO(content): github",
-    "linkedin": "// TODO(content): linkedin",
-    "image": "// TODO(content): headshot",
+    "github": null,
+    "linkedin": null,
+    "image": null,
     "category": "Core Committee"
   },
   {
@@ -14,9 +14,9 @@
     "role": "Vice President",
     "bio": "// TODO(content): bio",
     "funFact": "// TODO(content): fun fact",
-    "github": "// TODO(content): github",
-    "linkedin": "// TODO(content): linkedin",
-    "image": "// TODO(content): headshot",
+    "github": null,
+    "linkedin": null,
+    "image": null,
     "category": "Core Committee"
   },
   {
@@ -24,9 +24,9 @@
     "role": "Secretary",
     "bio": "// TODO(content): bio",
     "funFact": "// TODO(content): fun fact",
-    "github": "// TODO(content): github",
-    "linkedin": "// TODO(content): linkedin",
-    "image": "// TODO(content): headshot",
+    "github": null,
+    "linkedin": null,
+    "image": null,
     "category": "Core Committee"
   },
   {
@@ -34,9 +34,9 @@
     "role": "Treasurer",
     "bio": "// TODO(content): bio",
     "funFact": "// TODO(content): fun fact",
-    "github": "// TODO(content): github",
-    "linkedin": "// TODO(content): linkedin",
-    "image": "// TODO(content): headshot",
+    "github": null,
+    "linkedin": null,
+    "image": null,
     "category": "Core Committee"
   },
   {
@@ -44,9 +44,9 @@
     "role": "Technical Head",
     "bio": "// TODO(content): bio",
     "funFact": "// TODO(content): fun fact",
-    "github": "// TODO(content): github",
-    "linkedin": "// TODO(content): linkedin",
-    "image": "// TODO(content): headshot",
+    "github": null,
+    "linkedin": null,
+    "image": null,
     "category": "Core Committee"
   },
   {
@@ -54,9 +54,19 @@
     "role": "Departmental Head",
     "bio": "// TODO(content): bio",
     "funFact": "// TODO(content): fun fact",
-    "github": "// TODO(content): github",
-    "linkedin": "// TODO(content): linkedin",
-    "image": "// TODO(content): headshot",
+    "github": null,
+    "linkedin": null,
+    "image": null,
+    "category": "Core Committee"
+  },
+  {
+    "name": "Rishikesh Sutar",
+    "role": "Social Media Manager",
+    "bio": "// TODO(content): bio",
+    "funFact": "// TODO(content): fun fact",
+    "github": null,
+    "linkedin": null,
+    "image": null,
     "category": "Core Committee"
   }
 ]

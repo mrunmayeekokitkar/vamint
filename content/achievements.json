@@ -1,28 +1,22 @@
 [
   {
-    "year": "2026",
-    "achievements": [
-      {
-        "title": "1st Place - National Smart Web Hackathon",
-        "description": "Won the top prize for compiling an offline-first crisis relief mapper with peer-to-peer data syncing."
-      },
-      {
-        "title": "Top 10 Finalist - Global AI Agent Contest",
-        "description": "Competed against international teams to build highly responsive, self-healing local multi-agent environments."
-      }
-    ]
+    "title": "Ran the SIH Internal College Hackathon",
+    "description": "160+ students, 25+ teams competed in our first large-scale internal hackathon serving as the Smart India Hackathon 2025 selection round.",
+    "year": "2025"
   },
   {
-    "year": "2025",
-    "achievements": [
-      {
-        "title": "2nd Place - Inter-College Cyber Defense Rally",
-        "description": "Secured the runner-up position in real-time server defense, handling zero-day exploits across microservice stacks."
-      },
-      {
-        "title": "GitHub Campus Program Integration",
-        "description": "Formally integrated VAMINT projects into the official GitHub Campus Registry, providing cloud access for student devs."
-      }
-    ]
+    "title": "Hosted Sitecraft 2025",
+    "description": "A 2-hour website-cloning competition open to the college, structured in phases with increasing difficulty and fun twists.",
+    "year": "2025"
+  },
+  {
+    "title": "Co-organized Technobash 2026",
+    "description": "VAMINT played a key role in the college's 2-day technical fest — organizing and running the technical events alongside the Computer Department.",
+    "year": "2026"
+  },
+  {
+    "title": "Ran the Debate Competition 2026",
+    "description": "A standalone soft-skills event focused on building communication, structured argumentation, and leadership through campus debates on technology topics.",
+    "year": "2026"
   }
 ]

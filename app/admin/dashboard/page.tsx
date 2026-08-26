@@ -10,8 +10,9 @@ import Card from "@/components/ui/Card";
 export default function AdminDashboard() {
   const router = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [activeTab, setActiveTab] = useState<"join" | "events" | "team">("join");
-  const [submissions, setSubmissions] = useState<any[]>([]);
+  const [activeTab, setActiveTab] = useState<"memberships" | "committee" | "events" | "team">("memberships");
+  const [memberships, setMemberships] = useState<any[]>([]);
+  const [committeeApps, setCommitteeApps] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -29,7 +30,11 @@ export default function AdminDashboard() {
       const response = await fetch("/api/admin/join-submissions");
       if (response.ok) {
         const data = await response.json();
-        setSubmissions(data);
+        setMemberships(data.memberships || []);
+        setCommitteeApps(data.committeeApps || []);
+      } else if (response.status === 401) {
+        localStorage.removeItem("admin_token");
+        router.push("/admin");
       }
     } catch (error) {
       console.error("Failed to fetch submissions:", error);
@@ -40,7 +45,19 @@ export default function AdminDashboard() {
 
   const handleLogout = () => {
     localStorage.removeItem("admin_token");
+    // Clear cookie
+    document.cookie = "admin_token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
     router.push("/admin");
+  };
+
+  const parseDomains = (domainsStr: string) => {
+    try {
+      const parsed = JSON.parse(domainsStr);
+      if (Array.isArray(parsed)) return parsed.join(", ");
+      return domainsStr;
+    } catch {
+      return domainsStr;
+    }
   };
 
   if (!isAuthenticated) {
@@ -62,16 +79,26 @@ export default function AdminDashboard() {
         </div>
 
         {/* Tabs */}
-        <div className="flex gap-4 mb-8 border-b border-border-subtle">
+        <div className="flex gap-4 mb-8 border-b border-border-subtle overflow-x-auto whitespace-nowrap">
           <button
-            onClick={() => setActiveTab("join")}
+            onClick={() => setActiveTab("memberships")}
             className={`pb-4 px-4 font-sans text-sm font-semibold transition-colors ${
-              activeTab === "join"
+              activeTab === "memberships"
                 ? "text-mustard-500 border-b-2 border-mustard-500"
                 : "text-text-secondary hover:text-text-primary"
             }`}
           >
-            Join Submissions
+            Club Memberships ({memberships.length})
+          </button>
+          <button
+            onClick={() => setActiveTab("committee")}
+            className={`pb-4 px-4 font-sans text-sm font-semibold transition-colors ${
+              activeTab === "committee"
+                ? "text-mustard-500 border-b-2 border-mustard-500"
+                : "text-text-secondary hover:text-text-primary"
+            }`}
+          >
+            Committee Applications ({committeeApps.length})
           </button>
           <button
             onClick={() => setActiveTab("events")}
@@ -95,18 +122,18 @@ export default function AdminDashboard() {
           </button>
         </div>
 
-        {/* Join Submissions Tab */}
-        {activeTab === "join" && (
+        {/* Club Memberships Tab */}
+        {activeTab === "memberships" && (
           <div>
             {loading ? (
               <p className="text-text-secondary">Loading submissions...</p>
-            ) : submissions.length === 0 ? (
+            ) : memberships.length === 0 ? (
               <Card className="p-8 text-center text-text-secondary">
-                No submissions yet
+                No club memberships applications yet.
               </Card>
             ) : (
               <div className="space-y-4">
-                {submissions.map((sub) => (
+                {memberships.map((sub) => (
                   <Card key={sub.id} className="p-6">
                     <div className="flex justify-between items-start mb-4">
                       <div>
@@ -114,7 +141,7 @@ export default function AdminDashboard() {
                           {sub.name}
                         </h3>
                         <p className="font-mono text-xs text-text-secondary">
-                          {sub.email} • {sub.rollNo}
+                          {sub.email} • {sub.phone} • {sub.rollNo}
                         </p>
                       </div>
                       <span className="font-mono text-xs text-mustard-500">
@@ -124,11 +151,48 @@ export default function AdminDashboard() {
                     <div className="space-y-2 text-sm">
                       <p><span className="font-mono text-text-tertiary">Year:</span> {sub.year}</p>
                       <p><span className="font-mono text-text-tertiary">Branch:</span> {sub.branch}</p>
-                      <p><span className="font-mono text-text-tertiary">Domains:</span> {sub.domains}</p>
-                      <p><span className="font-mono text-text-tertiary">Reason:</span> {sub.reason}</p>
-                      {sub.github && (
-                        <p><span className="font-mono text-text-tertiary">GitHub:</span> {sub.github}</p>
-                      )}
+                      <p><span className="font-mono text-text-tertiary">Domains:</span> {parseDomains(sub.domains)}</p>
+                      <p><span className="font-mono text-text-tertiary">How did they hear:</span> {sub.referral}</p>
+                    </div>
+                  </Card>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Committee Applications Tab */}
+        {activeTab === "committee" && (
+          <div>
+            {loading ? (
+              <p className="text-text-secondary">Loading applications...</p>
+            ) : committeeApps.length === 0 ? (
+              <Card className="p-8 text-center text-text-secondary">
+                No committee applications yet.
+              </Card>
+            ) : (
+              <div className="space-y-4">
+                {committeeApps.map((sub) => (
+                  <Card key={sub.id} className="p-6">
+                    <div className="flex justify-between items-start mb-4">
+                      <div>
+                        <h3 className="font-display font-semibold text-lg text-text-primary">
+                          {sub.name}
+                        </h3>
+                        <p className="font-mono text-xs text-text-secondary">
+                          {sub.email} • {sub.phone} • {sub.rollNo}
+                        </p>
+                      </div>
+                      <span className="font-mono text-xs text-mustard-500">
+                        {new Date(sub.submittedAt).toLocaleDateString()}
+                      </span>
+                    </div>
+                    <div className="space-y-2 text-sm">
+                      <p><span className="font-mono text-text-tertiary">Year:</span> {sub.year}</p>
+                      <p><span className="font-mono text-text-tertiary">Branch:</span> {sub.branch}</p>
+                      <p><span className="font-mono text-text-tertiary">Preferred Position:</span> {sub.position}</p>
+                      <p><span className="font-mono text-text-tertiary">Reason to Join:</span> {sub.reason}</p>
+                      <p><span className="font-mono text-text-tertiary">Experience:</span> {sub.experience}</p>
                     </div>
                   </Card>
                 ))}
@@ -166,3 +230,4 @@ export default function AdminDashboard() {
     </div>
   );
 }
+export const dynamic = "force-dynamic";

@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Globe, ExternalLink } from "lucide-react";
+import Image from "next/image";
+import { ExternalLink } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -10,14 +11,17 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8 mb-12">
           {/* Brand Col */}
           <div className="md:col-span-1 flex flex-col space-y-4">
-            <Link href="/" className="flex items-center space-x-1">
-              <span className="font-display font-semibold text-lg tracking-wider text-text-primary">
-                [ vamint ]
-              </span>
-              <span className="w-1.5 h-4 bg-mustard-500 animate-blink"></span>
+            <Link href="/" aria-label="VAMINT Home">
+              <Image
+                src="/logo.jpg"
+                alt="VAMINT"
+                width={100}
+                height={40}
+                className="h-9 w-auto object-contain"
+              />
             </Link>
-            <p className="font-serif text-xs text-text-secondary leading-relaxed max-w-[240px]">
-              Code. Collaborate. Evolve. Building together, learning together.
+            <p className="font-sans text-xs text-text-secondary leading-relaxed max-w-[240px]">
+              Code. Collaborate. Evolve. A student tech community building together, learning together.
             </p>
           </div>
 
@@ -71,8 +75,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/about#achievements" className="text-text-secondary hover:text-mustard-500 transition-colors flex items-center gap-1">
-                  Achievements <ExternalLink size={12} className="text-mustard-500" />
+                <Link href="/join" className="text-text-secondary hover:text-mustard-500 transition-colors flex items-center gap-1">
+                  Join Us <ExternalLink size={12} className="text-mustard-500" />
                 </Link>
               </li>
             </ul>
@@ -83,39 +87,39 @@ export default function Footer() {
             <h4 className="font-mono text-xs font-semibold text-text-tertiary tracking-wider uppercase mb-4">
               Connect
             </h4>
-            <div className="flex space-x-4 mb-4">
+            <div className="flex flex-col space-y-3 mb-4">
               <a
-                href="https://github.com"
+                href="https://www.linkedin.com/company/vamint-community/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 bg-bg-surface border border-border-subtle rounded text-text-secondary hover:text-mustard-500 hover:border-mustard-500/30 transition-all duration-200"
-                aria-label="GitHub"
+                className="font-sans text-sm text-text-secondary hover:text-mustard-500 transition-colors"
+                aria-label="VAMINT on LinkedIn"
               >
-                <Globe size={18} />
+                LinkedIn
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://www.instagram.com/vamintcommunity/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 bg-bg-surface border border-border-subtle rounded text-text-secondary hover:text-mustard-500 hover:border-mustard-500/30 transition-all duration-200"
-                aria-label="LinkedIn"
+                className="font-sans text-sm text-text-secondary hover:text-mustard-500 transition-colors"
+                aria-label="VAMINT on Instagram"
               >
-                <Globe size={18} />
+                Instagram
               </a>
               <a
-                href="https://instagram.com"
+                href="https://github.com/mrunmayeekokitkar/vamint"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 bg-bg-surface border border-border-subtle rounded text-text-secondary hover:text-mustard-500 hover:border-mustard-500/30 transition-all duration-200"
-                aria-label="Instagram"
+                className="font-sans text-sm text-text-secondary hover:text-mustard-500 transition-colors"
+                aria-label="VAMINT on GitHub"
               >
-                <Globe size={18} />
+                GitHub
               </a>
             </div>
             <p className="font-sans text-xs text-text-secondary">
-              Contact:{" "}
-              <a href="mailto:hello@vamint.club" className="text-text-primary hover:text-mustard-500 transition-colors">
-                hello@vamint.club
+              Email:{" "}
+              <a href="mailto:vamintcommunity@gmail.com" className="text-text-primary hover:text-mustard-500 transition-colors">
+                vamintcommunity@gmail.com
               </a>
             </p>
           </div>
@@ -123,10 +127,10 @@ export default function Footer() {
 
         {/* Bottom Credits */}
         <div className="border-t border-border-subtle/50 pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-text-secondary gap-4">
-          <p>&copy; {currentYear} VAMINT Coding Club. All rights reserved.</p>
+          <p>&copy; {currentYear} VAMINT. All rights reserved.</p>
           <div className="flex space-x-6">
             <Link href="/legal" className="hover:text-text-primary transition-colors">
-              Code of Conduct & Privacy
+              Code of Conduct &amp; Privacy
             </Link>
           </div>
         </div>

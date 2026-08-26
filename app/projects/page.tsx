@@ -105,7 +105,8 @@ export default function Projects() {
             ))
           ) : (
             <div className="col-span-3 py-16 text-center text-text-secondary font-sans border border-dashed border-border-subtle rounded-lg">
-              No projects compiled in this category yet.
+              {/* TODO(content): student projects */}
+              Awaiting student projects. Check back soon!
             </div>
           )}
         </div>

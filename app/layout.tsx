@@ -28,32 +28,29 @@ const playfairDisplay = Playfair_Display({
 
 export const metadata: Metadata = {
   title: "VAMINT | Code. Collaborate. Evolve.",
-  description: "Official website of VAMINT, the college coding community. Building together, learning together.",
+  description: "VAMINT is the student tech community of our college — organizing hackathons, workshops, competitions, and soft-skills events to help students code, collaborate, and evolve together.",
   openGraph: {
     title: "VAMINT | Code. Collaborate. Evolve.",
-    description: "Official website of VAMINT, the college coding community. Building together, learning together.",
+    description: "VAMINT is the student tech community of our college — organizing hackathons, workshops, competitions, and soft-skills events to help students code, collaborate, and evolve together.",
     type: "website",
     url: "https://vamintcommunity.vercel.app",
-    // TODO(content): Add actual logo image
-    // images: [{
-    //   url: "/og-image.png",
-    //   width: 1200,
-    //   height: 630,
-    //   alt: "VAMINT Logo",
-    // }],
+    images: [{
+      url: "/logo.jpg",
+      width: 630,
+      height: 630,
+      alt: "VAMINT Logo",
+    }],
   },
   twitter: {
     card: "summary_large_image",
     title: "VAMINT | Code. Collaborate. Evolve.",
-    description: "Official website of VAMINT, the college coding community.",
-    // TODO(content): Add actual logo image
-    // images: ["/og-image.png"],
+    description: "VAMINT is the student tech community of our college — organizing hackathons, workshops, competitions, and soft-skills events.",
+    images: ["/logo.jpg"],
   },
-  // TODO(content): Add favicon
-  // icons: {
-  //   icon: "/favicon.ico",
-  //   apple: "/apple-touch-icon.png",
-  // },
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/logo.jpg",
+  },
 };
 
 export default function RootLayout({

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X, Sun, Moon } from "lucide-react";
 
@@ -70,12 +71,16 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-[1280px] mx-auto px-6 md:px-12 flex items-center justify-between">
-        {/* Typographic Logo */}
-        <Link href="/" className="flex items-center space-x-1 group">
-          <span className="font-display font-semibold text-lg tracking-wider text-text-primary">
-            [ vamint ]
-          </span>
-          <span className="w-1.5 h-4 bg-mustard-500 animate-blink"></span>
+        {/* Logo */}
+        <Link href="/" className="flex items-center group" aria-label="VAMINT Home">
+          <Image
+            src="/logo.jpg"
+            alt="VAMINT"
+            width={120}
+            height={48}
+            className="h-10 w-auto object-contain"
+            priority
+          />
         </Link>
 
         {/* Desktop Nav */}

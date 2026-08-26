@@ -1,21 +1,32 @@
 import { NextRequest, NextResponse } from 'next/server';
-// import { prisma } from '@/lib/prisma';
+import { prisma } from '@/lib/prisma';
 
 export async function GET(request: NextRequest) {
   try {
-    // Simple auth check - in production use proper JWT verification
+    // Cookie auth check
     const token = request.cookies.get('admin_token')?.value;
     if (!token) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // TODO: Fetch from database when Prisma is set up
-    // const submissions = await prisma.joinSubmission.findMany({
-    //   orderBy: { submittedAt: 'desc' },
-    //   take: 50,
-    // });
+    let memberships: any[] = [];
+    let committeeApps: any[] = [];
 
-    return NextResponse.json([]);
+    try {
+      memberships = await prisma.clubMembership.findMany({
+        orderBy: { submittedAt: 'desc' },
+      });
+      committeeApps = await prisma.committeeApplication.findMany({
+        orderBy: { submittedAt: 'desc' },
+      });
+    } catch (dbError) {
+      console.error("Prisma error fetching admin submissions:", dbError);
+    }
+
+    return NextResponse.json({
+      memberships,
+      committeeApps,
+    });
   } catch (error) {
     console.error('Fetch submissions error:', error);
     return NextResponse.json(
@@ -24,3 +35,4 @@ export async function GET(request: NextRequest) {
     );
   }
 }
+export const dynamic = "force-dynamic";
