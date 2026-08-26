@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { ScrollControls, useScroll } from "@react-three/drei";
+import { ScrollControls, useScroll, PointMaterial } from "@react-three/drei";
 import * as THREE from "three";
 
 // Brain/Bulb particle system with scroll-driven animation
