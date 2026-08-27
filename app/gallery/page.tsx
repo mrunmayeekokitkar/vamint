@@ -1,162 +1,381 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
+
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import Card from "@/components/ui/Card";
-import { X, ChevronLeft, ChevronRight, Image as ImageIcon } from "lucide-react";
 
-const galleryImages = [
-  { id: 0, title: "Syntax Showdown 2026", category: "Hackathons", desc: "Collaborating on local WASM translation templates." },
-  { id: 1, title: "AI Agent Dev Session", category: "Workshops", desc: "Setting up local transformer API gateways." },
-  { id: 2, title: "CP Sprint Winners", category: "Competitions", desc: "Top 3 positions checking algorithm outputs." },
-  { id: 3, title: "Sentinel Firmware Deploy", category: "Projects", desc: "ESP32 firmware signing validation check." },
-  { id: 4, title: "Annual General Compiles", category: "Gatherings", desc: "End of semester general assembly code reviews." },
-  { id: 5, title: "Design Systems Sprint", category: "Workshops", desc: "Typography alignment and color token discussions." }
+import {
+  ChevronLeft,
+  ChevronRight,
+  X,
+  Image as ImageIcon,
+} from "lucide-react";
+
+const galleryEvents = [
+  {
+    id: 0,
+    title: "SIH Internal Hackathon",
+    category: "Hackathons",
+    desc: "Students collaborating and competing during VAMINT's internal hackathon.",
+    images: [
+      "/gallery/sih/sih_1.jpeg",
+      "/gallery/sih/sih_2.jpeg",
+      "/gallery/sih/sih_3.jpeg",
+      "/gallery/sih/sih_4.jpeg",
+      "/gallery/sih/sih_5.jpeg",
+    ],
+  },
+
+  {
+    id: 1,
+    title: "Sitecraft 2025",
+    category: "Competitions",
+    desc: "Participants taking on the website cloning challenge.",
+    images: [
+      "/gallery/sitecraft/site_1.jpeg",
+      "/gallery/sitecraft/site_2.jpeg",
+      "/gallery/sitecraft/site_3.jpeg",
+      "/gallery/sitecraft/site_4.jpeg",
+    ],
+  },
+
+  {
+    id: 2,
+    title: "Technobash 2026",
+    category: "Technical Events",
+    desc: "Moments from one of the college's biggest technical events.",
+    images: [
+      "/gallery/technobash/tech_1.jpeg",
+      "/gallery/technobash/tech_2.jpeg",
+      "/gallery/technobash/tech_3.jpeg",
+      "/gallery/technobash/tech_4.jpeg",
+      "/gallery/technobash/tech_5.jpeg",
+    ],
+  },
+
+  {
+    id: 3,
+    title: "Debate Competition",
+    category: "Soft Skills",
+    desc: "Students sharing ideas and competing through debate.",
+    images: [],
+  },
+
+  {
+    id: 4,
+    title: "VAMINT Community",
+    category: "Community",
+    desc: "The people behind VAMINT — learning, building, and growing together.",
+    images: ["/gallery/committe/committee.jpeg"],
+  },
 ];
 
 export default function Gallery() {
-  const [selectedImage, setSelectedImage] = useState<number | null>(null);
+  const [currentImages, setCurrentImages] = useState<Record<number, number>>(
+    {}
+  );
 
-  // Close lightbox on Escape key press
+  const [selectedEvent, setSelectedEvent] = useState<number | null>(null);
+  const [selectedImage, setSelectedImage] = useState(0);
+
+  const getCurrentImage = (eventId: number) => {
+    return currentImages[eventId] ?? 0;
+  };
+
+  const nextImage = (eventId: number, total: number) => {
+    setCurrentImages((prev) => {
+      const current = prev[eventId] ?? 0;
+
+      return {
+        ...prev,
+        [eventId]: (current + 1) % total,
+      };
+    });
+  };
+
+  const prevImage = (eventId: number, total: number) => {
+    setCurrentImages((prev) => {
+      const current = prev[eventId] ?? 0;
+
+      return {
+        ...prev,
+        [eventId]: (current - 1 + total) % total,
+      };
+    });
+  };
+
+  const openLightbox = (
+    eventIndex: number,
+    imageIndex: number
+  ) => {
+    setSelectedEvent(eventIndex);
+    setSelectedImage(imageIndex);
+  };
+
+  const closeLightbox = () => {
+    setSelectedEvent(null);
+    setSelectedImage(0);
+  };
+
+  const handleLightboxNext = () => {
+    if (selectedEvent === null) return;
+
+    const images = galleryEvents[selectedEvent].images;
+
+    setSelectedImage((prev) => (prev + 1) % images.length);
+  };
+
+  const handleLightboxPrev = () => {
+    if (selectedEvent === null) return;
+
+    const images = galleryEvents[selectedEvent].images;
+
+    setSelectedImage(
+      (prev) => (prev - 1 + images.length) % images.length
+    );
+  };
+
+  // Keyboard navigation for lightbox
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setSelectedImage(null);
-      if (e.key === "ArrowRight" && selectedImage !== null) handleNext();
-      if (e.key === "ArrowLeft" && selectedImage !== null) handlePrev();
+      if (selectedEvent === null) return;
+
+      if (e.key === "Escape") {
+        closeLightbox();
+      }
+
+      if (e.key === "ArrowRight") {
+        handleLightboxNext();
+      }
+
+      if (e.key === "ArrowLeft") {
+        handleLightboxPrev();
+      }
     };
+
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [selectedImage]);
 
-  const handleNext = () => {
-    if (selectedImage === null) return;
-    setSelectedImage((selectedImage + 1) % galleryImages.length);
-  };
-
-  const handlePrev = () => {
-    if (selectedImage === null) return;
-    setSelectedImage((selectedImage - 1 + galleryImages.length) % galleryImages.length);
-  };
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [selectedEvent]);
 
   return (
     <div className="flex flex-col min-h-screen">
+
       <Navbar />
 
       <main className="flex-grow pt-32 pb-24 max-w-[1280px] mx-auto px-6 md:px-12 w-full">
-        {/* Header */}
+
+        {/* HEADER */}
+
         <div className="max-w-3xl mb-16">
-          <div className="font-mono text-xs text-mint-500 uppercase tracking-wider mb-3">
-            [ Workspace Gallery ]
+
+          <div className="font-mono text-xs text-yellow-500 uppercase tracking-wider mb-3">
+            [ VAMINT Gallery ]
           </div>
+
           <h1 className="font-display font-semibold text-4xl md:text-6xl tracking-tight text-text-primary mb-6">
-            Inside VAMINT labs
+            Moments with VAMINT
           </h1>
-          <p className="font-sans text-text-secondary text-base">
-            Photos from our hackathons, design discussions, late-night compiles, and campus workshops.
+
+          <p className="font-sans text-text-secondary text-base leading-relaxed">
+            A collection of moments from our hackathons, competitions,
+            technical events, and community activities.
           </p>
+
         </div>
 
-        {/* Gallery Grid */}
+
+        {/* EVENT CARDS */}
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {galleryImages.map((img) => (
-            <div
-              key={img.id}
-              onClick={() => setSelectedImage(img.id)}
-              className="group cursor-pointer bg-bg-surface border border-border-subtle hover:border-mint-500/30 rounded-lg overflow-hidden transition-all duration-300"
-            >
-              {/* Graphic Mockup Placeholder */}
-              <div className="relative aspect-video bg-bg-surface-raised border-b border-border-subtle flex items-center justify-center overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-mint-500/5 to-transparent opacity-50 group-hover:opacity-100 transition-opacity"></div>
-                <ImageIcon size={32} className="text-text-tertiary group-hover:text-mint-500 transition-colors" />
-                <span className="absolute bottom-3 right-3 font-mono text-[10px] text-text-tertiary bg-bg-primary px-2 py-0.5 rounded border border-border-subtle">
-                  {img.category}
-                </span>
+
+          {galleryEvents.map((event, eventIndex) => {
+            const currentIndex = getCurrentImage(event.id);
+
+            return (
+              <div
+                key={event.id}
+                className="bg-bg-surface border border-border-subtle rounded-lg overflow-hidden hover:border-yellow-500/30 transition-all duration-300 hover:-translate-y-1"
+              >
+
+                {/* IMAGE CAROUSEL */}
+
+                <div className="relative aspect-video bg-bg-surface-raised overflow-hidden">
+
+                  {event.images.length > 0 ? (
+
+                    <>
+                      <Image
+                        src={event.images[currentIndex]}
+                        alt={`${event.title} image ${currentIndex + 1}`}
+                        fill
+                        className="object-cover cursor-pointer"
+                        onClick={() =>
+                          openLightbox(eventIndex, currentIndex)
+                        }
+                      />
+
+                      {/* Previous Image */}
+
+                      {event.images.length > 1 && (
+                        <button
+                          onClick={() =>
+                            prevImage(event.id, event.images.length)
+                          }
+                          className="absolute left-3 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white p-2 rounded-full transition-all"
+                          aria-label="Previous image"
+                        >
+                          <ChevronLeft size={18} />
+                        </button>
+                      )}
+
+                      {/* Next Image */}
+
+                      {event.images.length > 1 && (
+                        <button
+                          onClick={() =>
+                            nextImage(event.id, event.images.length)
+                          }
+                          className="absolute right-3 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white p-2 rounded-full transition-all"
+                          aria-label="Next image"
+                        >
+                          <ChevronRight size={18} />
+                        </button>
+                      )}
+
+                      {/* Image Counter */}
+
+                      <div className="absolute bottom-3 left-3 bg-black/70 px-2 py-1 rounded text-[10px] font-mono text-white">
+                        {currentIndex + 1} / {event.images.length}
+                      </div>
+                    </>
+
+                  ) : (
+
+                    /* DEBATE - NO PHOTOS YET */
+
+                    <div className="w-full h-full flex flex-col items-center justify-center text-center">
+
+                      <ImageIcon
+                        size={42}
+                        className="text-text-tertiary mb-3"
+                      />
+
+                      <p className="font-mono text-xs text-text-tertiary">
+                        [ PHOTOS COMING SOON ]
+                      </p>
+
+                    </div>
+
+                  )}
+
+                  {/* CATEGORY */}
+
+                  <span className="absolute bottom-3 right-3 font-mono text-[10px] text-yellow-500 bg-bg-primary px-2 py-1 rounded border border-border-subtle">
+
+                    {event.category}
+
+                  </span>
+
+                </div>
+
+
+                {/* CARD CONTENT */}
+
+                <div className="p-5">
+
+                  <h3 className="font-display font-semibold text-lg text-text-primary mb-2">
+
+                    {event.title}
+
+                  </h3>
+
+                  <p className="font-sans text-xs text-text-secondary leading-relaxed">
+
+                    {event.desc}
+
+                  </p>
+
+                </div>
+
               </div>
-              <div className="p-5">
-                <h3 className="font-display font-semibold text-base text-text-primary mb-1">
-                  {img.title}
-                </h3>
-                <p className="font-sans text-xs text-text-secondary leading-relaxed">
-                  {img.desc}
-                </p>
-              </div>
-            </div>
-          ))}
+            );
+          })}
+
         </div>
 
-        {/* Custom Lightbox */}
-        {selectedImage !== null && (
-          <div className="fixed inset-0 z-50 bg-bg-primary/95 flex items-center justify-center p-4">
-            <button
-              onClick={() => setSelectedImage(null)}
-              className="absolute top-6 right-6 p-2 text-text-secondary hover:text-text-primary transition-colors focus:outline-none"
-              aria-label="Close Lightbox"
-            >
-              <X size={24} />
-            </button>
-
-            {/* Navigation buttons */}
-            <button
-              onClick={handlePrev}
-              className="absolute left-6 p-2 text-text-secondary hover:text-text-primary transition-colors focus:outline-none"
-              aria-label="Previous Image"
-            >
-              <ChevronLeft size={36} />
-            </button>
-
-            <div className="max-w-4xl w-full flex flex-col items-center">
-              {/* Image Container Mockup */}
-              <div className="w-full aspect-video bg-bg-surface border border-border-subtle rounded-lg flex flex-col justify-between p-6 shadow-2xl relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-tr from-mint-500/5 via-transparent to-transparent pointer-events-none"></div>
-                
-                {/* Simulated window control buttons */}
-                <div className="flex items-center space-x-2 border-b border-border-subtle pb-4 mb-4">
-                  <span className="w-2.5 h-2.5 rounded-full bg-error-500"></span>
-                  <span className="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
-                  <span className="w-2.5 h-2.5 rounded-full bg-mint-500"></span>
-                  <span className="text-[10px] font-mono text-text-tertiary pl-4">
-                    file:///vamint/gallery/{galleryImages[selectedImage].title.toLowerCase().replace(/ /g, "_")}.jpg
-                  </span>
-                </div>
-
-                <div className="flex-grow flex items-center justify-center py-12">
-                  <div className="text-center space-y-4">
-                    <ImageIcon size={64} className="text-mint-500/40 mx-auto animate-pulse" />
-                    <p className="font-mono text-xs text-text-tertiary">
-                      [ VISUAL SNAPSHOT RENDERED ]
-                    </p>
-                  </div>
-                </div>
-
-                <div className="border-t border-border-subtle pt-4 mt-4 flex items-center justify-between text-xs font-sans">
-                  <div>
-                    <h3 className="font-display font-semibold text-text-primary">
-                      {galleryImages[selectedImage].title}
-                    </h3>
-                    <p className="text-text-secondary mt-1">
-                      {galleryImages[selectedImage].desc}
-                    </p>
-                  </div>
-                  <span className="font-mono text-text-tertiary border border-border-subtle px-2 py-0.5 rounded">
-                    {galleryImages[selectedImage].category}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <button
-              onClick={handleNext}
-              className="absolute right-6 p-2 text-text-secondary hover:text-text-primary transition-colors focus:outline-none"
-              aria-label="Next Image"
-            >
-              <ChevronRight size={36} />
-            </button>
-          </div>
-        )}
       </main>
 
+
+      {/* LIGHTBOX */}
+
+      {selectedEvent !== null && (
+
+        <div className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4">
+
+          {/* Close */}
+
+          <button
+            onClick={closeLightbox}
+            className="absolute top-6 right-6 text-white hover:text-yellow-500 transition-colors z-10"
+            aria-label="Close gallery"
+          >
+            <X size={28} />
+          </button>
+
+
+          {/* Previous */}
+
+          {galleryEvents[selectedEvent].images.length > 1 && (
+            <button
+              onClick={handleLightboxPrev}
+              className="absolute left-4 md:left-10 text-white hover:text-yellow-500 transition-colors z-10"
+              aria-label="Previous image"
+            >
+              <ChevronLeft size={42} />
+            </button>
+          )}
+
+
+          {/* MAIN IMAGE */}
+
+          <div className="relative w-full max-w-6xl h-[80vh]">
+
+            <Image
+              src={
+                galleryEvents[selectedEvent].images[selectedImage]
+              }
+              alt={galleryEvents[selectedEvent].title}
+              fill
+              className="object-contain"
+              priority
+            />
+
+          </div>
+
+
+          {/* Next */}
+
+          {galleryEvents[selectedEvent].images.length > 1 && (
+            <button
+              onClick={handleLightboxNext}
+              className="absolute right-4 md:right-10 text-white hover:text-yellow-500 transition-colors z-10"
+              aria-label="Next image"
+            >
+              <ChevronRight size={42} />
+            </button>
+          )}
+
+        </div>
+
+      )}
+
       <Footer />
+
     </div>
   );
 }

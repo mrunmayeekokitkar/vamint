@@ -28,7 +28,7 @@ export default function Events() {
         {/* Header */}
         <div className="max-w-3xl mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="space-y-4">
-            <div className="font-mono text-xs text-mustard-500 uppercase tracking-wider">
+            <div className="font-mono text-xs text-yellow-500 uppercase tracking-wider">
               [ Calendar & Archive ]
             </div>
             <h1 className="font-display font-semibold text-4xl md:text-5xl tracking-tight text-text-primary">
@@ -45,7 +45,7 @@ export default function Events() {
               onClick={() => setFilter("upcoming")}
               className={`px-4 py-1.5 rounded font-sans text-xs font-semibold tracking-wide transition-all ${
                 filter === "upcoming"
-                  ? "bg-mustard-500/10 text-mustard-500 border border-mustard-500/20"
+                  ? "bg-yellow-500/10 text-yellow-500 border border-yellow-500/20"
                   : "text-text-secondary hover:text-text-primary"
               }`}
             >
@@ -55,7 +55,7 @@ export default function Events() {
               onClick={() => setFilter("past")}
               className={`px-4 py-1.5 rounded font-sans text-xs font-semibold tracking-wide transition-all ${
                 filter === "past"
-                  ? "bg-mustard-500/10 text-mustard-500 border border-mustard-500/20"
+                  ? "bg-yellow-500/10 text-yellow-500 border border-yellow-500/20"
                   : "text-text-secondary hover:text-text-primary"
               }`}
             >
@@ -69,12 +69,13 @@ export default function Events() {
           {filteredEvents.length > 0 ? (
             filteredEvents.map((event) => (
               <Card
-                key={event.slug}
-                className="flex flex-col justify-between hover:border-mustard-500/30 transition-all duration-300 h-full"
-              >
+            key={event.slug}
+              hoverGlow
+              className="flex flex-col justify-between h-full"
+                >
                 <div className="space-y-4">
                   <div className="flex flex-wrap gap-2 items-center justify-between">
-                    <span className="px-2 py-0.5 bg-mustard-500/10 border border-mustard-500/20 text-mustard-500 text-xs font-mono rounded">
+                    <span className="px-2 py-0.5 bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 text-xs font-mono rounded">
                       {event.type}
                     </span>
                     <div className="flex items-center space-x-1.5 text-xs font-mono text-text-tertiary">
@@ -109,7 +110,7 @@ export default function Events() {
 
                   <Link
                     href={`/events/${event.slug}`}
-                    className="text-text-primary hover:text-mustard-500 transition-colors font-sans text-xs font-semibold flex items-center gap-1 shrink-0"
+                    className="text-text-primary hover:text-yellow-500 transition-colors font-sans text-xs font-semibold flex items-center gap-1 shrink-0"
                   >
                     {filter === "upcoming" ? "Register" : "Recap"} <ArrowRight size={12} />
                   </Link>
