@@ -1,23 +1,25 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import dynamic from "next/dynamic";
 import Link from "next/link";
 import { ArrowRight, Code2, BrainCircuit, Terminal, ShieldAlert, Calendar, LayoutGrid } from "lucide-react";
+import dynamic from "next/dynamic";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
 
-// Dynamically load the 3D terminal with no SSR to avoid hydration issues
-const TerminalScene = dynamic(() => import("@/components/three/TerminalScene"), {
-  ssr: false,
-  loading: () => (
-    <div className="absolute inset-0 bg-bg-primary flex items-center justify-center opacity-20">
-      <div className="w-10 h-10 border-4 border-mustard-500/20 border-t-mustard-500 rounded-full animate-spin"></div>
-    </div>
-  ),
-});
+const TerminalScene = dynamic(
+  () => import("@/components/three/TerminalScene"),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="w-full h-full flex items-center justify-center">
+        <div className="w-8 h-8 border-2 border-yellow-500/30 border-t-yellow-500 rounded-full animate-spin" />
+      </div>
+    ),
+  }
+);
 
 export default function Home() {
   const [events, setEvents] = useState<{ slug: string; title: string; date: string; description: string; status: string }[]>([]);
@@ -60,48 +62,74 @@ export default function Home() {
     },
   ];
 
+
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
 
-      {/* Hero Section */}
-      <section
-        id="hero-section"
-        className="relative min-h-[90vh] flex items-center justify-center pt-24 overflow-hidden"
-      >
-        <TerminalScene />
+     {/* Hero Section */}
+<section
+  id="hero-section"
+  className="relative min-h-[90vh] pt-28 overflow-hidden flex items-center"
+>
+  <div className="max-w-[1280px] mx-auto px-6 md:px-12 w-full">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
-        <div className="relative z-10 max-w-[1280px] mx-auto px-6 md:px-12 text-center flex flex-col items-center">
-          <div className="inline-flex items-center space-x-2 bg-bg-surface border border-border-subtle px-3 py-1 rounded-full text-xs font-mono text-mustard-500 mb-8">
-            <span className="w-2 h-2 rounded-full bg-mustard-500 animate-pulse"></span>
-            <span>Recruitment Open for 2026–27</span>
-          </div>
+      {/* LEFT — Hero Content */}
+      <div className="relative z-10 flex flex-col items-start">
 
-          <h1 className="font-display font-semibold text-5xl md:text-7xl tracking-tight leading-[1.05] text-text-primary max-w-4xl mb-6">
-            Where students come to{" "}
-            <span className="text-mustard-500 text-glow">build things</span>{" "}
-            that matter.
-          </h1>
-
-          <p className="font-sans text-text-secondary text-lg md:text-xl max-w-2xl mb-10 leading-relaxed">
-            VAMINT is our college&apos;s student tech community — learn by doing, grow by sharing, and ship real projects alongside people who care about the craft.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center w-full max-w-md">
-            <Button variant="primary" href="/join" className="w-full sm:w-auto">
-              Join VAMINT
-            </Button>
-            <Button variant="secondary" href="/events" className="w-full sm:w-auto">
-              See our events
-            </Button>
-          </div>
+        <div className="inline-flex items-center gap-2 bg-bg-surface border border-border-subtle px-4 py-2 rounded-full text-xs font-mono text-yellow-500 mb-8">
+          <span className="w-2 h-2 rounded-full bg-yellow-500 animate-pulse" />
+          <span>Recruitment Open for 2026–27</span>
         </div>
 
+        <h1 className="font-display font-bold text-5xl md:text-6xl xl:text-7xl tracking-tight leading-[1.05] text-text-primary mb-6">
+          Where students come to{" "}
+          <span className="text-yellow-500 text-glow">
+            build things
+          </span>{" "}
+          that matter.
+        </h1>
+
+        <p className="font-sans text-text-secondary text-lg md:text-xl max-w-xl mb-10 leading-relaxed">
+          VAMINT is our college&apos;s student tech community — a place to
+          learn, experiment, build real projects, compete, and grow together.
+        </p>
+
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full">
+          <Button
+            variant="primary"
+            href="/join"
+            className="w-full sm:w-auto"
+          >
+            Join VAMINT
+          </Button>
+
+          <Button
+            variant="secondary"
+            href="/events"
+            className="w-full sm:w-auto"
+          >
+            See our events
+          </Button>
+        </div>
+      </div>
+
+      {/* RIGHT — 3D Terminal */}
+      <div className="relative w-full h-[400px] md:h-[500px] lg:h-[580px]">
+        <TerminalScene />
+      </div>
+
+    </div>
+  </div>
+</section>
+
         {/* Ambient bottom gradient */}
+        <section>
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-bg-primary to-transparent pointer-events-none"></div>
       </section>
 
-      {/* What We Focus On */}
+ {/* What We Focus On */}
       <section className="py-24 bg-bg-primary border-t border-border-subtle relative z-10">
         <div className="max-w-[1280px] mx-auto px-6 md:px-12">
           <div className="max-w-xl mb-16">
@@ -131,6 +159,7 @@ export default function Home() {
         </div>
       </section>
 
+
       {/* Upcoming Events */}
       <section className="py-24 bg-bg-primary">
         <div className="max-w-[1280px] mx-auto px-6 md:px-12">
@@ -145,7 +174,7 @@ export default function Home() {
             </div>
             <Link
               href="/events"
-              className="text-mustard-500 hover:text-mustard-400 font-sans text-sm font-semibold flex items-center gap-1 w-fit group"
+              className="text-yellow-500 hover:text-yellow-400 font-sans text-sm font-semibold flex items-center gap-1 w-fit group"
             >
               View all events
               <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
@@ -155,10 +184,10 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {events.length > 0 ? (
               events.map((event) => (
-                <Card key={event.slug} className="flex flex-col md:flex-row gap-6 hover:border-mustard-500/30 transition-all duration-300">
+                <Card key={event.slug} className="flex flex-col md:flex-row gap-6 hover:border-yellow-500/30 transition-all duration-300">
                   <div className="flex-1 flex flex-col justify-between space-y-4">
                     <div>
-                      <div className="flex items-center space-x-2 text-xs font-mono text-mustard-500 mb-2">
+                      <div className="flex items-center space-x-2 text-xs font-mono text-yellow-500 mb-2">
                         <Calendar size={14} />
                         <span>{new Date(event.date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</span>
                       </div>
@@ -199,7 +228,7 @@ export default function Home() {
               </div>
               <Link
                 href="/projects"
-                className="text-mustard-500 hover:text-mustard-400 font-sans text-sm font-semibold flex items-center gap-1 w-fit group"
+                className="text-yellow-500 hover:text-yellow-400 font-sans text-sm font-semibold flex items-center gap-1 w-fit group"
               >
                 View all projects
                 <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
@@ -208,9 +237,9 @@ export default function Home() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {projects.map((project) => (
-                <Card key={project.slug} className="flex flex-col justify-between h-full hover:border-mustard-500/30 transition-all duration-300">
+                <Card key={project.slug} className="flex flex-col justify-between h-full hover:border-yellow-500/30 transition-all duration-300">
                   <div className="space-y-4">
-                    <span className="px-2 py-0.5 bg-mustard-500/10 border border-mustard-500/20 text-mustard-500 text-xs font-mono rounded">
+                    <span className="px-2 py-0.5 bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 text-xs font-mono rounded">
                       {project.category}
                     </span>
                     <h3 className="font-display font-semibold text-xl text-text-primary">
@@ -230,7 +259,7 @@ export default function Home() {
                     </div>
                     <Link
                       href={`/projects/${project.slug}`}
-                      className="text-text-primary hover:text-mustard-500 transition-colors font-sans text-xs font-semibold flex items-center gap-1"
+                      className="text-text-primary hover:text-yellow-500 transition-colors font-sans text-xs font-semibold flex items-center gap-1"
                     >
                       Details <ArrowRight size={12} />
                     </Link>

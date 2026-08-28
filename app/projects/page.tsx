@@ -31,7 +31,7 @@ export default function Projects() {
         {/* Header */}
         <div className="max-w-3xl mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="space-y-4">
-            <div className="font-mono text-xs text-mustard-500 uppercase tracking-wider">
+            <div className="font-mono text-xs text-yellow-500 uppercase tracking-wider">
               [ Compilation Registry ]
             </div>
             <h1 className="font-display font-semibold text-4xl md:text-5xl tracking-tight text-text-primary">
@@ -50,7 +50,7 @@ export default function Projects() {
                 onClick={() => setSelectedCategory(cat)}
                 className={`px-3.5 py-1.5 rounded-md font-sans text-xs font-semibold tracking-wide transition-all border ${
                   selectedCategory === cat
-                    ? "bg-mustard-500/10 border-mustard-500 text-mustard-500"
+                    ? "bg-yellow-500/10 border-yellow-500 text-yellow-500"
                     : "bg-bg-surface border-border-subtle text-text-secondary hover:text-text-primary hover:border-border-subtle/80"
                 }`}
               >
@@ -65,12 +65,13 @@ export default function Projects() {
           {filteredProjects.length > 0 ? (
             filteredProjects.map((project) => (
               <Card
-                key={project.slug}
-                className="flex flex-col justify-between hover:border-mustard-500/30 transition-all duration-300 h-full"
-              >
+  key={project.slug}
+  hoverGlow
+  className="flex flex-col justify-between h-full"
+>
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <span className="px-2.5 py-0.5 bg-mustard-500/10 border border-mustard-500/20 text-mustard-500 text-xs font-mono rounded">
+                    <span className="px-2.5 py-0.5 bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 text-xs font-mono rounded">
                       {project.category}
                     </span>
                   </div>
@@ -96,7 +97,7 @@ export default function Projects() {
 
                   <Link
                     href={`/projects/${project.slug}`}
-                    className="text-text-primary hover:text-mustard-500 transition-colors font-sans text-xs font-semibold flex items-center gap-1 shrink-0"
+                    className="text-text-primary hover:text-yellow-500 transition-colors font-sans text-xs font-semibold flex items-center gap-1 shrink-0"
                   >
                     Details <ArrowRight size={12} />
                   </Link>
