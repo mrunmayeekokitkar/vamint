@@ -119,21 +119,14 @@ export default function Footer() {
                 Instagram
               </a>
 
-              <a
-                href="https://github.com/mrunmayeekokitkar/vamint"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-sans text-sm text-text-secondary hover:text-yellow-500 transition-colors"
-              >
-                GitHub
-              </a>
-
             </div>
 
             <p className="font-sans text-xs text-text-secondary">
               Email:{" "}
               <a
-                href="mailto:vamintcommunity@gmail.com"
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=vamintcommunity@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-text-primary hover:text-yellow-500 transition-colors"
               >
                 vamintcommunity@gmail.com

@@ -12,81 +12,72 @@ import { CheckCircle2, Terminal, AlertCircle } from "lucide-react";
 
 // ─── VALIDATION SCHEMAS ──────────────────────────────────────────────────────
 const membershipSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  email: z.string().email("Invalid email format"),
-  rollNo: z.string().min(4, "Invalid roll number"),
-  year: z.string().min(1, "Select your academic year"),
-  branch: z.string().min(2, "Branch/Specialization is required"),
-  phone: z.string().min(10, "Phone number must be at least 10 digits"),
-  domains: z.array(z.string()).min(1, "Select at least one domain of interest"),
-  referral: z.string().min(2, "Please share how you heard about us"),
+  name: z.string().trim().min(1, "Full Name is required"),
+  email: z.string().trim().email("Invalid email format"),
+  phone: z.string().trim().regex(/^\d{10}$/, "Contact Number must be exactly 10 digits"),
+  year: z.string().trim().min(1, "Select your academic year"),
+  department: z.string().trim().min(1, "Select your department"),
 });
 
 const committeeSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  email: z.string().email("Invalid email format"),
-  rollNo: z.string().min(4, "Invalid roll number"),
-  year: z.string().min(1, "Select your academic year"),
-  branch: z.string().min(2, "Branch/Specialization is required"),
-  phone: z.string().min(10, "Phone number must be at least 10 digits"),
-  position: z.string().min(2, "Preferred position/role is required"),
-  reason: z.string().min(15, "Explain in at least 15 characters why you want to join"),
-  experience: z.string().min(10, "Explain in at least 10 characters your prior experience"),
+  name: z.string().trim().min(1, "Full Name is required"),
+  email: z.string().trim().email("Invalid email format"),
+  phone: z.string().trim().regex(/^\d{10}$/, "Contact Number must be exactly 10 digits"),
+  year: z.string().trim().min(1, "Select your academic year"),
+  department: z.string().trim().min(1, "Select your department"),
+  preferredArea: z.string().trim().min(1, "Preferred area is required"),
+  reason: z.string().trim().min(1, "Why do you want to join is required"),
+  experience: z.string().trim().min(1, "Past experience is required"),
 });
 
 type MembershipValues = z.infer<typeof membershipSchema>;
 type CommitteeValues = z.infer<typeof committeeSchema>;
 
+const DEPARTMENTS = [
+  "First Year Engineering",
+  "Computer Engineering",
+  "Information Technology",
+  "Artificial Intelligence & Data Science",
+  "Artificial Intelligence & Machine Learning",
+  "Electronics & Telecommunication",
+  "Mechanical Engineering",
+  "Civil Engineering",
+  "BCA",
+  "MCA",
+  "MBA",
+];
+
 // ─── FORMS CONTAINER ──────────────────────────────────────────────────────────
 export default function Join() {
   const [activeTab, setActiveTab] = useState<"member" | "committee">("member");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submittedForm, setSubmittedForm] = useState<"member" | "committee" | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   // 1. Membership Form Hook
   const memberForm = useForm<MembershipValues>({
     resolver: zodResolver(membershipSchema),
-    defaultValues: { domains: [], referral: "" },
+    defaultValues: { name: "", email: "", phone: "", year: "", department: "" },
   });
 
   // 2. Committee Form Hook
   const committeeForm = useForm<CommitteeValues>({
     resolver: zodResolver(committeeSchema),
-    defaultValues: { position: "", reason: "", experience: "" },
+    defaultValues: { name: "", email: "", phone: "", year: "", department: "", preferredArea: "", reason: "", experience: "" },
   });
-
-  const domainOptions = [
-    "Community Events",
-    "Workshops",
-    "Competitions",
-    "Technical Events",
-    "Soft-Skills Events",
-  ];
-
-  const handleDomainToggle = (domain: string) => {
-    const current = [...memberForm.watch("domains")];
-    const index = current.indexOf(domain);
-    if (index > -1) {
-      current.splice(index, 1);
-    } else {
-      current.push(domain);
-    }
-    memberForm.setValue("domains", current, { shouldValidate: true });
-  };
 
   const onMemberSubmit = async (data: MembershipValues) => {
     setIsSubmitting(true);
     setError(null);
     try {
-      const response = await fetch("/api/membership", {
+      const response = await fetch("/api/join", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...data, honeypot: "" }),
       });
       const resData = await response.json();
       if (response.ok) {
-        setSubmitSuccess(true);
+        setSubmittedForm("member");
         memberForm.reset();
       } else {
         setError(resData.error || "Failed to submit membership application.");
@@ -102,14 +93,14 @@ export default function Join() {
     setIsSubmitting(true);
     setError(null);
     try {
-      const response = await fetch("/api/committee-apply", {
+      const response = await fetch("/api/committee", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...data, honeypot: "" }),
       });
       const resData = await response.json();
       if (response.ok) {
-        setSubmitSuccess(true);
+        setSubmittedForm("committee");
         committeeForm.reset();
       } else {
         setError(resData.error || "Failed to submit committee application.");
@@ -152,6 +143,7 @@ export default function Join() {
                 </li>
                 <li className="flex gap-2">
                   <span className="text-mustard-500 font-bold">✓</span>
+                  {/* TODO: Verify exact workshop-participant competition benefit */}
                   <span>A clean learning environment without gatekeeping or AI slop.</span>
                 </li>
               </ul>
@@ -164,7 +156,7 @@ export default function Join() {
               <button
                 onClick={() => {
                   setActiveTab("member");
-                  setSubmitSuccess(false);
+                  setSubmittedForm(null);
                   setError(null);
                 }}
                 className={`px-4 py-1.5 rounded font-sans text-xs font-semibold tracking-wide transition-all ${
@@ -178,7 +170,7 @@ export default function Join() {
               <button
                 onClick={() => {
                   setActiveTab("committee");
-                  setSubmitSuccess(false);
+                  setSubmittedForm(null);
                   setError(null);
                 }}
                 className={`px-4 py-1.5 rounded font-sans text-xs font-semibold tracking-wide transition-all ${
@@ -192,16 +184,34 @@ export default function Join() {
             </div>
 
             <Card className="border border-border-subtle p-8">
-              {submitSuccess ? (
+              {submittedForm ? (
                 <div className="py-16 text-center space-y-6">
                   <CheckCircle2 className="text-mustard-500 mx-auto" size={56} />
                   <h3 className="font-display font-semibold text-2xl text-text-primary">
                     Application Received
                   </h3>
-                  <p className="font-sans text-sm text-text-secondary max-w-sm mx-auto leading-relaxed">
-                    Thank you for applying. We will review your application details and follow up via email shortly.
-                  </p>
-                  <Button variant="secondary" onClick={() => setSubmitSuccess(false)}>
+                  {submittedForm === "member" ? (
+                    <div className="space-y-4">
+                      <p className="font-sans text-sm text-text-secondary max-w-sm mx-auto leading-relaxed">
+                        Thank you for applying to be a Club Member! Please join our WhatsApp group to stay updated on future announcements and events:
+                      </p>
+                      <div className="py-2">
+                        <a
+                          href="https://chat.whatsapp.com/DmOn3n5ArSe5VdMr5QXqkh"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-block px-6 py-2.5 bg-[#25D366] hover:bg-[#20ba59] text-white font-sans text-sm font-semibold rounded transition-colors"
+                        >
+                          Join WhatsApp Group
+                        </a>
+                      </div>
+                    </div>
+                  ) : (
+                    <p className="font-sans text-sm text-text-secondary max-w-sm mx-auto leading-relaxed">
+                      Thank you for applying. We will review your application details and follow up via email shortly.
+                    </p>
+                  )}
+                  <Button variant="secondary" onClick={() => setSubmittedForm(null)}>
                     Submit another response
                   </Button>
                 </div>
@@ -220,7 +230,7 @@ export default function Join() {
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
                           <label className="block font-mono text-xs text-text-secondary uppercase">
-                            Name
+                            Full Name
                           </label>
                           <input
                             type="text"
@@ -238,7 +248,7 @@ export default function Join() {
 
                         <div className="space-y-2">
                           <label className="block font-mono text-xs text-text-secondary uppercase">
-                            Email
+                            Email ID
                           </label>
                           <input
                             type="email"
@@ -258,45 +268,25 @@ export default function Join() {
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
                           <label className="block font-mono text-xs text-text-secondary uppercase">
-                            Roll Number
+                            Contact Number
                           </label>
                           <input
                             type="text"
                             className="w-full bg-bg-primary border border-border-subtle rounded px-4 py-2 text-sm text-text-primary focus:border-mustard-500 focus:outline-none transition-colors"
-                            placeholder="24CSE0123"
-                            {...memberForm.register("rollNo")}
+                            placeholder="9876543210"
+                            {...memberForm.register("phone")}
                           />
-                          {memberForm.formState.errors.rollNo && (
+                          {memberForm.formState.errors.phone && (
                             <p className="font-mono text-xs text-error-500 flex items-center gap-1 mt-1">
                               <AlertCircle size={12} />
-                              {memberForm.formState.errors.rollNo.message}
+                              {memberForm.formState.errors.phone.message}
                             </p>
                           )}
                         </div>
 
                         <div className="space-y-2">
                           <label className="block font-mono text-xs text-text-secondary uppercase">
-                            Academic Branch
-                          </label>
-                          <input
-                            type="text"
-                            className="w-full bg-bg-primary border border-border-subtle rounded px-4 py-2 text-sm text-text-primary focus:border-mustard-500 focus:outline-none transition-colors"
-                            placeholder="Computer Science"
-                            {...memberForm.register("branch")}
-                          />
-                          {memberForm.formState.errors.branch && (
-                            <p className="font-mono text-xs text-error-500 flex items-center gap-1 mt-1">
-                              <AlertCircle size={12} />
-                              {memberForm.formState.errors.branch.message}
-                            </p>
-                          )}
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                          <label className="block font-mono text-xs text-text-secondary uppercase">
-                            Current Year
+                            Academic Year
                           </label>
                           <select
                             className="w-full bg-bg-primary border border-border-subtle rounded px-4 py-2.5 text-sm text-text-primary focus:border-mustard-500 focus:outline-none transition-colors"
@@ -315,71 +305,27 @@ export default function Join() {
                             </p>
                           )}
                         </div>
-
-                        <div className="space-y-2">
-                          <label className="block font-mono text-xs text-text-secondary uppercase">
-                            Phone Number
-                          </label>
-                          <input
-                            type="text"
-                            className="w-full bg-bg-primary border border-border-subtle rounded px-4 py-2 text-sm text-text-primary focus:border-mustard-500 focus:outline-none transition-colors"
-                            placeholder="9876543210"
-                            {...memberForm.register("phone")}
-                          />
-                          {memberForm.formState.errors.phone && (
-                            <p className="font-mono text-xs text-error-500 flex items-center gap-1 mt-1">
-                              <AlertCircle size={12} />
-                              {memberForm.formState.errors.phone.message}
-                            </p>
-                          )}
-                        </div>
-                      </div>
-
-                      <div className="space-y-2">
-                        <label className="block font-mono text-xs text-text-secondary uppercase mb-2">
-                          Preferred Domains
-                        </label>
-                        <div className="flex flex-wrap gap-2.5">
-                          {domainOptions.map((domain) => {
-                            const isSelected = memberForm.watch("domains")?.includes(domain);
-                            return (
-                              <button
-                                key={domain}
-                                type="button"
-                                onClick={() => handleDomainToggle(domain)}
-                                className={`px-3 py-1.5 border rounded font-sans text-xs font-semibold tracking-wide transition-all ${
-                                  isSelected
-                                    ? "bg-mustard-500/10 border-mustard-500 text-mustard-500"
-                                    : "bg-bg-primary border-border-subtle text-text-secondary hover:text-text-primary"
-                                }`}
-                              >
-                                {domain}
-                              </button>
-                            );
-                          })}
-                        </div>
-                        {memberForm.formState.errors.domains && (
-                          <p className="font-mono text-xs text-error-500 flex items-center gap-1 mt-1">
-                            <AlertCircle size={12} />
-                            {memberForm.formState.errors.domains.message}
-                          </p>
-                        )}
                       </div>
 
                       <div className="space-y-2">
                         <label className="block font-mono text-xs text-text-secondary uppercase">
-                          How did you hear about us?
+                          Department
                         </label>
-                        <input
-                          type="text"
-                          className="w-full bg-bg-primary border border-border-subtle rounded px-4 py-2 text-sm text-text-primary focus:border-mustard-500 focus:outline-none transition-colors"
-                          placeholder="Friend, social media, poster..."
-                          {...memberForm.register("referral")}
-                        />
-                        {memberForm.formState.errors.referral && (
+                        <select
+                          className="w-full bg-bg-primary border border-border-subtle rounded px-4 py-2.5 text-sm text-text-primary focus:border-mustard-500 focus:outline-none transition-colors"
+                          {...memberForm.register("department")}
+                        >
+                          <option value="">Select department</option>
+                          {DEPARTMENTS.map((dept) => (
+                            <option key={dept} value={dept}>
+                              {dept}
+                            </option>
+                          ))}
+                        </select>
+                        {memberForm.formState.errors.department && (
                           <p className="font-mono text-xs text-error-500 flex items-center gap-1 mt-1">
                             <AlertCircle size={12} />
-                            {memberForm.formState.errors.referral.message}
+                            {memberForm.formState.errors.department.message}
                           </p>
                         )}
                       </div>
@@ -404,7 +350,7 @@ export default function Join() {
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
                           <label className="block font-mono text-xs text-text-secondary uppercase">
-                            Name
+                            Full Name
                           </label>
                           <input
                             type="text"
@@ -422,7 +368,7 @@ export default function Join() {
 
                         <div className="space-y-2">
                           <label className="block font-mono text-xs text-text-secondary uppercase">
-                            Email
+                            Email ID
                           </label>
                           <input
                             type="email"
@@ -442,45 +388,25 @@ export default function Join() {
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
                           <label className="block font-mono text-xs text-text-secondary uppercase">
-                            Roll Number
+                            Contact Number
                           </label>
                           <input
                             type="text"
                             className="w-full bg-bg-primary border border-border-subtle rounded px-4 py-2 text-sm text-text-primary focus:border-mustard-500 focus:outline-none transition-colors"
-                            placeholder="24CSE0123"
-                            {...committeeForm.register("rollNo")}
+                            placeholder="9876543210"
+                            {...committeeForm.register("phone")}
                           />
-                          {committeeForm.formState.errors.rollNo && (
+                          {committeeForm.formState.errors.phone && (
                             <p className="font-mono text-xs text-error-500 flex items-center gap-1 mt-1">
                               <AlertCircle size={12} />
-                              {committeeForm.formState.errors.rollNo.message}
+                              {committeeForm.formState.errors.phone.message}
                             </p>
                           )}
                         </div>
 
                         <div className="space-y-2">
                           <label className="block font-mono text-xs text-text-secondary uppercase">
-                            Academic Branch
-                          </label>
-                          <input
-                            type="text"
-                            className="w-full bg-bg-primary border border-border-subtle rounded px-4 py-2 text-sm text-text-primary focus:border-mustard-500 focus:outline-none transition-colors"
-                            placeholder="Computer Science"
-                            {...committeeForm.register("branch")}
-                          />
-                          {committeeForm.formState.errors.branch && (
-                            <p className="font-mono text-xs text-error-500 flex items-center gap-1 mt-1">
-                              <AlertCircle size={12} />
-                              {committeeForm.formState.errors.branch.message}
-                            </p>
-                          )}
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                          <label className="block font-mono text-xs text-text-secondary uppercase">
-                            Current Year
+                            Academic Year
                           </label>
                           <select
                             className="w-full bg-bg-primary border border-border-subtle rounded px-4 py-2.5 text-sm text-text-primary focus:border-mustard-500 focus:outline-none transition-colors"
@@ -499,21 +425,53 @@ export default function Join() {
                             </p>
                           )}
                         </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-2">
+                          <label className="block font-mono text-xs text-text-secondary uppercase">
+                            Department
+                          </label>
+                          <select
+                            className="w-full bg-bg-primary border border-border-subtle rounded px-4 py-2.5 text-sm text-text-primary focus:border-mustard-500 focus:outline-none transition-colors"
+                            {...committeeForm.register("department")}
+                          >
+                            <option value="">Select department</option>
+                            {DEPARTMENTS.map((dept) => (
+                              <option key={dept} value={dept}>
+                                {dept}
+                              </option>
+                            ))}
+                          </select>
+                          {committeeForm.formState.errors.department && (
+                            <p className="font-mono text-xs text-error-500 flex items-center gap-1 mt-1">
+                              <AlertCircle size={12} />
+                              {committeeForm.formState.errors.department.message}
+                            </p>
+                          )}
+                        </div>
 
                         <div className="space-y-2">
                           <label className="block font-mono text-xs text-text-secondary uppercase">
-                            Phone Number
+                            Preferred area to work with
                           </label>
-                          <input
-                            type="text"
-                            className="w-full bg-bg-primary border border-border-subtle rounded px-4 py-2 text-sm text-text-primary focus:border-mustard-500 focus:outline-none transition-colors"
-                            placeholder="9876543210"
-                            {...committeeForm.register("phone")}
-                          />
-                          {committeeForm.formState.errors.phone && (
+                          {/* Flag: Meaning of Options 1-6 is not specified, left TODO comments for the club to fill in */}
+                          <select
+                            className="w-full bg-bg-primary border border-border-subtle rounded px-4 py-2.5 text-sm text-text-primary focus:border-mustard-500 focus:outline-none transition-colors"
+                            {...committeeForm.register("preferredArea")}
+                          >
+                            <option value="">Select an area</option>
+                            <option value="Option 1">Option 1 (TODO: Club to define preferred area 1)</option>
+                            <option value="Option 2">Option 2 (TODO: Club to define preferred area 2)</option>
+                            <option value="Option 3">Option 3 (TODO: Club to define preferred area 3)</option>
+                            <option value="Option 4">Option 4 (TODO: Club to define preferred area 4)</option>
+                            <option value="Option 5">Option 5 (TODO: Club to define preferred area 5)</option>
+                            <option value="Option 6">Option 6 (TODO: Club to define preferred area 6)</option>
+                          </select>
+                          {committeeForm.formState.errors.preferredArea && (
                             <p className="font-mono text-xs text-error-500 flex items-center gap-1 mt-1">
                               <AlertCircle size={12} />
-                              {committeeForm.formState.errors.phone.message}
+                              {committeeForm.formState.errors.preferredArea.message}
                             </p>
                           )}
                         </div>
@@ -521,29 +479,7 @@ export default function Join() {
 
                       <div className="space-y-2">
                         <label className="block font-mono text-xs text-text-secondary uppercase">
-                          Preferred Core Committee Position
-                        </label>
-                        <select
-                          className="w-full bg-bg-primary border border-border-subtle rounded px-4 py-2.5 text-sm text-text-primary focus:border-mustard-500 focus:outline-none transition-colors"
-                          {...committeeForm.register("position")}
-                        >
-                          <option value="">Select a role</option>
-                          <option value="Technical Team Member">Technical Team Member</option>
-                          <option value="Event Coordinator">Event Coordinator</option>
-                          <option value="Social Media Manager">Social Media Manager</option>
-                          <option value="Design Lead">Design Lead</option>
-                        </select>
-                        {committeeForm.formState.errors.position && (
-                          <p className="font-mono text-xs text-error-500 flex items-center gap-1 mt-1">
-                            <AlertCircle size={12} />
-                            {committeeForm.formState.errors.position.message}
-                          </p>
-                        )}
-                      </div>
-
-                      <div className="space-y-2">
-                        <label className="block font-mono text-xs text-text-secondary uppercase">
-                          Why do you want to join the Core Committee?
+                          Why do you want to join?
                         </label>
                         <textarea
                           rows={4}
@@ -561,7 +497,7 @@ export default function Join() {
 
                       <div className="space-y-2">
                         <label className="block font-mono text-xs text-text-secondary uppercase">
-                          Relevant prior experience (coding, managing, designing, etc.)
+                          Past experience
                         </label>
                         <textarea
                           rows={4}

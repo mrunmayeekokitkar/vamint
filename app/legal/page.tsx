@@ -26,20 +26,67 @@ export default function Legal() {
             <h2 className="font-display font-semibold text-xl text-text-primary">
               1. Code of Conduct
             </h2>
-            <p>
-              VAMINT is dedicated to providing a harassment-free experience for everyone, regardless of gender, sexual orientation, disability, physical appearance, body size, race, or religion. We do not tolerate harassment of club members or event participants in any form.
-            </p>
-            <p>
-              All communication should be appropriate for a technical audience including people of many different backgrounds. Technical disagreements are normal, but personal attacks are unacceptable. Be kind to other contributors.
-            </p>
+            <div className="space-y-6">
+              <div>
+                <h3 className="font-semibold text-text-primary text-sm uppercase font-mono tracking-wide mb-1">Purpose &amp; Scope</h3>
+                <p>
+                  VAMINT is committed to fostering an inclusive, welcoming, and harassment-free tech community. This Code of Conduct outlines expectations for all club members, core committee members, and participants across all physical and virtual platforms, including events, workshops, online communication channels, and code repositories.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="font-semibold text-text-primary text-sm uppercase font-mono tracking-wide mb-1">Expected Behavior</h3>
+                <p>
+                  Members are expected to engage in a collaborative and respectful manner. Be kind, inclusive, supportive of others&apos; learning journeys, and open to feedback. Focus on constructive critiques of ideas rather than personal attacks or gatekeeping.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="font-semibold text-text-primary text-sm uppercase font-mono tracking-wide mb-1">Unacceptable Behavior</h3>
+                <p>
+                  We do not tolerate harassment, bullying, discrimination, personal insults, public or private intimidation, or sexualized language/imagery. Plagiarism, academic dishonesty, and spamming community resources are strictly prohibited.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="font-semibold text-text-primary text-sm uppercase font-mono tracking-wide mb-1">Reporting Process</h3>
+                <p>
+                  If you witness or experience unacceptable behavior, please report the incident immediately. You can reach out directly via our Gmail compose portal:{" "}
+                  <a
+                    href="https://mail.google.com/mail/?view=cm&fs=1&to=vamintcommunity@gmail.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-mustard-500 hover:underline"
+                  >
+                    Report Incident
+                  </a>{" "}
+                  {/* TODO: Add escalation contact / specific name of student lead or faculty advisor here */}
+                  to notify the community leadership team. All reports will be handled confidentially.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="font-semibold text-text-primary text-sm uppercase font-mono tracking-wide mb-1">Consequences</h3>
+                <p>
+                  Failure to comply with these guidelines may result in a formal warning, temporary suspension from activities, or permanent expulsion from the VAMINT community, as determined by the core leadership.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="font-semibold text-text-primary text-sm uppercase font-mono tracking-wide mb-1">Acknowledgement Clause</h3>
+                <p>
+                  By submitting the membership form or the committee application form, you explicitly acknowledge, agree, and pledge to adhere to this Code of Conduct and all associated community guidelines.
+                </p>
+              </div>
+            </div>
           </section>
 
           <section className="space-y-4">
             <h2 className="font-display font-semibold text-xl text-text-primary">
-              2. Privacy & Data Handling
+              2. Privacy &amp; Data Handling
             </h2>
             <p>
-              When you submit applications, registrations, or contact logs via this portal, we collect details including your name, email, roll number, department, and academic year.
+              When you submit applications, registrations, or logs via this portal, we collect details including your name, email, contact number, department, and academic year.
             </p>
             <p>
               This data is utilized solely for recruitment profiling, workshop coordinating, and official club registry. We do not share your details with external advertising agencies or databases. Your information is deleted once you graduate or formally request removal.

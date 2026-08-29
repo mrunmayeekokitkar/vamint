@@ -141,7 +141,7 @@ export default function Navbar() {
             </Link>
 
             <Link
-              href="/legal/code-of-conduct"
+              href="/legal"
               onClick={() => setIsOpen(false)}
               className="mt-5 text-center text-sm text-text-tertiary hover:text-text-secondary transition-colors"
             >
