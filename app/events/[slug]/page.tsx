@@ -17,7 +17,6 @@ import {
   MapPin,
   ArrowLeft,
   CheckCircle2,
-  ShieldAlert,
   Users,
   Trophy,
   Sparkles,
@@ -127,11 +126,13 @@ export default function EventDetail() {
               <Calendar size={12} />
 
               <span>
-                {new Date(event.date).toLocaleDateString("en-US", {
-                  month: "long",
-                  day: "numeric",
-                  year: "numeric",
-                })}
+                {event.slug === "technobash-2026"
+                  ? "February 13-14, 2026"
+                  : new Date(event.date).toLocaleDateString("en-US", {
+                      month: "long",
+                      day: "numeric",
+                      year: "numeric",
+                    })}
               </span>
             </div>
 
@@ -287,180 +288,193 @@ export default function EventDetail() {
         {/* ─── UPCOMING EVENT PAGE ─── */}
 
         {isUpcoming && (
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-12">
-
-            {/* MAIN CONTENT */}
-            <div className="md:col-span-3 space-y-8 font-sans text-text-secondary leading-relaxed">
-
+          event.slug === "orientation-2026-27" ? (
+            <div className="max-w-3xl space-y-8 font-sans text-text-secondary leading-relaxed">
               <div className="space-y-4">
-
                 <h3 className="font-display font-semibold text-lg text-text-primary border-b border-border-subtle/50 pb-2">
                   Overview
                 </h3>
-
                 <p className="text-sm">
                   {event.description}
                 </p>
+              </div>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-12">
+
+              {/* MAIN CONTENT */}
+              <div className="md:col-span-3 space-y-8 font-sans text-text-secondary leading-relaxed">
+
+                <div className="space-y-4">
+
+                  <h3 className="font-display font-semibold text-lg text-text-primary border-b border-border-subtle/50 pb-2">
+                    Overview
+                  </h3>
+
+                  <p className="text-sm">
+                    {event.description}
+                  </p>
+
+                </div>
+
+                {event.prerequisites && (
+                  <div className="space-y-2">
+
+                    <h4 className="font-display font-semibold text-sm text-text-primary">
+                      Prerequisites
+                    </h4>
+
+                    <p className="text-xs">
+                      {event.prerequisites}
+                    </p>
+
+                  </div>
+                )}
+
+                {event.whatToBring && (
+                  <div className="space-y-2">
+
+                    <h4 className="font-display font-semibold text-sm text-text-primary">
+                      What to Bring
+                    </h4>
+
+                    <p className="text-xs">
+                      {event.whatToBring}
+                    </p>
+
+                  </div>
+                )}
 
               </div>
 
-              {event.prerequisites && (
-                <div className="space-y-2">
+              {/* RSVP */}
+              <div className="md:col-span-2">
 
-                  <h4 className="font-display font-semibold text-sm text-text-primary">
-                    Prerequisites
-                  </h4>
+                <Card className="border border-border-subtle">
 
-                  <p className="text-xs">
-                    {event.prerequisites}
-                  </p>
+                  {regSuccess ? (
 
-                </div>
-              )}
+                    <div className="text-center py-8 space-y-4">
 
-              {event.whatToBring && (
-                <div className="space-y-2">
+                      <CheckCircle2
+                        className="text-mint-500 mx-auto"
+                        size={40}
+                      />
 
-                  <h4 className="font-display font-semibold text-sm text-text-primary">
-                    What to Bring
-                  </h4>
+                      <h4 className="font-display font-semibold text-lg text-text-primary">
+                        Registration Complete
+                      </h4>
 
-                  <p className="text-xs">
-                    {event.whatToBring}
-                  </p>
+                      <p className="text-xs text-text-secondary">
+                        Your attendance confirmation has been processed.
+                        We&apos;ll see you at the event!
+                      </p>
 
-                </div>
-              )}
+                      <Button
+                        variant="secondary"
+                        onClick={() => setRegSuccess(false)}
+                        className="w-full"
+                      >
+                        Done
+                      </Button>
+
+                    </div>
+
+                  ) : (
+
+                    <form
+                      onSubmit={handleSubmit(onSubmit)}
+                      className="space-y-4"
+                    >
+
+                      <h3 className="font-mono text-xs font-semibold text-text-tertiary uppercase tracking-wider">
+                        RSVP Registration
+                      </h3>
+
+                      {/* NAME */}
+                      <div className="space-y-1.5">
+
+                        <label className="block font-mono text-[10px] text-text-secondary uppercase">
+                          Name
+                        </label>
+
+                        <input
+                          type="text"
+                          className="w-full bg-bg-primary border border-border-subtle rounded px-3 py-2 text-xs text-text-primary focus:border-mint-500 focus:outline-none"
+                          placeholder="Your name"
+                          {...register("name")}
+                        />
+
+                        {errors.name && (
+                          <p className="text-[10px] text-error-500">
+                            {errors.name.message}
+                          </p>
+                        )}
+
+                      </div>
+
+                      {/* EMAIL */}
+                      <div className="space-y-1.5">
+
+                        <label className="block font-mono text-[10px] text-text-secondary uppercase">
+                          Email
+                        </label>
+
+                        <input
+                          type="email"
+                          className="w-full bg-bg-primary border border-border-subtle rounded px-3 py-2 text-xs text-text-primary focus:border-mint-500 focus:outline-none"
+                          placeholder="you@college.edu"
+                          {...register("email")}
+                        />
+
+                        {errors.email && (
+                          <p className="text-[10px] text-error-500">
+                            {errors.email.message}
+                          </p>
+                        )}
+
+                      </div>
+
+                      {/* ROLL NUMBER */}
+                      <div className="space-y-1.5">
+
+                        <label className="block font-mono text-[10px] text-text-secondary uppercase">
+                          Roll Number
+                        </label>
+
+                        <input
+                          type="text"
+                          className="w-full bg-bg-primary border border-border-subtle rounded px-3 py-2 text-xs text-text-primary focus:border-mint-500 focus:outline-none"
+                          placeholder="24CSE0123"
+                          {...register("rollNo")}
+                        />
+
+                        {errors.rollNo && (
+                          <p className="text-[10px] text-error-500">
+                            {errors.rollNo.message}
+                          </p>
+                        )}
+
+                      </div>
+
+                      <Button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="w-full"
+                      >
+                        {isSubmitting ? "Registering..." : "Register Attendance"}
+                      </Button>
+
+                    </form>
+
+                  )}
+
+                </Card>
+
+              </div>
 
             </div>
-
-            {/* RSVP */}
-            <div className="md:col-span-2">
-
-              <Card className="border border-border-subtle">
-
-                {regSuccess ? (
-
-                  <div className="text-center py-8 space-y-4">
-
-                    <CheckCircle2
-                      className="text-mint-500 mx-auto"
-                      size={40}
-                    />
-
-                    <h4 className="font-display font-semibold text-lg text-text-primary">
-                      Registration Complete
-                    </h4>
-
-                    <p className="text-xs text-text-secondary">
-                      Your attendance confirmation has been processed.
-                      We&apos;ll see you at the event!
-                    </p>
-
-                    <Button
-                      variant="secondary"
-                      onClick={() => setRegSuccess(false)}
-                      className="w-full"
-                    >
-                      Done
-                    </Button>
-
-                  </div>
-
-                ) : (
-
-                  <form
-                    onSubmit={handleSubmit(onSubmit)}
-                    className="space-y-4"
-                  >
-
-                    <h3 className="font-mono text-xs font-semibold text-text-tertiary uppercase tracking-wider">
-                      RSVP Registration
-                    </h3>
-
-                    {/* NAME */}
-                    <div className="space-y-1.5">
-
-                      <label className="block font-mono text-[10px] text-text-secondary uppercase">
-                        Name
-                      </label>
-
-                      <input
-                        type="text"
-                        className="w-full bg-bg-primary border border-border-subtle rounded px-3 py-2 text-xs text-text-primary focus:border-mint-500 focus:outline-none"
-                        placeholder="Your name"
-                        {...register("name")}
-                      />
-
-                      {errors.name && (
-                        <p className="text-[10px] text-error-500">
-                          {errors.name.message}
-                        </p>
-                      )}
-
-                    </div>
-
-                    {/* EMAIL */}
-                    <div className="space-y-1.5">
-
-                      <label className="block font-mono text-[10px] text-text-secondary uppercase">
-                        Email
-                      </label>
-
-                      <input
-                        type="email"
-                        className="w-full bg-bg-primary border border-border-subtle rounded px-3 py-2 text-xs text-text-primary focus:border-mint-500 focus:outline-none"
-                        placeholder="you@college.edu"
-                        {...register("email")}
-                      />
-
-                      {errors.email && (
-                        <p className="text-[10px] text-error-500">
-                          {errors.email.message}
-                        </p>
-                      )}
-
-                    </div>
-
-                    {/* ROLL NUMBER */}
-                    <div className="space-y-1.5">
-
-                      <label className="block font-mono text-[10px] text-text-secondary uppercase">
-                        Roll Number
-                      </label>
-
-                      <input
-                        type="text"
-                        className="w-full bg-bg-primary border border-border-subtle rounded px-3 py-2 text-xs text-text-primary focus:border-mint-500 focus:outline-none"
-                        placeholder="24CSE0123"
-                        {...register("rollNo")}
-                      />
-
-                      {errors.rollNo && (
-                        <p className="text-[10px] text-error-500">
-                          {errors.rollNo.message}
-                        </p>
-                      )}
-
-                    </div>
-
-                    <Button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="w-full"
-                    >
-                      {isSubmitting ? "Registering..." : "Register Attendance"}
-                    </Button>
-
-                  </form>
-
-                )}
-
-              </Card>
-
-            </div>
-
-          </div>
+          )
         )}
 
       </main>

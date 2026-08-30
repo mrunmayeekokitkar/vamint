@@ -31,9 +31,9 @@ export default function About() {
       desc: "VAMINT was officially founded at GSMCOE, initially serving the Computer Engineering department. A group of final-year CE students came together with a shared goal: build a real student tech community, not just another club on paper.",
     },
     {
-      date: "Late 2025",
-      title: "Doors Open to the Whole College",
-      desc: "VAMINT expanded beyond Computer Engineering and opened up to students from all departments across GSMCOE.",
+      date: "October 2025",
+      title: "On-campus Placement Drive",
+      desc: "Coordinated an on-campus placement drive, facilitating communication and ensuring smooth execution of the recruitment process.",
     },
     {
       date: "17 September 2025",
@@ -70,30 +70,32 @@ export default function About() {
           <h1 className="font-display font-semibold text-4xl md:text-6xl tracking-tight text-text-primary mb-6">
             A community that codes, collaborates, and evolves together
           </h1>
-          <p className="font-sans text-text-secondary text-lg leading-relaxed mb-6">
-            VAMINT is GSMCOE&apos;s student tech community. We run events, workshops, competitions, and soft-skills programs to help students grow in all directions, not just technically. Whether you&apos;re building your first project or preparing for a hackathon, there&apos;s a place for you here.
+          <p className="font-sans text-text-secondary text-lg leading-relaxed mb-10">
+            VAMINT was founded in 2025 by final-year Computer Engineering students at GSMCOE to build a student tech community where peer learning and collaboration come first. It started as something they wished had existed when they were in their first year, a welcoming space where students from all branches can learn, experiment, run practical workshops, hackathons, and soft-skills events to grow in all directions, not just technically.
           </p>
 
-          {/* Founding Story */}
-          <div className="border-l-2 border-yellow-500/40 pl-6 space-y-4">
-            <p className="font-sans text-text-secondary text-base leading-relaxed">
-              VAMINT was founded in 2025 by final-year students from the Computer Engineering department at GSMCOE. It started as something they wished had existed when they were in first year — a community where students could actually build things together and learn from each other.
-            </p>
-            <div>
-              <p className="font-mono text-xs text-yellow-500 uppercase tracking-wider mb-3">Founders</p>
-              <div className="flex flex-wrap gap-x-5 gap-y-2">
-                {founders.map((f) => (
-                  <a
-                    key={f.name}
-                    href={f.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-sans text-sm text-text-secondary hover:text-yellow-500 transition-colors underline underline-offset-2"
-                  >
+          {/* Redesigned Founders Section */}
+          <div className="bg-bg-surface/40 border border-border-subtle/60 rounded-lg p-6 md:p-8">
+            <h3 className="font-mono text-xs font-semibold text-yellow-500 uppercase tracking-wider mb-6 pb-2 border-b border-border-subtle/50">
+              VAMINT Founders
+            </h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+              {founders.map((f) => (
+                <a
+                  key={f.name}
+                  href={f.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block bg-bg-surface-raised border border-border-subtle hover:border-yellow-500/50 p-4 rounded-md text-center transition-all duration-300 hover:shadow-[0_0_12px_rgba(244,202,48,0.05)] hover:-translate-y-0.5"
+                >
+                  <p className="font-display font-semibold text-sm text-text-primary">
                     {f.name}
-                  </a>
-                ))}
-              </div>
+                  </p>
+                  <p className="font-sans text-[11px] text-yellow-500 mt-1">
+                    LinkedIn
+                  </p>
+                </a>
+              ))}
             </div>
           </div>
         </div>

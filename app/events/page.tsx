@@ -5,7 +5,6 @@ import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Card from "@/components/ui/Card";
-import Button from "@/components/ui/Button";
 import { Calendar, MapPin, ArrowRight } from "lucide-react";
 
 export default function Events() {
@@ -29,7 +28,7 @@ export default function Events() {
         <div className="max-w-3xl mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="space-y-4">
             <div className="font-mono text-xs text-yellow-500 uppercase tracking-wider">
-              [ Calendar & Archive ]
+              [ Calendar &amp; Archive ]
             </div>
             <h1 className="font-display font-semibold text-4xl md:text-5xl tracking-tight text-text-primary">
               VAMINT Events
@@ -69,10 +68,10 @@ export default function Events() {
           {filteredEvents.length > 0 ? (
             filteredEvents.map((event) => (
               <Card
-            key={event.slug}
-              hoverGlow
-              className="flex flex-col justify-between h-full"
-                >
+                key={event.slug}
+                hoverGlow
+                className="flex flex-col justify-between h-full"
+              >
                 <div className="space-y-4">
                   <div className="flex flex-wrap gap-2 items-center justify-between">
                     <span className="px-2 py-0.5 bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 text-xs font-mono rounded">
@@ -81,11 +80,13 @@ export default function Events() {
                     <div className="flex items-center space-x-1.5 text-xs font-mono text-text-tertiary">
                       <Calendar size={12} />
                       <span>
-                        {new Date(event.date).toLocaleDateString("en-US", {
-                          month: "short",
-                          day: "numeric",
-                          year: "numeric",
-                        })}
+                        {event.slug === "technobash-2026"
+                          ? "Feb 13-14, 2026"
+                          : new Date(event.date).toLocaleDateString("en-US", {
+                              month: "short",
+                              day: "numeric",
+                              year: "numeric",
+                            })}
                       </span>
                     </div>
                   </div>
@@ -112,7 +113,7 @@ export default function Events() {
                     href={`/events/${event.slug}`}
                     className="text-text-primary hover:text-yellow-500 transition-colors font-sans text-xs font-semibold flex items-center gap-1 shrink-0"
                   >
-                    {filter === "upcoming" ? "Register" : "Recap"} <ArrowRight size={12} />
+                    {filter === "upcoming" ? (event.slug === "orientation-2026-27" ? "Details" : "Register") : "Recap"} <ArrowRight size={12} />
                   </Link>
                 </div>
               </Card>

@@ -65,12 +65,14 @@ export default function Team() {
     });
   }, []);
 
-  const coreCommittee = teamMembers.filter(
-    (m) => m.category === "Core Committee"
+  // Core Leads hold President, Vice President, Secretary, Treasurer, Technical Head
+  const coreLeads = teamMembers.filter((m) =>
+    ["President", "Vice President", "Secretary", "Treasurer", "Technical Head"].includes(m.role)
   );
 
-  const advisors = teamMembers.filter(
-    (m) => m.category === "Advisory"
+  // Committee tier holds the rest of the functional roles
+  const committeeMembers = teamMembers.filter((m) =>
+    !["President", "Vice President", "Secretary", "Treasurer", "Technical Head"].includes(m.role)
   );
 
   return (
@@ -94,125 +96,198 @@ export default function Team() {
           </p>
         </div>
 
-        {/* Core Committee */}
-        <div className="mb-20">
-          <h2 className="font-mono text-xs font-semibold text-text-tertiary tracking-wider uppercase mb-8 border-b border-border-subtle/50 pb-2">
-            Core Committee
-          </h2>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            {coreCommittee.map((member) => (
-              <Card
-                key={member.name}
-                hoverGlow
-                className="flex flex-col h-full"
-              >
-                {/* Initials avatar */}
-                <div className="w-16 h-16 rounded-full bg-bg-surface-raised border border-border-subtle flex items-center justify-center font-display font-semibold text-xl text-text-secondary mb-5">
-                  {member.name
-                    .split(" ")
-                    .map((n: string) => n[0])
-                    .join("")}
-                </div>
-
-                {/* Name and Role */}
-                <div className="mb-4">
-                  <h3 className="font-display font-semibold text-lg text-text-primary">
-                    {member.name}
-                  </h3>
-
-                  <p className="font-mono text-xs text-yellow-500 mt-1">
-                    {member.role}
-                  </p>
-                </div>
-
-                {/* Bio (merged — no separate fun fact block) */}
-                <p className="font-sans text-sm text-text-secondary leading-relaxed">
-                  {member.bio ?? "Bio coming soon."}
-                </p>
-
-                {/* Social Links */}
-                <div className="flex space-x-4 mt-auto pt-5">
-                  {member.github && (
-                    <a
-                      href={member.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-text-secondary hover:text-yellow-500 transition-colors"
-                      aria-label={`${member.name}'s GitHub`}
-                    >
-                      <GitHubIcon size={17} />
-                    </a>
-                  )}
-
-                  {member.linkedin && (
-                    <a
-                      href={member.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-text-secondary hover:text-yellow-500 transition-colors"
-                      aria-label={`${member.name}'s LinkedIn`}
-                    >
-                      <LinkedInIcon size={17} />
-                    </a>
-                  )}
-
-                  {member.instagram && (
-                    <a
-                      href={member.instagram}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-text-secondary hover:text-yellow-500 transition-colors"
-                      aria-label={`${member.name}'s Instagram`}
-                    >
-                      <InstagramIcon size={17} />
-                    </a>
-                  )}
-                </div>
-              </Card>
-            ))}
-          </div>
-        </div>
-
-        {/* Advisory Board */}
-        {advisors.length > 0 && (
-          <div>
+        {/* Core Leads Tier */}
+        {coreLeads.length > 0 && (
+          <div className="mb-20">
             <h2 className="font-mono text-xs font-semibold text-text-tertiary tracking-wider uppercase mb-8 border-b border-border-subtle/50 pb-2">
-              Advisory Board
+              Core Leads
             </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl">
-              {advisors.map((member) => (
-                <Card
-                  key={member.name}
-                  hoverGlow
-                  className="flex gap-6 items-start"
-                >
-                  {/* Initials */}
-                  <div className="w-16 h-16 rounded-full bg-bg-surface-raised border border-border-subtle flex-shrink-0 flex items-center justify-center font-display font-semibold text-xl text-text-secondary">
-                    {member.name
-                      .split(" ")
-                      .map((n: string) => n[0])
-                      .join("")}
-                  </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {coreLeads.map((member, index) => {
+                const isAlt = index % 2 === 1;
+                // Alternate background tint
+                const cardBg = isAlt ? "bg-bg-surface-raised border-yellow-500/10" : "bg-bg-surface";
 
-                  <div className="space-y-2">
-                    <div>
-                      <h3 className="font-display font-semibold text-lg text-text-primary">
+                return (
+                  <Card
+                    key={member.name}
+                    hoverGlow
+                    className={`flex flex-col items-center text-center p-8 md:p-10 min-h-[460px] h-full ${cardBg}`}
+                  >
+                    {/* Photo / Avatar Placeholder */}
+                    <div className="mb-6 flex justify-center w-full">
+                      {member.image ? (
+                        <img
+                          src={member.image}
+                          alt={member.name}
+                          className="w-24 h-24 rounded-full object-cover border-2 border-yellow-500/20"
+                        />
+                      ) : (
+                        <div className="w-24 h-24 rounded-full bg-bg-surface-raised border-2 border-border-subtle flex items-center justify-center font-display font-semibold text-2xl text-text-secondary">
+                          {member.name
+                            .split(" ")
+                            .map((n: string) => n[0])
+                            .join("")}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Name and Role */}
+                    <div className="mb-4">
+                      <h3 className="font-display font-semibold text-xl md:text-2xl text-text-primary">
                         {member.name}
                       </h3>
 
-                      <p className="font-mono text-xs text-yellow-500 mt-1">
+                      <p className="font-mono text-xs text-yellow-500 mt-1 uppercase tracking-wider">
                         {member.role}
                       </p>
                     </div>
 
-                    <p className="font-sans text-sm text-text-secondary leading-relaxed">
+                    {/* Bio */}
+                    <p className="font-sans text-sm text-text-secondary leading-relaxed max-w-md mb-6">
                       {member.bio ?? "Bio coming soon."}
                     </p>
-                  </div>
-                </Card>
-              ))}
+
+                    {/* Social Links */}
+                    <div className="flex justify-center space-x-4 mt-auto pt-4">
+                      {member.github && (
+                        <a
+                          href={member.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-text-secondary hover:text-yellow-500 transition-colors p-1"
+                          aria-label={`${member.name}'s GitHub`}
+                        >
+                          <GitHubIcon size={18} />
+                        </a>
+                      )}
+
+                      {member.linkedin && (
+                        <a
+                          href={member.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-text-secondary hover:text-yellow-500 transition-colors p-1"
+                          aria-label={`${member.name}'s LinkedIn`}
+                        >
+                          <LinkedInIcon size={18} />
+                        </a>
+                      )}
+
+                      {member.instagram && (
+                        <a
+                          href={member.instagram}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-text-secondary hover:text-yellow-500 transition-colors p-1"
+                          aria-label={`${member.name}'s Instagram`}
+                        >
+                          <InstagramIcon size={18} />
+                        </a>
+                      )}
+                    </div>
+                  </Card>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* Committee Tier */}
+        {committeeMembers.length > 0 && (
+          <div className="mb-20">
+            <h2 className="font-mono text-xs font-semibold text-text-tertiary tracking-wider uppercase mb-8 border-b border-border-subtle/50 pb-2">
+              Committee
+            </h2>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {committeeMembers.map((member, index) => {
+                const isAlt = index % 2 === 1;
+                // Alternate background tint
+                const cardBg = isAlt ? "bg-bg-surface-raised border-yellow-500/10" : "bg-bg-surface";
+
+                return (
+                  <Card
+                    key={member.name}
+                    hoverGlow
+                    className={`flex flex-col items-center text-center p-6 min-h-[380px] h-full ${cardBg}`}
+                  >
+                    {/* Photo / Avatar Placeholder */}
+                    <div className="mb-4 flex justify-center w-full">
+                      {member.image ? (
+                        <img
+                          src={member.image}
+                          alt={member.name}
+                          className="w-16 h-16 rounded-full object-cover border border-yellow-500/10"
+                        />
+                      ) : (
+                        <div className="w-16 h-16 rounded-full bg-bg-surface-raised border border-border-subtle flex items-center justify-center font-display font-semibold text-lg text-text-secondary">
+                          {member.name
+                            .split(" ")
+                            .map((n: string) => n[0])
+                            .join("")}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Name and Role */}
+                    <div className="mb-3">
+                      <h3 className="font-display font-semibold text-lg text-text-primary">
+                        {member.name}
+                      </h3>
+
+                      <p className="font-mono text-xs text-yellow-500 mt-1 uppercase tracking-wider">
+                        {member.role}
+                      </p>
+                    </div>
+
+                    {/* Bio */}
+                    <p className="font-sans text-xs text-text-secondary leading-relaxed mb-4 max-w-sm">
+                      {member.bio ?? "Bio coming soon."}
+                    </p>
+
+                    {/* Social Links */}
+                    <div className="flex justify-center space-x-4 mt-auto pt-3">
+                      {member.github && (
+                        <a
+                          href={member.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-text-secondary hover:text-yellow-500 transition-colors p-1"
+                          aria-label={`${member.name}'s GitHub`}
+                        >
+                          <GitHubIcon size={17} />
+                        </a>
+                      )}
+
+                      {member.linkedin && (
+                        <a
+                          href={member.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-text-secondary hover:text-yellow-500 transition-colors p-1"
+                          aria-label={`${member.name}'s LinkedIn`}
+                        >
+                          <LinkedInIcon size={17} />
+                        </a>
+                      )}
+
+                      {member.instagram && (
+                        <a
+                          href={member.instagram}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-text-secondary hover:text-yellow-500 transition-colors p-1"
+                          aria-label={`${member.name}'s Instagram`}
+                        >
+                          <InstagramIcon size={17} />
+                        </a>
+                      )}
+                    </div>
+                  </Card>
+                );
+              })}
             </div>
           </div>
         )}
