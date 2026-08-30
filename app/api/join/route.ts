@@ -4,7 +4,10 @@ import { z } from "zod";
 const joinSchema = z.object({
   name: z.string().trim().min(1, "Full Name is required"),
   email: z.string().trim().email("Invalid email format"),
-  phone: z.string().trim().regex(/^\d{10}$/, "Contact Number must be exactly 10 digits"),
+  phone: z
+    .string()
+    .trim()
+    .regex(/^\d{10}$/, "Contact Number must be exactly 10 digits"),
   year: z.string().trim().min(1, "Academic Year is required"),
   department: z.string().trim().min(1, "Department is required"),
 });
@@ -26,7 +29,10 @@ export async function POST(request: NextRequest) {
 
     if (!googleScriptUrl) {
       console.error("GOOGLE_SCRIPT_URL is not set");
-      return NextResponse.json({ error: "Server configuration error" }, { status: 500 });
+      return NextResponse.json(
+        { error: "Server configuration error" },
+        { status: 500 },
+      );
     }
 
     // Forward to Google Apps Script Web App
@@ -46,23 +52,36 @@ export async function POST(request: NextRequest) {
 
     if (!response.ok) {
       const responseText = await response.text();
-      console.error("Google Apps Script request failed:", response.status, responseText);
-      return NextResponse.json({ error: "Failed to forward data to Google Sheet" }, { status: 502 });
+      console.error(
+        "Google Apps Script request failed:",
+        response.status,
+        responseText,
+      );
+      return NextResponse.json(
+        { error: "Failed to forward data to Google Sheet" },
+        { status: 502 },
+      );
     }
 
     return NextResponse.json(
-      { success: true, message: "Club membership application successfully submitted!" },
-      { status: 201 }
+      {
+        success: true,
+        message: "Club membership application successfully submitted!",
+      },
+      { status: 201 },
     );
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
         { error: "Validation failed", details: error.issues },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     console.error("Join application error:", error);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 },
+    );
   }
 }

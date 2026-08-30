@@ -33,7 +33,7 @@ export default function AdminLogin() {
       } else {
         setError(data.error || "Invalid password");
       }
-    } catch (err) {
+    } catch {
       setError("Something went wrong");
     } finally {
       setIsLoading(false);
@@ -43,13 +43,13 @@ export default function AdminLogin() {
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
-      
+
       <main className="flex-grow pt-32 pb-24 flex items-center justify-center">
         <Card className="w-full max-w-md p-8">
           <h1 className="font-display font-semibold text-2xl text-text-primary mb-6 text-center">
             Admin Access
           </h1>
-          
+
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
               <label className="block font-mono text-xs text-text-secondary uppercase mb-2">

@@ -49,14 +49,14 @@ export default function Navbar() {
           className="flex items-center group"
           aria-label="VAMINT Home"
         >
-        <Image
-  src="/logo.jpg"
-  alt="VAMINT"
-  width={120}
-  height={48}
-  className="h-16 w-16 object-cover rounded-full border-2 border-yellow-500 p-0.5"
-  priority
-/>
+          <Image
+            src="/logo.jpg"
+            alt="VAMINT"
+            width={120}
+            height={48}
+            className="h-16 w-16 object-cover rounded-full border-2 border-yellow-500 p-0.5"
+            priority
+          />
         </Link>
 
         {/* Desktop Navigation */}

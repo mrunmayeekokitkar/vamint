@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from "next/server";
 // import { prisma } from '@/lib/prisma';
-import { z } from 'zod';
+import { z } from "zod";
 
 // Validation schema
 const registrationSchema = z.object({
@@ -11,15 +11,15 @@ const registrationSchema = z.object({
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: Promise<{ slug: string }> }
+  { params }: { params: Promise<{ slug: string }> },
 ) {
   try {
     const body = await request.json();
     const { slug } = await params;
-    
+
     // Validate input
     const validatedData = registrationSchema.parse(body);
-    
+
     // TODO: Get event details from database when Prisma is set up
     // const event = await prisma.event.findUnique({
     //   where: { slug },
@@ -40,11 +40,8 @@ export async function POST(
     // }
 
     // Check for spam
-    if ('honeypot' in body && body.honeypot) {
-      return NextResponse.json(
-        { error: "Spam detected" },
-        { status: 400 }
-      );
+    if ("honeypot" in body && body.honeypot) {
+      return NextResponse.json({ error: "Spam detected" }, { status: 400 });
     }
 
     // TODO: Store registration in database when Prisma is set up
@@ -58,24 +55,30 @@ export async function POST(
     //   },
     // });
 
-    console.log('Event registration (database disabled):', { slug, validatedData });
+    console.log("Event registration (database disabled):", {
+      slug,
+      validatedData,
+    });
 
     return NextResponse.json(
-      { success: true, message: "Database not configured - registration logged to console" },
-      { status: 201 }
+      {
+        success: true,
+        message: "Database not configured - registration logged to console",
+      },
+      { status: 201 },
     );
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
         { error: "Validation failed", details: error.issues },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
-    console.error('Event registration error:', error);
+    console.error("Event registration error:", error);
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

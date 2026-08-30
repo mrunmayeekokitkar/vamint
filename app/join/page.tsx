@@ -14,7 +14,10 @@ import { CheckCircle2, Terminal, AlertCircle } from "lucide-react";
 const membershipSchema = z.object({
   name: z.string().trim().min(1, "Full Name is required"),
   email: z.string().trim().email("Invalid email format"),
-  phone: z.string().trim().regex(/^\d{10}$/, "Contact Number must be exactly 10 digits"),
+  phone: z
+    .string()
+    .trim()
+    .regex(/^\d{10}$/, "Contact Number must be exactly 10 digits"),
   year: z.string().trim().min(1, "Select your academic year"),
   department: z.string().trim().min(1, "Select your department"),
 });
@@ -22,7 +25,10 @@ const membershipSchema = z.object({
 const committeeSchema = z.object({
   name: z.string().trim().min(1, "Full Name is required"),
   email: z.string().trim().email("Invalid email format"),
-  phone: z.string().trim().regex(/^\d{10}$/, "Contact Number must be exactly 10 digits"),
+  phone: z
+    .string()
+    .trim()
+    .regex(/^\d{10}$/, "Contact Number must be exactly 10 digits"),
   year: z.string().trim().min(1, "Select your academic year"),
   department: z.string().trim().min(1, "Select your department"),
   preferredArea: z.string().trim().min(1, "Preferred area is required"),
@@ -51,7 +57,9 @@ const DEPARTMENTS = [
 export default function Join() {
   const [activeTab, setActiveTab] = useState<"member" | "committee">("member");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submittedForm, setSubmittedForm] = useState<"member" | "committee" | null>(null);
+  const [submittedForm, setSubmittedForm] = useState<
+    "member" | "committee" | null
+  >(null);
   const [error, setError] = useState<string | null>(null);
 
   // 1. Membership Form Hook
@@ -63,7 +71,16 @@ export default function Join() {
   // 2. Committee Form Hook
   const committeeForm = useForm<CommitteeValues>({
     resolver: zodResolver(committeeSchema),
-    defaultValues: { name: "", email: "", phone: "", year: "", department: "", preferredArea: "", reason: "", experience: "" },
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      year: "",
+      department: "",
+      preferredArea: "",
+      reason: "",
+      experience: "",
+    },
   });
 
   const onMemberSubmit = async (data: MembershipValues) => {
@@ -82,7 +99,7 @@ export default function Join() {
       } else {
         setError(resData.error || "Failed to submit membership application.");
       }
-    } catch (err) {
+    } catch {
       setError("An unexpected error occurred. Please try again.");
     } finally {
       setIsSubmitting(false);
@@ -105,7 +122,7 @@ export default function Join() {
       } else {
         setError(resData.error || "Failed to submit committee application.");
       }
-    } catch (err) {
+    } catch {
       setError("An unexpected error occurred. Please try again.");
     } finally {
       setIsSubmitting(false);
@@ -128,10 +145,17 @@ export default function Join() {
                 Join the VAMINT Community
               </h1>
               <p className="font-sans text-sm text-text-secondary leading-relaxed">
-                VAMINT is open to all students at GSMCOE, regardless of branch, year, or experience level. Whether you want to show up to events and learn alongside others, or get more involved and help run things, there&apos;s a place for you here.
+                VAMINT is open to all students at GSMCOE, regardless of branch,
+                year, or experience level. Whether you want to show up to events
+                and learn alongside others, or get more involved and help run
+                things, there&apos;s a place for you here.
               </p>
               <p className="font-sans text-sm text-text-secondary leading-relaxed">
-                Club Members get access to all our events, workshops, and community activities. Committee Members take an active role in planning and organizing, working directly with the core team to make things happen. Pick the one that fits where you&apos;re at right now.
+                Club Members get access to all our events, workshops, and
+                community activities. Committee Members take an active role in
+                planning and organizing, working directly with the core team to
+                make things happen. Pick the one that fits where you&apos;re at
+                right now.
               </p>
             </div>
           </div>
@@ -172,14 +196,18 @@ export default function Join() {
             <Card className="border border-border-subtle p-5 md:p-8">
               {submittedForm ? (
                 <div className="py-16 text-center space-y-6">
-                  <CheckCircle2 className="text-mustard-500 mx-auto" size={56} />
+                  <CheckCircle2
+                    className="text-mustard-500 mx-auto"
+                    size={56}
+                  />
                   <h3 className="font-display font-semibold text-2xl text-text-primary">
                     Application Received
                   </h3>
                   {submittedForm === "member" ? (
                     <div className="space-y-4">
                       <p className="font-sans text-sm text-text-secondary max-w-sm mx-auto leading-relaxed">
-                        Thanks for applying! Join our WhatsApp group to stay updated on announcements and upcoming events:
+                        Thanks for applying! Join our WhatsApp group to stay
+                        updated on announcements and upcoming events:
                       </p>
                       <div className="py-2">
                         <a
@@ -194,10 +222,14 @@ export default function Join() {
                     </div>
                   ) : (
                     <p className="font-sans text-sm text-text-secondary max-w-sm mx-auto leading-relaxed">
-                      Thanks for applying. We&apos;ll review your application and be in touch soon.
+                      Thanks for applying. We&apos;ll review your application
+                      and be in touch soon.
                     </p>
                   )}
-                  <Button variant="secondary" onClick={() => setSubmittedForm(null)}>
+                  <Button
+                    variant="secondary"
+                    onClick={() => setSubmittedForm(null)}
+                  >
                     Submit another response
                   </Button>
                 </div>
@@ -212,7 +244,10 @@ export default function Join() {
 
                   {activeTab === "member" ? (
                     /* CLUB MEMBER FORM */
-                    <form onSubmit={memberForm.handleSubmit(onMemberSubmit)} className="space-y-6">
+                    <form
+                      onSubmit={memberForm.handleSubmit(onMemberSubmit)}
+                      className="space-y-6"
+                    >
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
                           <label className="block font-mono text-xs text-text-secondary uppercase">
@@ -316,7 +351,11 @@ export default function Join() {
                         )}
                       </div>
 
-                      <Button type="submit" disabled={isSubmitting} className="w-full">
+                      <Button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="w-full"
+                      >
                         {isSubmitting ? (
                           <span className="flex items-center gap-2">
                             <span className="w-4 h-4 border-2 border-bg-primary border-t-transparent rounded-full animate-spin"></span>
@@ -332,7 +371,10 @@ export default function Join() {
                     </form>
                   ) : (
                     /* COMMITTEE MEMBER FORM */
-                    <form onSubmit={committeeForm.handleSubmit(onCommitteeSubmit)} className="space-y-6">
+                    <form
+                      onSubmit={committeeForm.handleSubmit(onCommitteeSubmit)}
+                      className="space-y-6"
+                    >
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
                           <label className="block font-mono text-xs text-text-secondary uppercase">
@@ -432,7 +474,10 @@ export default function Join() {
                           {committeeForm.formState.errors.department && (
                             <p className="font-mono text-xs text-error-500 flex items-center gap-1 mt-1">
                               <AlertCircle size={12} />
-                              {committeeForm.formState.errors.department.message}
+                              {
+                                committeeForm.formState.errors.department
+                                  .message
+                              }
                             </p>
                           )}
                         </div>
@@ -447,17 +492,32 @@ export default function Join() {
                             {...committeeForm.register("preferredArea")}
                           >
                             <option value="">Select an area</option>
-                            <option value="Option 1">Option 1 (TODO: Club to define preferred area 1)</option>
-                            <option value="Option 2">Option 2 (TODO: Club to define preferred area 2)</option>
-                            <option value="Option 3">Option 3 (TODO: Club to define preferred area 3)</option>
-                            <option value="Option 4">Option 4 (TODO: Club to define preferred area 4)</option>
-                            <option value="Option 5">Option 5 (TODO: Club to define preferred area 5)</option>
-                            <option value="Option 6">Option 6 (TODO: Club to define preferred area 6)</option>
+                            <option value="Option 1">
+                              Option 1 (TODO: Club to define preferred area 1)
+                            </option>
+                            <option value="Option 2">
+                              Option 2 (TODO: Club to define preferred area 2)
+                            </option>
+                            <option value="Option 3">
+                              Option 3 (TODO: Club to define preferred area 3)
+                            </option>
+                            <option value="Option 4">
+                              Option 4 (TODO: Club to define preferred area 4)
+                            </option>
+                            <option value="Option 5">
+                              Option 5 (TODO: Club to define preferred area 5)
+                            </option>
+                            <option value="Option 6">
+                              Option 6 (TODO: Club to define preferred area 6)
+                            </option>
                           </select>
                           {committeeForm.formState.errors.preferredArea && (
                             <p className="font-mono text-xs text-error-500 flex items-center gap-1 mt-1">
                               <AlertCircle size={12} />
-                              {committeeForm.formState.errors.preferredArea.message}
+                              {
+                                committeeForm.formState.errors.preferredArea
+                                  .message
+                              }
                             </p>
                           )}
                         </div>
@@ -499,7 +559,11 @@ export default function Join() {
                         )}
                       </div>
 
-                      <Button type="submit" disabled={isSubmitting} className="w-full">
+                      <Button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="w-full"
+                      >
                         {isSubmitting ? (
                           <span className="flex items-center gap-2">
                             <span className="w-4 h-4 border-2 border-bg-primary border-t-transparent rounded-full animate-spin"></span>

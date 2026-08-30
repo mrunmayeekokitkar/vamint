@@ -106,7 +106,6 @@ export default function FAQ() {
       <Navbar />
 
       <main className="flex-grow pt-32 pb-24 max-w-[800px] mx-auto px-6 w-full">
-        
         {/* Header */}
         <div className="mb-16">
           <div className="font-mono text-xs text-yellow-500 uppercase tracking-wider mb-3">
@@ -127,7 +126,6 @@ export default function FAQ() {
         <div className="space-y-12">
           {faqData.map((group, groupIdx) => (
             <div key={groupIdx} className="space-y-4">
-
               {/* Category */}
               <h2 className="font-mono text-xs font-semibold text-text-tertiary tracking-wider uppercase border-b border-border-subtle/50 pb-3">
                 {group.category}
@@ -157,10 +155,7 @@ export default function FAQ() {
                           {isOpen ? (
                             <Minus size={18} className="text-yellow-500" />
                           ) : (
-                            <Plus
-                              size={18}
-                              className="text-text-tertiary"
-                            />
+                            <Plus size={18} className="text-text-tertiary" />
                           )}
                         </span>
                       </button>

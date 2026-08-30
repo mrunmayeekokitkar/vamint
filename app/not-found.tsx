@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import Button from "@/components/ui/Button";
 
@@ -14,11 +13,16 @@ export default function NotFound() {
             Page not found
           </h2>
           <p className="font-sans text-sm text-text-secondary leading-relaxed">
-            The page you're looking for doesn't exist or has been moved. Let's get you back on track.
+            The page you&apos;re looking for doesn&apos;t exist or has been moved. Let&apos;s
+            get you back on track.
           </p>
         </div>
 
-        <Button variant="primary" href="/" className="inline-flex items-center gap-2">
+        <Button
+          variant="primary"
+          href="/"
+          className="inline-flex items-center gap-2"
+        >
           <ArrowLeft size={16} />
           Back to Home
         </Button>

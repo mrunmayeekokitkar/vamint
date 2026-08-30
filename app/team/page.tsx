@@ -5,7 +5,34 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Card from "@/components/ui/Card";
 
-// Instagram icon (inline SVG — Lucide doesn't include Instagram)
+// User/Avatar icon placeholder (inline SVG)
+function UserIcon({
+  size = 24,
+  className = "",
+}: {
+  size?: number;
+  className?: string;
+}) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.5}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+      <circle cx="12" cy="7" r="4" />
+    </svg>
+  );
+}
+
+// Instagram icon (inline SVG)
 function InstagramIcon({ size = 17 }: { size?: number }) {
   return (
     <svg
@@ -65,24 +92,13 @@ export default function Team() {
     });
   }, []);
 
-  // Core Leads hold President, Vice President, Secretary, Treasurer, Technical Head
-  const coreLeads = teamMembers.filter((m) =>
-    ["President", "Vice President", "Secretary", "Treasurer", "Technical Head"].includes(m.role)
-  );
-
-  // Committee tier holds the rest of the functional roles
-  const committeeMembers = teamMembers.filter((m) =>
-    !["President", "Vice President", "Secretary", "Treasurer", "Technical Head"].includes(m.role)
-  );
-
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
 
-      <main className="flex-grow pt-32 pb-24 max-w-[1280px] mx-auto px-6 md:px-12 w-full">
-
+      <main className="flex-grow pt-32 pb-24 max-w-4xl mx-auto px-6 w-full">
         {/* Header */}
-        <div className="max-w-3xl mb-16">
+        <div className="mb-16 text-center md:text-left">
           <div className="font-mono text-xs text-yellow-500 uppercase tracking-wider mb-3">
             [ Meet the Team ]
           </div>
@@ -92,206 +108,94 @@ export default function Team() {
           </h1>
 
           <p className="font-sans text-text-secondary text-base leading-relaxed">
-            These are the students who plan events, build projects, keep things organized, and help the community grow.
+            These are the students who plan events, build projects, keep things
+            organized, and help the community grow.
           </p>
         </div>
 
-        {/* Core Leads Tier */}
-        {coreLeads.length > 0 && (
-          <div className="mb-20">
-            <h2 className="font-mono text-xs font-semibold text-text-tertiary tracking-wider uppercase mb-8 border-b border-border-subtle/50 pb-2">
-              Core Leads
-            </h2>
+        {/* Team Members List */}
+        <div className="flex flex-col gap-6">
+          {teamMembers.map((member) => (
+            <Card
+              key={member.name}
+              hoverGlow
+              className="flex flex-col md:flex-row items-center md:items-start text-center md:text-left p-6 md:p-8 gap-6 md:gap-8 w-full"
+            >
+              {/* Left Column: Photo & Name */}
+              <div className="flex flex-col items-center flex-shrink-0 w-32">
+                <div className="w-24 h-24 rounded-full overflow-hidden bg-bg-surface-raised border border-border-subtle flex items-center justify-center mb-3">
+                  {member.image ? (
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <UserIcon size={40} className="text-text-secondary" />
+                  )}
+                </div>
+                <h3 className="font-display font-semibold text-lg text-text-primary text-center leading-tight">
+                  {member.name}
+                </h3>
+              </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {coreLeads.map((member, index) => {
-                const isAlt = index % 2 === 1;
-                // Alternate background tint
-                const cardBg = isAlt ? "bg-bg-surface-raised border-yellow-500/10" : "bg-bg-surface";
+              {/* Right Column: Role/Position, Bio, Socials */}
+              <div className="flex flex-col flex-grow w-full md:w-auto min-h-[96px] justify-between">
+                <div>
+                  <div className="font-mono text-xs text-yellow-500 uppercase tracking-wider mb-2">
+                    {member.role}
+                  </div>
+                  <p className="font-sans text-sm text-text-secondary leading-relaxed mb-4">
+                    {member.bio &&
+                    typeof member.bio === "string" &&
+                    member.bio.trim() !== ""
+                      ? member.bio
+                      : "Bio coming soon."}
+                  </p>
+                </div>
 
-                return (
-                  <Card
-                    key={member.name}
-                    hoverGlow
-                    className={`flex flex-col items-center text-center p-8 md:p-10 min-h-[460px] h-full ${cardBg}`}
-                  >
-                    {/* Photo / Avatar Placeholder */}
-                    <div className="mb-6 flex justify-center w-full">
-                      {member.image ? (
-                        <img
-                          src={member.image}
-                          alt={member.name}
-                          className="w-24 h-24 rounded-full object-cover border-2 border-yellow-500/20"
-                        />
-                      ) : (
-                        <div className="w-24 h-24 rounded-full bg-bg-surface-raised border-2 border-border-subtle flex items-center justify-center font-display font-semibold text-2xl text-text-secondary">
-                          {member.name
-                            .split(" ")
-                            .map((n: string) => n[0])
-                            .join("")}
-                        </div>
-                      )}
-                    </div>
+                {/* Socials */}
+                <div className="flex justify-center md:justify-start space-x-4 mt-auto">
+                  {member.github && (
+                    <a
+                      href={member.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-text-secondary hover:text-yellow-500 transition-colors p-1"
+                      aria-label={`${member.name}'s GitHub`}
+                    >
+                      <GitHubIcon size={17} />
+                    </a>
+                  )}
 
-                    {/* Name and Role */}
-                    <div className="mb-4">
-                      <h3 className="font-display font-semibold text-xl md:text-2xl text-text-primary">
-                        {member.name}
-                      </h3>
+                  {member.linkedin && (
+                    <a
+                      href={member.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-text-secondary hover:text-yellow-500 transition-colors p-1"
+                      aria-label={`${member.name}'s LinkedIn`}
+                    >
+                      <LinkedInIcon size={17} />
+                    </a>
+                  )}
 
-                      <p className="font-mono text-xs text-yellow-500 mt-1 uppercase tracking-wider">
-                        {member.role}
-                      </p>
-                    </div>
-
-                    {/* Bio */}
-                    <p className="font-sans text-sm text-text-secondary leading-relaxed max-w-md mb-6">
-                      {member.bio ?? "Bio coming soon."}
-                    </p>
-
-                    {/* Social Links */}
-                    <div className="flex justify-center space-x-4 mt-auto pt-4">
-                      {member.github && (
-                        <a
-                          href={member.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-text-secondary hover:text-yellow-500 transition-colors p-1"
-                          aria-label={`${member.name}'s GitHub`}
-                        >
-                          <GitHubIcon size={18} />
-                        </a>
-                      )}
-
-                      {member.linkedin && (
-                        <a
-                          href={member.linkedin}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-text-secondary hover:text-yellow-500 transition-colors p-1"
-                          aria-label={`${member.name}'s LinkedIn`}
-                        >
-                          <LinkedInIcon size={18} />
-                        </a>
-                      )}
-
-                      {member.instagram && (
-                        <a
-                          href={member.instagram}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-text-secondary hover:text-yellow-500 transition-colors p-1"
-                          aria-label={`${member.name}'s Instagram`}
-                        >
-                          <InstagramIcon size={18} />
-                        </a>
-                      )}
-                    </div>
-                  </Card>
-                );
-              })}
-            </div>
-          </div>
-        )}
-
-        {/* Committee Tier */}
-        {committeeMembers.length > 0 && (
-          <div className="mb-20">
-            <h2 className="font-mono text-xs font-semibold text-text-tertiary tracking-wider uppercase mb-8 border-b border-border-subtle/50 pb-2">
-              Committee
-            </h2>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {committeeMembers.map((member, index) => {
-                const isAlt = index % 2 === 1;
-                // Alternate background tint
-                const cardBg = isAlt ? "bg-bg-surface-raised border-yellow-500/10" : "bg-bg-surface";
-
-                return (
-                  <Card
-                    key={member.name}
-                    hoverGlow
-                    className={`flex flex-col items-center text-center p-6 min-h-[380px] h-full ${cardBg}`}
-                  >
-                    {/* Photo / Avatar Placeholder */}
-                    <div className="mb-4 flex justify-center w-full">
-                      {member.image ? (
-                        <img
-                          src={member.image}
-                          alt={member.name}
-                          className="w-16 h-16 rounded-full object-cover border border-yellow-500/10"
-                        />
-                      ) : (
-                        <div className="w-16 h-16 rounded-full bg-bg-surface-raised border border-border-subtle flex items-center justify-center font-display font-semibold text-lg text-text-secondary">
-                          {member.name
-                            .split(" ")
-                            .map((n: string) => n[0])
-                            .join("")}
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Name and Role */}
-                    <div className="mb-3">
-                      <h3 className="font-display font-semibold text-lg text-text-primary">
-                        {member.name}
-                      </h3>
-
-                      <p className="font-mono text-xs text-yellow-500 mt-1 uppercase tracking-wider">
-                        {member.role}
-                      </p>
-                    </div>
-
-                    {/* Bio */}
-                    <p className="font-sans text-xs text-text-secondary leading-relaxed mb-4 max-w-sm">
-                      {member.bio ?? "Bio coming soon."}
-                    </p>
-
-                    {/* Social Links */}
-                    <div className="flex justify-center space-x-4 mt-auto pt-3">
-                      {member.github && (
-                        <a
-                          href={member.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-text-secondary hover:text-yellow-500 transition-colors p-1"
-                          aria-label={`${member.name}'s GitHub`}
-                        >
-                          <GitHubIcon size={17} />
-                        </a>
-                      )}
-
-                      {member.linkedin && (
-                        <a
-                          href={member.linkedin}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-text-secondary hover:text-yellow-500 transition-colors p-1"
-                          aria-label={`${member.name}'s LinkedIn`}
-                        >
-                          <LinkedInIcon size={17} />
-                        </a>
-                      )}
-
-                      {member.instagram && (
-                        <a
-                          href={member.instagram}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-text-secondary hover:text-yellow-500 transition-colors p-1"
-                          aria-label={`${member.name}'s Instagram`}
-                        >
-                          <InstagramIcon size={17} />
-                        </a>
-                      )}
-                    </div>
-                  </Card>
-                );
-              })}
-            </div>
-          </div>
-        )}
-
+                  {member.instagram && (
+                    <a
+                      href={member.instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-text-secondary hover:text-yellow-500 transition-colors p-1"
+                      aria-label={`${member.name}'s Instagram`}
+                    >
+                      <InstagramIcon size={17} />
+                    </a>
+                  )}
+                </div>
+              </div>
+            </Card>
+          ))}
+        </div>
       </main>
 
       <Footer />

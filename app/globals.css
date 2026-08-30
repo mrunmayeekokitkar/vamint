@@ -3,32 +3,32 @@
 :root {
   /* VAMINT Color System */
 
-  --background: #0E0E10;
-  --foreground: #F7F3E9;
+  --background: #0e0e10;
+  --foreground: #f7f3e9;
 
-  --bg-primary: #0E0E10;
+  --bg-primary: #0e0e10;
   --bg-surface: #161619;
-  --bg-surface-raised: #1E1E22;
+  --bg-surface-raised: #1e1e22;
 
-  --border-subtle: #2A2A2D;
+  --border-subtle: #2a2a2d;
 
-  --text-primary: #F7F3E9;
-  --text-secondary: #B8B4A8;
-  --text-tertiary: #7E7A70;
+  --text-primary: #f7f3e9;
+  --text-secondary: #b8b4a8;
+  --text-tertiary: #7e7a70;
 
   /* VAMINT accents */
-  --yellow-500: #F4CA30;
-  --yellow-400: #F7D75B;
-  --yellow-600: #D9AC16;
+  --yellow-500: #f4ca30;
+  --yellow-400: #f7d75b;
+  --yellow-600: #d9ac16;
 
-  --coral-500: #FF6B4A;
-  --coral-400: #FF896F;
+  --coral-500: #ff6b4a;
+  --coral-400: #ff896f;
 
-  --mint-500: #5FD9A4;
-  --mint-400: #83E5B8;
-  --mint-700: #35A979;
+  --mint-500: #5fd9a4;
+  --mint-400: #83e5b8;
+  --mint-700: #35a979;
 
-  --error-500: #F06565;
+  --error-500: #f06565;
 }
 
 @theme {

@@ -92,7 +92,7 @@ export default function Projects() {
           <div className="space-y-16">
             {DOMAINS.map((domain) => {
               const domainProjects = projects.filter(
-                (p) => p.category === domain.key
+                (p) => p.category === domain.key,
               );
 
               return (
@@ -176,7 +176,10 @@ function ProjectCard({ project }: { project: any }) {
       <div className="mt-8 pt-4 border-t border-border-subtle/50 flex items-center justify-between">
         <div className="flex flex-wrap gap-1.5">
           {project.tags.slice(0, 3).map((tag: string) => (
-            <span key={tag} className="text-[11px] font-mono text-text-tertiary">
+            <span
+              key={tag}
+              className="text-[11px] font-mono text-text-tertiary"
+            >
               #{tag}
             </span>
           ))}

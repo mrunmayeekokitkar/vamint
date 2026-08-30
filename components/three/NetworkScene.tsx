@@ -2,17 +2,17 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Points, PointMaterial } from "@react-three/drei";
+import { PointMaterial } from "@react-three/drei";
 import * as THREE from "three";
 
 // Individual Particle/Node simulation
 function ParticleNetwork({ scrollProgress }: { scrollProgress: number }) {
   const pointsRef = useRef<THREE.Points>(null);
   const lineSegmentsRef = useRef<THREE.LineSegments>(null);
-  
+
   // Configuration
   const particleCount = 70;
-  
+
   // Store start positions, target positions, and active velocities
   const [positionsData] = useState(() => {
     const start = [];
@@ -22,13 +22,13 @@ function ParticleNetwork({ scrollProgress }: { scrollProgress: number }) {
       start.push(
         (Math.random() - 0.5) * 15,
         (Math.random() - 0.5) * 10,
-        (Math.random() - 0.5) * 5
+        (Math.random() - 0.5) * 5,
       );
       // Compact gathered network state (scroll = 1)
       target.push(
         (Math.random() - 0.5) * 6,
         (Math.random() - 0.5) * 4,
-        (Math.random() - 0.5) * 3
+        (Math.random() - 0.5) * 3,
       );
     }
     return {
@@ -53,11 +53,23 @@ function ParticleNetwork({ scrollProgress }: { scrollProgress: number }) {
     // Interpolate positions based on scrollProgress + add subtle ambient drift
     for (let i = 0; i < particleCount; i++) {
       const idx = i * 3;
-      
+
       // Target position based on scroll interpolation
-      const targetX = THREE.MathUtils.lerp(positionsData.start[idx], positionsData.target[idx], scrollProgress);
-      const targetY = THREE.MathUtils.lerp(positionsData.start[idx + 1], positionsData.target[idx + 1], scrollProgress);
-      const targetZ = THREE.MathUtils.lerp(positionsData.start[idx + 2], positionsData.target[idx + 2], scrollProgress);
+      const targetX = THREE.MathUtils.lerp(
+        positionsData.start[idx],
+        positionsData.target[idx],
+        scrollProgress,
+      );
+      const targetY = THREE.MathUtils.lerp(
+        positionsData.start[idx + 1],
+        positionsData.target[idx + 1],
+        scrollProgress,
+      );
+      const targetZ = THREE.MathUtils.lerp(
+        positionsData.start[idx + 2],
+        positionsData.target[idx + 2],
+        scrollProgress,
+      );
 
       // Subtle wave drift to keep it alive
       const driftX = Math.sin(time * 0.2 + i) * 0.08;
@@ -84,8 +96,10 @@ function ParticleNetwork({ scrollProgress }: { scrollProgress: number }) {
         const zB = currentPositions[idxB + 2];
 
         // Euclidean distance
-        const dist = Math.sqrt((xA - xB) ** 2 + (yA - yB) ** 2 + (zA - zB) ** 2);
-        
+        const dist = Math.sqrt(
+          (xA - xB) ** 2 + (yA - yB) ** 2 + (zA - zB) ** 2,
+        );
+
         // Draw line if close enough (more lines drawn as scrollProgress increases)
         const activeThreshold = lineThreshold * (0.3 + scrollProgress * 0.7);
         if (dist < activeThreshold) {
@@ -96,7 +110,10 @@ function ParticleNetwork({ scrollProgress }: { scrollProgress: number }) {
 
     // Update lines
     const lineGeom = lineSegmentsRef.current.geometry;
-    lineGeom.setAttribute("position", new THREE.Float32BufferAttribute(lineCoords, 3));
+    lineGeom.setAttribute(
+      "position",
+      new THREE.Float32BufferAttribute(lineCoords, 3),
+    );
     lineGeom.attributes.position.needsUpdate = true;
   });
 
@@ -144,7 +161,7 @@ export default function NetworkScene() {
     const timer = setTimeout(() => {
       setPrefersReducedMotion(mediaQuery.matches);
     }, 0);
-    
+
     const handleScroll = () => {
       const scrollY = window.scrollY;
       const windowHeight = window.innerHeight;
@@ -164,14 +181,39 @@ export default function NetworkScene() {
   if (prefersReducedMotion) {
     return (
       <div className="absolute inset-0 flex items-center justify-center opacity-25 pointer-events-none">
-        <svg width="100%" height="100%" className="w-full h-full max-w-lg text-mustard-500/20">
+        <svg
+          width="100%"
+          height="100%"
+          className="w-full h-full max-w-lg text-mustard-500/20"
+        >
           <circle cx="20%" cy="30%" r="4" fill="currentColor" />
           <circle cx="45%" cy="40%" r="5" fill="currentColor" />
           <circle cx="75%" cy="60%" r="3" fill="currentColor" />
           <circle cx="30%" cy="70%" r="4" fill="currentColor" />
-          <line x1="20%" y1="30%" x2="45%" y2="40%" stroke="currentColor" strokeWidth="1" />
-          <line x1="45%" y1="40%" x2="75%" y2="60%" stroke="currentColor" strokeWidth="1" />
-          <line x1="30%" y1="70%" x2="45%" y2="40%" stroke="currentColor" strokeWidth="1" />
+          <line
+            x1="20%"
+            y1="30%"
+            x2="45%"
+            y2="40%"
+            stroke="currentColor"
+            strokeWidth="1"
+          />
+          <line
+            x1="45%"
+            y1="40%"
+            x2="75%"
+            y2="60%"
+            stroke="currentColor"
+            strokeWidth="1"
+          />
+          <line
+            x1="30%"
+            y1="70%"
+            x2="45%"
+            y2="40%"
+            stroke="currentColor"
+            strokeWidth="1"
+          />
         </svg>
       </div>
     );

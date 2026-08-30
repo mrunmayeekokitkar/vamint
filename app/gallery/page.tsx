@@ -6,12 +6,7 @@ import Image from "next/image";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
-import {
-  ChevronLeft,
-  ChevronRight,
-  X,
-  Image as ImageIcon,
-} from "lucide-react";
+import { ChevronLeft, ChevronRight, X, Image as ImageIcon } from "lucide-react";
 
 const galleryEvents = [
   {
@@ -74,7 +69,7 @@ const galleryEvents = [
 
 export default function Gallery() {
   const [currentImages, setCurrentImages] = useState<Record<number, number>>(
-    {}
+    {},
   );
 
   const [selectedEvent, setSelectedEvent] = useState<number | null>(null);
@@ -106,10 +101,7 @@ export default function Gallery() {
     });
   };
 
-  const openLightbox = (
-    eventIndex: number,
-    imageIndex: number
-  ) => {
+  const openLightbox = (eventIndex: number, imageIndex: number) => {
     setSelectedEvent(eventIndex);
     setSelectedImage(imageIndex);
   };
@@ -132,9 +124,7 @@ export default function Gallery() {
 
     const images = galleryEvents[selectedEvent].images;
 
-    setSelectedImage(
-      (prev) => (prev - 1 + images.length) % images.length
-    );
+    setSelectedImage((prev) => (prev - 1 + images.length) % images.length);
   };
 
   // Keyboard navigation for lightbox
@@ -164,15 +154,12 @@ export default function Gallery() {
 
   return (
     <div className="flex flex-col min-h-screen">
-
       <Navbar />
 
       <main className="flex-grow pt-32 pb-24 max-w-[1280px] mx-auto px-6 md:px-12 w-full">
-
         {/* HEADER */}
 
         <div className="max-w-3xl mb-16">
-
           <div className="font-mono text-xs text-yellow-500 uppercase tracking-wider mb-3">
             [ VAMINT Gallery ]
           </div>
@@ -182,17 +169,14 @@ export default function Gallery() {
           </h1>
 
           <p className="font-sans text-text-secondary text-base leading-relaxed">
-            A collection of moments from our hackathons, competitions,
-            technical events, and community activities.
+            A collection of moments from our hackathons, competitions, technical
+            events, and community activities.
           </p>
-
         </div>
-
 
         {/* EVENT CARDS */}
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-
           {galleryEvents.map((event, eventIndex) => {
             const currentIndex = getCurrentImage(event.id);
 
@@ -201,22 +185,17 @@ export default function Gallery() {
                 key={event.id}
                 className="bg-bg-surface border border-border-subtle rounded-lg overflow-hidden hover:border-yellow-500/30 transition-all duration-300 hover:-translate-y-1"
               >
-
                 {/* IMAGE CAROUSEL */}
 
                 <div className="relative aspect-video bg-bg-surface-raised overflow-hidden">
-
                   {event.images.length > 0 ? (
-
                     <>
                       <Image
                         src={event.images[currentIndex]}
                         alt={`${event.title} image ${currentIndex + 1}`}
                         fill
                         className="object-cover cursor-pointer"
-                        onClick={() =>
-                          openLightbox(eventIndex, currentIndex)
-                        }
+                        onClick={() => openLightbox(eventIndex, currentIndex)}
                       />
 
                       {/* Previous Image */}
@@ -253,13 +232,10 @@ export default function Gallery() {
                         {currentIndex + 1} / {event.images.length}
                       </div>
                     </>
-
                   ) : (
-
                     /* DEBATE - NO PHOTOS YET */
 
                     <div className="w-full h-full flex flex-col items-center justify-center text-center">
-
                       <ImageIcon
                         size={42}
                         className="text-text-tertiary mb-3"
@@ -268,55 +244,37 @@ export default function Gallery() {
                       <p className="font-mono text-xs text-text-tertiary">
                         [ PHOTOS COMING SOON ]
                       </p>
-
                     </div>
-
                   )}
 
                   {/* CATEGORY */}
 
                   <span className="absolute bottom-3 right-3 font-mono text-[10px] text-yellow-500 bg-bg-primary px-2 py-1 rounded border border-border-subtle">
-
                     {event.category}
-
                   </span>
-
                 </div>
-
 
                 {/* CARD CONTENT */}
 
                 <div className="p-5">
-
                   <h3 className="font-display font-semibold text-lg text-text-primary mb-2">
-
                     {event.title}
-
                   </h3>
 
                   <p className="font-sans text-xs text-text-secondary leading-relaxed">
-
                     {event.desc}
-
                   </p>
-
                 </div>
-
               </div>
             );
           })}
-
         </div>
-
       </main>
-
 
       {/* LIGHTBOX */}
 
       {selectedEvent !== null && (
-
         <div className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4">
-
           {/* Close */}
 
           <button
@@ -326,7 +284,6 @@ export default function Gallery() {
           >
             <X size={28} />
           </button>
-
 
           {/* Previous */}
 
@@ -340,23 +297,17 @@ export default function Gallery() {
             </button>
           )}
 
-
           {/* MAIN IMAGE */}
 
           <div className="relative w-full max-w-6xl h-[80vh]">
-
             <Image
-              src={
-                galleryEvents[selectedEvent].images[selectedImage]
-              }
+              src={galleryEvents[selectedEvent].images[selectedImage]}
               alt={galleryEvents[selectedEvent].title}
               fill
               className="object-contain"
               priority
             />
-
           </div>
-
 
           {/* Next */}
 
@@ -369,13 +320,10 @@ export default function Gallery() {
               <ChevronRight size={42} />
             </button>
           )}
-
         </div>
-
       )}
 
       <Footer />
-
     </div>
   );
 }

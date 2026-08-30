@@ -10,7 +10,9 @@ import Card from "@/components/ui/Card";
 export default function AdminDashboard() {
   const router = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [activeTab, setActiveTab] = useState<"memberships" | "committee" | "events" | "team">("memberships");
+  const [activeTab, setActiveTab] = useState<
+    "memberships" | "committee" | "events" | "team"
+  >("memberships");
   const [memberships, setMemberships] = useState<any[]>([]);
   const [committeeApps, setCommitteeApps] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -46,7 +48,8 @@ export default function AdminDashboard() {
   const handleLogout = () => {
     localStorage.removeItem("admin_token");
     // Clear cookie
-    document.cookie = "admin_token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+    document.cookie =
+      "admin_token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
     router.push("/admin");
   };
 
@@ -67,7 +70,7 @@ export default function AdminDashboard() {
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
-      
+
       <main className="flex-grow pt-32 pb-24 max-w-[1280px] mx-auto px-6 w-full">
         <div className="flex items-center justify-between mb-8">
           <h1 className="font-display font-semibold text-3xl text-text-primary">
@@ -149,10 +152,30 @@ export default function AdminDashboard() {
                       </span>
                     </div>
                     <div className="space-y-2 text-sm">
-                      <p><span className="font-mono text-text-tertiary">Year:</span> {sub.year}</p>
-                      <p><span className="font-mono text-text-tertiary">Branch:</span> {sub.branch}</p>
-                      <p><span className="font-mono text-text-tertiary">Domains:</span> {parseDomains(sub.domains)}</p>
-                      <p><span className="font-mono text-text-tertiary">How did they hear:</span> {sub.referral}</p>
+                      <p>
+                        <span className="font-mono text-text-tertiary">
+                          Year:
+                        </span>{" "}
+                        {sub.year}
+                      </p>
+                      <p>
+                        <span className="font-mono text-text-tertiary">
+                          Branch:
+                        </span>{" "}
+                        {sub.branch}
+                      </p>
+                      <p>
+                        <span className="font-mono text-text-tertiary">
+                          Domains:
+                        </span>{" "}
+                        {parseDomains(sub.domains)}
+                      </p>
+                      <p>
+                        <span className="font-mono text-text-tertiary">
+                          How did they hear:
+                        </span>{" "}
+                        {sub.referral}
+                      </p>
                     </div>
                   </Card>
                 ))}
@@ -188,11 +211,36 @@ export default function AdminDashboard() {
                       </span>
                     </div>
                     <div className="space-y-2 text-sm">
-                      <p><span className="font-mono text-text-tertiary">Year:</span> {sub.year}</p>
-                      <p><span className="font-mono text-text-tertiary">Branch:</span> {sub.branch}</p>
-                      <p><span className="font-mono text-text-tertiary">Preferred Position:</span> {sub.position}</p>
-                      <p><span className="font-mono text-text-tertiary">Reason to Join:</span> {sub.reason}</p>
-                      <p><span className="font-mono text-text-tertiary">Experience:</span> {sub.experience}</p>
+                      <p>
+                        <span className="font-mono text-text-tertiary">
+                          Year:
+                        </span>{" "}
+                        {sub.year}
+                      </p>
+                      <p>
+                        <span className="font-mono text-text-tertiary">
+                          Branch:
+                        </span>{" "}
+                        {sub.branch}
+                      </p>
+                      <p>
+                        <span className="font-mono text-text-tertiary">
+                          Preferred Position:
+                        </span>{" "}
+                        {sub.position}
+                      </p>
+                      <p>
+                        <span className="font-mono text-text-tertiary">
+                          Reason to Join:
+                        </span>{" "}
+                        {sub.reason}
+                      </p>
+                      <p>
+                        <span className="font-mono text-text-tertiary">
+                          Experience:
+                        </span>{" "}
+                        {sub.experience}
+                      </p>
                     </div>
                   </Card>
                 ))}
@@ -208,7 +256,7 @@ export default function AdminDashboard() {
               Event management coming soon
             </p>
             <p className="font-mono text-xs text-text-tertiary">
-              // TODO(content): Implement event CRUD operations
+              {"// TODO(content): Implement event CRUD operations"}
             </p>
           </Card>
         )}
@@ -220,7 +268,7 @@ export default function AdminDashboard() {
               Team management coming soon
             </p>
             <p className="font-mono text-xs text-text-tertiary">
-              // TODO(content): Implement team CRUD operations
+              {"// TODO(content): Implement team CRUD operations"}
             </p>
           </Card>
         )}

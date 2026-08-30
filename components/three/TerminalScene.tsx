@@ -11,7 +11,12 @@ const COMMANDS = [
   { prefix: "  ", text: "+ 160 members added", delay: 0.35 },
   { prefix: "$ ", text: "vamint --code --collaborate --evolve", delay: 0.55 },
   { prefix: "✓ ", text: "Welcome to VAMINT", delay: 0.72, highlight: true },
-  { prefix: "  ", text: "Code. Collaborate. Evolve.", delay: 0.82, tagline: true },
+  {
+    prefix: "  ",
+    text: "Code. Collaborate. Evolve.",
+    delay: 0.82,
+    tagline: true,
+  },
 ];
 
 // ─── 3D terminal frame (floating box) ───────────────────────────────────────
@@ -22,8 +27,10 @@ function TerminalMesh({ scrollProgress }: { scrollProgress: number }) {
     if (!groupRef.current) return;
     const t = clock.getElapsedTime();
     // Gentle float + slight tilt driven by scroll
-    groupRef.current.rotation.x = Math.sin(t * 0.4) * 0.04 - scrollProgress * 0.08;
-    groupRef.current.rotation.y = Math.sin(t * 0.25) * 0.06 + scrollProgress * 0.05;
+    groupRef.current.rotation.x =
+      Math.sin(t * 0.4) * 0.04 - scrollProgress * 0.08;
+    groupRef.current.rotation.y =
+      Math.sin(t * 0.25) * 0.06 + scrollProgress * 0.05;
     groupRef.current.position.y = Math.sin(t * 0.5) * 0.06;
   });
 
@@ -89,7 +96,9 @@ function TerminalText({ scrollProgress }: { scrollProgress: number }) {
             <div
               key={i}
               className={`transition-all duration-500 ${
-                visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
+                visible
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-2"
               }`}
               style={{ transitionDelay: `${i * 80}ms` }}
             >
@@ -98,10 +107,10 @@ function TerminalText({ scrollProgress }: { scrollProgress: number }) {
                   cmd.highlight
                     ? "text-mustard-500"
                     : cmd.tagline
-                    ? "text-text-primary font-semibold"
-                    : cmd.prefix === "$ "
-                    ? "text-mustard-500"
-                    : "text-text-tertiary"
+                      ? "text-text-primary font-semibold"
+                      : cmd.prefix === "$ "
+                        ? "text-mustard-500"
+                        : "text-text-tertiary"
                 }
               >
                 {cmd.prefix}
@@ -111,10 +120,10 @@ function TerminalText({ scrollProgress }: { scrollProgress: number }) {
                   cmd.highlight
                     ? "text-mustard-500 font-semibold"
                     : cmd.tagline
-                    ? "text-text-primary"
-                    : cmd.prefix === "$ "
-                    ? "text-text-primary"
-                    : "text-text-secondary"
+                      ? "text-text-primary"
+                      : cmd.prefix === "$ "
+                        ? "text-text-primary"
+                        : "text-text-secondary"
                 }
               >
                 {cmd.text}
@@ -134,9 +143,16 @@ function StaticFallback() {
   return (
     <div className="absolute inset-0 flex items-center justify-center">
       <div className="border border-mustard-500/20 rounded-lg bg-bg-surface/50 p-6 max-w-xs font-mono text-xs text-text-secondary space-y-1">
-        <div><span className="text-mustard-500">$ </span>git clone vamint-community</div>
-        <div><span className="text-mustard-500">$ </span>vamint --code --collaborate --evolve</div>
-        <div className="text-mustard-500 font-semibold">✓ Welcome to VAMINT</div>
+        <div>
+          <span className="text-mustard-500">$ </span>git clone vamint-community
+        </div>
+        <div>
+          <span className="text-mustard-500">$ </span>vamint --code
+          --collaborate --evolve
+        </div>
+        <div className="text-mustard-500 font-semibold">
+          ✓ Welcome to VAMINT
+        </div>
         <div className="text-text-primary">Code. Collaborate. Evolve.</div>
       </div>
     </div>
@@ -155,7 +171,10 @@ export default function TerminalScene() {
     const hero = document.getElementById("hero-section");
     const handleScroll = () => {
       const heroHeight = hero ? hero.offsetHeight : window.innerHeight;
-      const progress = Math.min(Math.max(window.scrollY / (heroHeight * 0.9), 0), 1);
+      const progress = Math.min(
+        Math.max(window.scrollY / (heroHeight * 0.9), 0),
+        1,
+      );
       setScrollProgress(progress);
     };
 

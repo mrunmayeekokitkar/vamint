@@ -78,7 +78,7 @@ export default function ProjectDetail() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-2 bg-bg-surface border border-border-subtle hover:border-mint-500/30 text-text-secondary hover:text-text-primary rounded-md font-sans text-xs font-semibold transition-all"
               >
-              <Link2 size={14} />
+                <Link2 size={14} />
                 View Repository
               </a>
             )}
@@ -138,9 +138,15 @@ export default function ProjectDetail() {
                 </h4>
                 <ul className="space-y-2">
                   {project.contributors.map((c: string) => (
-                    <li key={c} className="font-sans text-xs text-text-secondary flex items-center gap-2">
+                    <li
+                      key={c}
+                      className="font-sans text-xs text-text-secondary flex items-center gap-2"
+                    >
                       <span className="w-6 h-6 rounded bg-bg-surface-raised border border-border-subtle flex items-center justify-center text-[10px] font-display text-text-tertiary">
-                        {c.split(" ").map((n: string) => n[0]).join("")}
+                        {c
+                          .split(" ")
+                          .map((n: string) => n[0])
+                          .join("")}
                       </span>
                       {c}
                     </li>

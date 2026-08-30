@@ -34,7 +34,8 @@ export default function Events() {
               VAMINT Events
             </h1>
             <p className="font-sans text-text-secondary text-base">
-              Workshops, sprints, algorithm contests, and campus code hackathons.
+              Workshops, sprints, algorithm contests, and campus code
+              hackathons.
             </p>
           </div>
 
@@ -113,7 +114,12 @@ export default function Events() {
                     href={`/events/${event.slug}`}
                     className="text-text-primary hover:text-yellow-500 transition-colors font-sans text-xs font-semibold flex items-center gap-1 shrink-0"
                   >
-                    {filter === "upcoming" ? (event.slug === "orientation-2026-27" ? "Details" : "Register") : "Recap"} <ArrowRight size={12} />
+                    {filter === "upcoming"
+                      ? event.slug === "orientation-2026-27"
+                        ? "Details"
+                        : "Register"
+                      : "Recap"}{" "}
+                    <ArrowRight size={12} />
                   </Link>
                 </div>
               </Card>

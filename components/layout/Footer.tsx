@@ -8,9 +8,7 @@ export default function Footer() {
   return (
     <footer className="bg-bg-primary border-t border-border-subtle mt-auto">
       <div className="max-w-[1280px] mx-auto px-6 md:px-12 py-16">
-
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8 mb-12">
-
           {/* Brand */}
           <div className="md:col-span-1 flex flex-col space-y-4">
             <Link href="/" aria-label="VAMINT Home">
@@ -37,25 +35,37 @@ export default function Footer() {
 
             <ul className="space-y-3 font-sans text-sm">
               <li>
-                <Link href="/about" className="text-text-secondary hover:text-yellow-500 transition-colors">
+                <Link
+                  href="/about"
+                  className="text-text-secondary hover:text-yellow-500 transition-colors"
+                >
                   About
                 </Link>
               </li>
 
               <li>
-                <Link href="/events" className="text-text-secondary hover:text-yellow-500 transition-colors">
+                <Link
+                  href="/events"
+                  className="text-text-secondary hover:text-yellow-500 transition-colors"
+                >
                   Events
                 </Link>
               </li>
 
               <li>
-                <Link href="/projects" className="text-text-secondary hover:text-yellow-500 transition-colors">
+                <Link
+                  href="/projects"
+                  className="text-text-secondary hover:text-yellow-500 transition-colors"
+                >
                   Projects
                 </Link>
               </li>
 
               <li>
-                <Link href="/team" className="text-text-secondary hover:text-yellow-500 transition-colors">
+                <Link
+                  href="/team"
+                  className="text-text-secondary hover:text-yellow-500 transition-colors"
+                >
                   Team
                 </Link>
               </li>
@@ -70,13 +80,19 @@ export default function Footer() {
 
             <ul className="space-y-3 font-sans text-sm">
               <li>
-                <Link href="/gallery" className="text-text-secondary hover:text-yellow-500 transition-colors">
+                <Link
+                  href="/gallery"
+                  className="text-text-secondary hover:text-yellow-500 transition-colors"
+                >
                   Gallery
                 </Link>
               </li>
 
               <li>
-                <Link href="/faq" className="text-text-secondary hover:text-yellow-500 transition-colors">
+                <Link
+                  href="/faq"
+                  className="text-text-secondary hover:text-yellow-500 transition-colors"
+                >
                   FAQ
                 </Link>
               </li>
@@ -100,7 +116,6 @@ export default function Footer() {
             </h4>
 
             <div className="flex flex-col space-y-3 mb-5">
-
               <a
                 href="https://www.linkedin.com/company/vamint-community/"
                 target="_blank"
@@ -118,7 +133,6 @@ export default function Footer() {
               >
                 Instagram
               </a>
-
             </div>
 
             <p className="font-sans text-xs text-text-secondary">
@@ -146,7 +160,6 @@ export default function Footer() {
             Code of Conduct &amp; Privacy
           </Link>
         </div>
-
       </div>
     </footer>
   );

@@ -7,7 +7,9 @@ import Card from "@/components/ui/Card";
 import { GraduationCap, Users2, Rocket } from "lucide-react";
 
 export default function About() {
-  const [highlights, setHighlights] = useState<{ title: string; description: string; year: string; }[]>([]);
+  const [highlights, setHighlights] = useState<
+    { title: string; description: string; year: string }[]
+  >([]);
 
   useEffect(() => {
     import("@/content/achievements.json").then((data) => {
@@ -16,12 +18,30 @@ export default function About() {
   }, []);
 
   const founders = [
-    { name: "Sumit Patil", linkedin: "https://www.linkedin.com/in/timepassislife/" },
-    { name: "Soham Patil", linkedin: "https://www.linkedin.com/in/soham-patil-363115251/" },
-    { name: "Vedant Badve", linkedin: "https://www.linkedin.com/in/vedantbadve/" },
-    { name: "Pritam Tambe", linkedin: "https://www.linkedin.com/in/pritamtambe/" },
-    { name: "Pravin Tambe", linkedin: "https://www.linkedin.com/in/pravintambe01/" },
-    { name: "Vaibhav Patil", linkedin: "https://www.linkedin.com/in/vaibhav-patil-1b37b3359/" },
+    {
+      name: "Sumit Patil",
+      linkedin: "https://www.linkedin.com/in/timepassislife/",
+    },
+    {
+      name: "Soham Patil",
+      linkedin: "https://www.linkedin.com/in/soham-patil-363115251/",
+    },
+    {
+      name: "Vedant Badve",
+      linkedin: "https://www.linkedin.com/in/vedantbadve/",
+    },
+    {
+      name: "Pritam Tambe",
+      linkedin: "https://www.linkedin.com/in/pritamtambe/",
+    },
+    {
+      name: "Pravin Tambe",
+      linkedin: "https://www.linkedin.com/in/pravintambe01/",
+    },
+    {
+      name: "Vaibhav Patil",
+      linkedin: "https://www.linkedin.com/in/vaibhav-patil-1b37b3359/",
+    },
   ];
 
   const milestones = [
@@ -71,7 +91,13 @@ export default function About() {
             A community that codes, collaborates, and evolves together
           </h1>
           <p className="font-sans text-text-secondary text-lg leading-relaxed mb-10">
-            VAMINT was founded in 2025 by final-year Computer Engineering students at GSMCOE to build a student tech community where peer learning and collaboration come first. It started as something they wished had existed when they were in their first year, a welcoming space where students from all branches can learn, experiment, run practical workshops, hackathons, and soft-skills events to grow in all directions, not just technically.
+            VAMINT was founded in 2025 by final-year Computer Engineering
+            students at GSMCOE to build a student tech community where peer
+            learning and collaboration come first. It started as something they
+            wished had existed when they were in their first year, a welcoming
+            space where students from all branches can learn, experiment, run
+            practical workshops, hackathons, and soft-skills events to grow in
+            all directions, not just technically.
           </p>
 
           {/* Redesigned Founders Section */}
@@ -104,23 +130,35 @@ export default function About() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-24">
           <Card hoverGlow className="flex flex-col space-y-3">
             <Rocket className="text-yellow-500 mb-2" size={24} />
-            <h3 className="font-display font-semibold text-lg text-text-primary">Peer Learning</h3>
+            <h3 className="font-display font-semibold text-lg text-text-primary">
+              Peer Learning
+            </h3>
             <p className="font-sans text-sm text-text-secondary leading-relaxed">
-              We bridge experience gaps by pairing students who want to learn with those who want to teach, because both sides grow in the process.
+              We bridge experience gaps by pairing students who want to learn
+              with those who want to teach, because both sides grow in the
+              process.
             </p>
           </Card>
           <Card hoverGlow className="flex flex-col space-y-3">
             <GraduationCap className="text-yellow-500 mb-2" size={24} />
-            <h3 className="font-display font-semibold text-lg text-text-primary">Practical Events</h3>
+            <h3 className="font-display font-semibold text-lg text-text-primary">
+              Practical Events
+            </h3>
             <p className="font-sans text-sm text-text-secondary leading-relaxed">
-              From hackathons to web-dev competitions to debates, every event is hands-on. We&apos;re not here for theory; we&apos;re here to do things.
+              From hackathons to web-dev competitions to debates, every event is
+              hands-on. We&apos;re not here for theory; we&apos;re here to do
+              things.
             </p>
           </Card>
           <Card hoverGlow className="flex flex-col space-y-3">
             <Users2 className="text-yellow-500 mb-2" size={24} />
-            <h3 className="font-display font-semibold text-lg text-text-primary">Real Community</h3>
+            <h3 className="font-display font-semibold text-lg text-text-primary">
+              Real Community
+            </h3>
             <p className="font-sans text-sm text-text-secondary leading-relaxed">
-              We&apos;re friendly, inclusive, and informal. No gatekeeping, no jargon for its own sake, just students helping each other get better.
+              We&apos;re friendly, inclusive, and informal. No gatekeeping, no
+              jargon for its own sake, just students helping each other get
+              better.
             </p>
           </Card>
         </div>
@@ -135,9 +173,15 @@ export default function About() {
               <div key={index} className="relative">
                 {/* Timeline dot */}
                 <span className="absolute -left-[31px] md:-left-[47px] top-1.5 w-3 h-3 rounded-full bg-yellow-500 ring-4 ring-bg-primary"></span>
-                <span className="font-mono text-xs text-yellow-500 mb-1 block">{m.date}</span>
-                <h3 className="font-display font-semibold text-lg text-text-primary mb-2">{m.title}</h3>
-                <p className="font-sans text-sm text-text-secondary leading-relaxed max-w-xl">{m.desc}</p>
+                <span className="font-mono text-xs text-yellow-500 mb-1 block">
+                  {m.date}
+                </span>
+                <h3 className="font-display font-semibold text-lg text-text-primary mb-2">
+                  {m.title}
+                </h3>
+                <p className="font-sans text-sm text-text-secondary leading-relaxed max-w-xl">
+                  {m.desc}
+                </p>
               </div>
             ))}
           </div>
@@ -153,10 +197,16 @@ export default function About() {
               {highlights.map((a, i) => (
                 <Card key={i} className="flex flex-col space-y-2">
                   <div className="flex items-center justify-between">
-                    <span className="font-mono text-xs text-yellow-500">{a.year}</span>
+                    <span className="font-mono text-xs text-yellow-500">
+                      {a.year}
+                    </span>
                   </div>
-                  <h3 className="font-display font-semibold text-lg text-text-primary">{a.title}</h3>
-                  <p className="font-sans text-sm text-text-secondary leading-relaxed">{a.description}</p>
+                  <h3 className="font-display font-semibold text-lg text-text-primary">
+                    {a.title}
+                  </h3>
+                  <p className="font-sans text-sm text-text-secondary leading-relaxed">
+                    {a.description}
+                  </p>
                 </Card>
               ))}
             </div>

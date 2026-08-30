@@ -16,7 +16,8 @@ export default function Legal() {
             Code of Conduct &amp; Privacy
           </h1>
           <p className="text-base">
-            Our community rules for events and online spaces, and how we handle the personal data you share with us.
+            Our community rules for events and online spaces, and how we handle
+            the personal data you share with us.
           </p>
         </div>
 
@@ -28,30 +29,51 @@ export default function Legal() {
             </h2>
             <div className="space-y-6">
               <div>
-                <h3 className="font-semibold text-text-primary text-sm uppercase font-mono tracking-wide mb-1">Purpose &amp; Scope</h3>
+                <h3 className="font-semibold text-text-primary text-sm uppercase font-mono tracking-wide mb-1">
+                  Purpose &amp; Scope
+                </h3>
                 <p>
-                  VAMINT is committed to keeping the community inclusive, welcoming, and free from harassment. This Code of Conduct applies to all members, committee members, and participants, covering everything from in-person events and workshops to online channels and code repositories.
+                  VAMINT is committed to keeping the community inclusive,
+                  welcoming, and free from harassment. This Code of Conduct
+                  applies to all members, committee members, and participants,
+                  covering everything from in-person events and workshops to
+                  online channels and code repositories.
                 </p>
               </div>
 
               <div>
-                <h3 className="font-semibold text-text-primary text-sm uppercase font-mono tracking-wide mb-1">Expected Behavior</h3>
+                <h3 className="font-semibold text-text-primary text-sm uppercase font-mono tracking-wide mb-1">
+                  Expected Behavior
+                </h3>
                 <p>
-                  Be kind, collaborative, and supportive. Engage constructively, respect others&apos; learning journeys, and give feedback on ideas rather than people. Everyone is at a different stage, and that&apos;s the point.
+                  Be kind, collaborative, and supportive. Engage constructively,
+                  respect others&apos; learning journeys, and give feedback on
+                  ideas rather than people. Everyone is at a different stage,
+                  and that&apos;s the point.
                 </p>
               </div>
 
               <div>
-                <h3 className="font-semibold text-text-primary text-sm uppercase font-mono tracking-wide mb-1">Unacceptable Behavior</h3>
+                <h3 className="font-semibold text-text-primary text-sm uppercase font-mono tracking-wide mb-1">
+                  Unacceptable Behavior
+                </h3>
                 <p>
-                  We do not tolerate harassment, bullying, discrimination, personal insults, intimidation of any kind, or sexualized language and imagery. Plagiarism, academic dishonesty, and spamming community spaces are also strictly off-limits.
+                  We do not tolerate harassment, bullying, discrimination,
+                  personal insults, intimidation of any kind, or sexualized
+                  language and imagery. Plagiarism, academic dishonesty, and
+                  spamming community spaces are also strictly off-limits.
                 </p>
               </div>
 
               <div>
-                <h3 className="font-semibold text-text-primary text-sm uppercase font-mono tracking-wide mb-1">Reporting Process</h3>
+                <h3 className="font-semibold text-text-primary text-sm uppercase font-mono tracking-wide mb-1">
+                  Reporting Process
+                </h3>
                 <p>
-                  If you witness or experience something that violates this Code of Conduct, please report it as soon as possible. You can reach the community leadership team directly via our Gmail compose portal:{" "}
+                  If you witness or experience something that violates this Code
+                  of Conduct, please report it as soon as possible. You can
+                  reach the community leadership team directly via our Gmail
+                  compose portal:{" "}
                   <a
                     href="https://mail.google.com/mail/?view=cm&fs=1&to=vamintcommunity@gmail.com"
                     target="_blank"
@@ -66,16 +88,25 @@ export default function Legal() {
               </div>
 
               <div>
-                <h3 className="font-semibold text-text-primary text-sm uppercase font-mono tracking-wide mb-1">Consequences</h3>
+                <h3 className="font-semibold text-text-primary text-sm uppercase font-mono tracking-wide mb-1">
+                  Consequences
+                </h3>
                 <p>
-                  Violations may result in a formal warning, temporary suspension from activities, or permanent removal from the VAMINT community, depending on the nature and severity of the incident, as determined by the core leadership.
+                  Violations may result in a formal warning, temporary
+                  suspension from activities, or permanent removal from the
+                  VAMINT community, depending on the nature and severity of the
+                  incident, as determined by the core leadership.
                 </p>
               </div>
 
               <div>
-                <h3 className="font-semibold text-text-primary text-sm uppercase font-mono tracking-wide mb-1">Acknowledgement</h3>
+                <h3 className="font-semibold text-text-primary text-sm uppercase font-mono tracking-wide mb-1">
+                  Acknowledgement
+                </h3>
                 <p>
-                  By submitting a membership or committee application, you acknowledge and agree to follow this Code of Conduct and all associated community guidelines.
+                  By submitting a membership or committee application, you
+                  acknowledge and agree to follow this Code of Conduct and all
+                  associated community guidelines.
                 </p>
               </div>
             </div>
@@ -86,10 +117,15 @@ export default function Legal() {
               2. Privacy &amp; Data Handling
             </h2>
             <p>
-              When you submit applications or registrations through this site, we collect details including your name, email, contact number, department, and academic year.
+              When you submit applications or registrations through this site,
+              we collect details including your name, email, contact number,
+              department, and academic year.
             </p>
             <p>
-              This information is used solely for recruitment, workshop coordination, and maintaining the club registry. We do not share your details with any external parties, and your data will be removed once you graduate or request deletion.
+              This information is used solely for recruitment, workshop
+              coordination, and maintaining the club registry. We do not share
+              your details with any external parties, and your data will be
+              removed once you graduate or request deletion.
             </p>
           </section>
         </div>

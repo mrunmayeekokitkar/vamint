@@ -1,10 +1,10 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
 
 export async function GET(request: NextRequest) {
   try {
     // Cookie auth check
-    const token = request.cookies.get('admin_token')?.value;
+    const token = request.cookies.get("admin_token")?.value;
     if (!token) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
@@ -14,10 +14,10 @@ export async function GET(request: NextRequest) {
 
     try {
       memberships = await prisma.clubMembership.findMany({
-        orderBy: { submittedAt: 'desc' },
+        orderBy: { submittedAt: "desc" },
       });
       committeeApps = await prisma.committeeApplication.findMany({
-        orderBy: { submittedAt: 'desc' },
+        orderBy: { submittedAt: "desc" },
       });
     } catch (dbError) {
       console.error("Prisma error fetching admin submissions:", dbError);
@@ -28,10 +28,10 @@ export async function GET(request: NextRequest) {
       committeeApps,
     });
   } catch (error) {
-    console.error('Fetch submissions error:', error);
+    console.error("Fetch submissions error:", error);
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

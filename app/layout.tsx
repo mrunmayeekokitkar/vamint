@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Inter, JetBrains_Mono, Playfair_Display } from "next/font/google";
+import {
+  Space_Grotesk,
+  Inter,
+  JetBrains_Mono,
+  Playfair_Display,
+} from "next/font/google";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -28,23 +33,28 @@ const playfairDisplay = Playfair_Display({
 
 export const metadata: Metadata = {
   title: "VAMINT | Code. Collaborate. Evolve.",
-  description: "VAMINT is the student tech community of our college — organizing hackathons, workshops, competitions, and soft-skills events to help students code, collaborate, and evolve together.",
+  description:
+    "VAMINT is the student tech community of our college — organizing hackathons, workshops, competitions, and soft-skills events to help students code, collaborate, and evolve together.",
   openGraph: {
     title: "VAMINT | Code. Collaborate. Evolve.",
-    description: "VAMINT is the student tech community of our college — organizing hackathons, workshops, competitions, and soft-skills events to help students code, collaborate, and evolve together.",
+    description:
+      "VAMINT is the student tech community of our college — organizing hackathons, workshops, competitions, and soft-skills events to help students code, collaborate, and evolve together.",
     type: "website",
     url: "https://vamintcommunity.vercel.app",
-    images: [{
-      url: "/logo.jpg",
-      width: 630,
-      height: 630,
-      alt: "VAMINT Logo",
-    }],
+    images: [
+      {
+        url: "/logo.jpg",
+        width: 630,
+        height: 630,
+        alt: "VAMINT Logo",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "VAMINT | Code. Collaborate. Evolve.",
-    description: "VAMINT is the student tech community of our college — organizing hackathons, workshops, competitions, and soft-skills events.",
+    description:
+      "VAMINT is the student tech community of our college — organizing hackathons, workshops, competitions, and soft-skills events.",
     images: ["/logo.jpg"],
   },
   icons: {
