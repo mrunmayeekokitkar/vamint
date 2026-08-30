@@ -23,7 +23,7 @@ const faqData: FAQGroup[] = [
       {
         question: "What is VAMINT?",
         answer:
-          "VAMINT is our college's student tech community. We bring students together through technical events, competitions, workshops, projects, and activities that help students learn, build, collaborate, and grow.",
+          "VAMINT is GSMCOE's student tech community. We bring students together through technical events, competitions, workshops, projects, and activities so students can learn, build, collaborate, and grow.",
       },
       {
         question: "Who can join VAMINT?",

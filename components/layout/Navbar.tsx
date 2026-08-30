@@ -107,7 +107,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="fixed inset-0 top-[73px] bg-bg-primary z-40 lg:hidden border-t border-border-subtle">
+        <div className="fixed inset-0 top-[73px] bg-bg-primary z-40 lg:hidden border-t border-border-subtle overflow-y-auto">
           <nav className="flex flex-col px-8 pt-8">
             {navItems.map((item) => {
               const isActive = pathname === item.path;

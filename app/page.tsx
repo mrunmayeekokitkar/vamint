@@ -72,7 +72,7 @@ export default function Home() {
   id="hero-section"
   className="relative min-h-[90vh] pt-28 overflow-hidden flex items-center"
 >
-  <div className="max-w-[1280px] mx-auto px-6 md:px-12 w-full">
+  <div className="max-w-[1280px] mx-auto px-4 sm:px-6 md:px-12 w-full">
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
       {/* LEFT — Hero Content */}
@@ -92,7 +92,7 @@ export default function Home() {
         </h1>
 
         <p className="font-sans text-text-secondary text-lg md:text-xl max-w-xl mb-10 leading-relaxed">
-          VAMINT is our college&apos;s student tech community — a place to
+          VAMINT is GSMCOE&apos;s student tech community, a place to
           learn, experiment, build real projects, compete, and grow together.
         </p>
 
@@ -131,7 +131,7 @@ export default function Home() {
 
  {/* What We Focus On */}
       <section className="py-24 bg-bg-primary border-t border-border-subtle relative z-10">
-        <div className="max-w-[1280px] mx-auto px-6 md:px-12">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 md:px-12">
           <div className="max-w-xl mb-16">
             <h2 className="font-display font-semibold text-3xl md:text-4xl text-text-primary mb-4">
               What we do
@@ -162,14 +162,14 @@ export default function Home() {
 
       {/* Upcoming Events */}
       <section className="py-24 bg-bg-primary">
-        <div className="max-w-[1280px] mx-auto px-6 md:px-12">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 md:px-12">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
             <div>
               <h2 className="font-display font-semibold text-3xl md:text-4xl text-text-primary mb-4">
                 Upcoming Events
               </h2>
               <p className="font-sans text-text-secondary">
-                See what we have on the calendar. Register to participate.
+                See what we have on the calendar.
               </p>
             </div>
             <Link
@@ -198,15 +198,18 @@ export default function Home() {
                         {event.description}
                       </p>
                     </div>
-                    <Button variant="secondary" href={`/events/${event.slug}`} className="w-fit">
-                      Register Now
-                    </Button>
+                    <Link
+                      href={`/events/${event.slug}`}
+                      className="text-yellow-500 hover:text-yellow-400 font-sans text-xs font-semibold flex items-center gap-1 w-fit"
+                    >
+                      Learn more <ArrowRight size={12} />
+                    </Link>
                   </div>
                 </Card>
               ))
             ) : (
               <p className="text-text-secondary font-sans col-span-2">
-                No upcoming events scheduled. Check back soon!
+                No upcoming events right now. Check back soon!
               </p>
             )}
           </div>
@@ -216,7 +219,7 @@ export default function Home() {
       {/* Projects */}
       {projects.length > 0 && (
         <section className="py-24 bg-bg-surface border-t border-border-subtle">
-          <div className="max-w-[1280px] mx-auto px-6 md:px-12">
+          <div className="max-w-[1280px] mx-auto px-4 sm:px-6 md:px-12">
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
               <div>
                 <h2 className="font-display font-semibold text-3xl md:text-4xl text-text-primary mb-4">
@@ -273,12 +276,12 @@ export default function Home() {
 
       {/* Closing CTA */}
       <section className="py-24 bg-bg-surface border-t border-border-subtle relative overflow-hidden">
-        <div className="max-w-[1280px] mx-auto px-6 md:px-12 text-center relative z-10">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 md:px-12 text-center relative z-10">
           <h2 className="font-display font-semibold text-4xl md:text-5xl text-text-primary mb-6 max-w-xl mx-auto">
             Ready to build something?
           </h2>
           <p className="font-sans text-text-secondary max-w-lg mx-auto mb-10">
-            We&apos;re looking for curious students who want to learn, create, and grow together. No experience required — just bring your enthusiasm.
+            We&apos;re looking for curious students who want to learn, create, and grow together. No experience required, just bring your enthusiasm.
           </p>
           <Button variant="primary" href="/join">
             Apply to Join VAMINT

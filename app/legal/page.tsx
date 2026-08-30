@@ -10,13 +10,13 @@ export default function Legal() {
         {/* Header */}
         <div className="mb-16">
           <div className="font-mono text-xs text-mint-500 uppercase tracking-wider mb-3">
-            [ Policy & Standard ]
+            [ Policy &amp; Standard ]
           </div>
           <h1 className="font-display font-semibold text-4xl md:text-5xl tracking-tight text-text-primary mb-6">
-            Code of Conduct & Privacy
+            Code of Conduct &amp; Privacy
           </h1>
           <p className="text-base">
-            Club rules for event participation, academic code submission, and personal data storage protocols.
+            Our community rules for events and online spaces, and how we handle the personal data you share with us.
           </p>
         </div>
 
@@ -30,28 +30,28 @@ export default function Legal() {
               <div>
                 <h3 className="font-semibold text-text-primary text-sm uppercase font-mono tracking-wide mb-1">Purpose &amp; Scope</h3>
                 <p>
-                  VAMINT is committed to fostering an inclusive, welcoming, and harassment-free tech community. This Code of Conduct outlines expectations for all club members, core committee members, and participants across all physical and virtual platforms, including events, workshops, online communication channels, and code repositories.
+                  VAMINT is committed to keeping the community inclusive, welcoming, and free from harassment. This Code of Conduct applies to all members, committee members, and participants, covering everything from in-person events and workshops to online channels and code repositories.
                 </p>
               </div>
 
               <div>
                 <h3 className="font-semibold text-text-primary text-sm uppercase font-mono tracking-wide mb-1">Expected Behavior</h3>
                 <p>
-                  Members are expected to engage in a collaborative and respectful manner. Be kind, inclusive, supportive of others&apos; learning journeys, and open to feedback. Focus on constructive critiques of ideas rather than personal attacks or gatekeeping.
+                  Be kind, collaborative, and supportive. Engage constructively, respect others&apos; learning journeys, and give feedback on ideas rather than people. Everyone is at a different stage, and that&apos;s the point.
                 </p>
               </div>
 
               <div>
                 <h3 className="font-semibold text-text-primary text-sm uppercase font-mono tracking-wide mb-1">Unacceptable Behavior</h3>
                 <p>
-                  We do not tolerate harassment, bullying, discrimination, personal insults, public or private intimidation, or sexualized language/imagery. Plagiarism, academic dishonesty, and spamming community resources are strictly prohibited.
+                  We do not tolerate harassment, bullying, discrimination, personal insults, intimidation of any kind, or sexualized language and imagery. Plagiarism, academic dishonesty, and spamming community spaces are also strictly off-limits.
                 </p>
               </div>
 
               <div>
                 <h3 className="font-semibold text-text-primary text-sm uppercase font-mono tracking-wide mb-1">Reporting Process</h3>
                 <p>
-                  If you witness or experience unacceptable behavior, please report the incident immediately. You can reach out directly via our Gmail compose portal:{" "}
+                  If you witness or experience something that violates this Code of Conduct, please report it as soon as possible. You can reach the community leadership team directly via our Gmail compose portal:{" "}
                   <a
                     href="https://mail.google.com/mail/?view=cm&fs=1&to=vamintcommunity@gmail.com"
                     target="_blank"
@@ -61,21 +61,21 @@ export default function Legal() {
                     Report Incident
                   </a>{" "}
                   {/* TODO: Add escalation contact / specific name of student lead or faculty advisor here */}
-                  to notify the community leadership team. All reports will be handled confidentially.
+                  All reports will be handled with confidentiality.
                 </p>
               </div>
 
               <div>
                 <h3 className="font-semibold text-text-primary text-sm uppercase font-mono tracking-wide mb-1">Consequences</h3>
                 <p>
-                  Failure to comply with these guidelines may result in a formal warning, temporary suspension from activities, or permanent expulsion from the VAMINT community, as determined by the core leadership.
+                  Violations may result in a formal warning, temporary suspension from activities, or permanent removal from the VAMINT community, depending on the nature and severity of the incident, as determined by the core leadership.
                 </p>
               </div>
 
               <div>
-                <h3 className="font-semibold text-text-primary text-sm uppercase font-mono tracking-wide mb-1">Acknowledgement Clause</h3>
+                <h3 className="font-semibold text-text-primary text-sm uppercase font-mono tracking-wide mb-1">Acknowledgement</h3>
                 <p>
-                  By submitting the membership form or the committee application form, you explicitly acknowledge, agree, and pledge to adhere to this Code of Conduct and all associated community guidelines.
+                  By submitting a membership or committee application, you acknowledge and agree to follow this Code of Conduct and all associated community guidelines.
                 </p>
               </div>
             </div>
@@ -86,19 +86,10 @@ export default function Legal() {
               2. Privacy &amp; Data Handling
             </h2>
             <p>
-              When you submit applications, registrations, or logs via this portal, we collect details including your name, email, contact number, department, and academic year.
+              When you submit applications or registrations through this site, we collect details including your name, email, contact number, department, and academic year.
             </p>
             <p>
-              This data is utilized solely for recruitment profiling, workshop coordinating, and official club registry. We do not share your details with external advertising agencies or databases. Your information is deleted once you graduate or formally request removal.
-            </p>
-          </section>
-
-          <section className="space-y-4">
-            <h2 className="font-display font-semibold text-xl text-text-primary">
-              3. Repository Licensing
-            </h2>
-            <p>
-              Unless explicitly specified otherwise, all software compiled by VAMINT developers during official sprints is licensed under the MIT Open Source License. Contributors retain original copyright but grant permissions for public campus compilations.
+              This information is used solely for recruitment, workshop coordination, and maintaining the club registry. We do not share your details with any external parties, and your data will be removed once you graduate or request deletion.
             </p>
           </section>
         </div>

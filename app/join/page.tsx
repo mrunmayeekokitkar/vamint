@@ -119,34 +119,20 @@ export default function Join() {
       <main className="flex-grow pt-32 pb-24 max-w-[1100px] mx-auto px-6 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-16">
           {/* Side Info */}
-          <div className="lg:col-span-2 space-y-12">
+          <div className="lg:col-span-2 space-y-8">
             <div className="space-y-4">
               <div className="font-mono text-xs text-mustard-500 uppercase tracking-wider">
                 [ Admissions Open ]
               </div>
               <h1 className="font-display font-semibold text-4xl md:text-5xl tracking-tight text-text-primary">
-                Join the VAMINT Tech Community
+                Join the VAMINT Community
               </h1>
               <p className="font-sans text-sm text-text-secondary leading-relaxed">
-                Whether you want to participate in events and workshops as a club member, or organize them as part of our core committee, apply below.
+                VAMINT is open to all students at GSMCOE, regardless of branch, year, or experience level. Whether you want to show up to events and learn alongside others, or get more involved and help run things, there&apos;s a place for you here.
               </p>
-            </div>
-
-            <div className="space-y-6">
-              <h3 className="font-mono text-xs font-semibold text-text-tertiary uppercase tracking-wider border-b border-border-subtle/50 pb-2">
-                What to expect
-              </h3>
-              <ul className="space-y-4 font-sans text-sm text-text-secondary">
-                <li className="flex gap-2">
-                  <span className="text-mustard-500 font-bold">✓</span>
-                  <span>Collaborative events, hackathons, and soft-skills debates.</span>
-                </li>
-                <li className="flex gap-2">
-                  <span className="text-mustard-500 font-bold">✓</span>
-                  {/* TODO: Verify exact workshop-participant competition benefit */}
-                  <span>A clean learning environment without gatekeeping or AI slop.</span>
-                </li>
-              </ul>
+              <p className="font-sans text-sm text-text-secondary leading-relaxed">
+                Club Members get access to all our events, workshops, and community activities. Committee Members take an active role in planning and organizing, working directly with the core team to make things happen. Pick the one that fits where you&apos;re at right now.
+              </p>
             </div>
           </div>
 
@@ -165,7 +151,7 @@ export default function Join() {
                     : "text-text-secondary hover:text-text-primary"
                 }`}
               >
-                Club Membership
+                Club Member
               </button>
               <button
                 onClick={() => {
@@ -179,11 +165,11 @@ export default function Join() {
                     : "text-text-secondary hover:text-text-primary"
                 }`}
               >
-                Core Committee
+                Committee Member
               </button>
             </div>
 
-            <Card className="border border-border-subtle p-8">
+            <Card className="border border-border-subtle p-5 md:p-8">
               {submittedForm ? (
                 <div className="py-16 text-center space-y-6">
                   <CheckCircle2 className="text-mustard-500 mx-auto" size={56} />
@@ -193,7 +179,7 @@ export default function Join() {
                   {submittedForm === "member" ? (
                     <div className="space-y-4">
                       <p className="font-sans text-sm text-text-secondary max-w-sm mx-auto leading-relaxed">
-                        Thank you for applying to be a Club Member! Please join our WhatsApp group to stay updated on future announcements and events:
+                        Thanks for applying! Join our WhatsApp group to stay updated on announcements and upcoming events:
                       </p>
                       <div className="py-2">
                         <a
@@ -208,7 +194,7 @@ export default function Join() {
                     </div>
                   ) : (
                     <p className="font-sans text-sm text-text-secondary max-w-sm mx-auto leading-relaxed">
-                      Thank you for applying. We will review your application details and follow up via email shortly.
+                      Thanks for applying. We&apos;ll review your application and be in touch soon.
                     </p>
                   )}
                   <Button variant="secondary" onClick={() => setSubmittedForm(null)}>
@@ -225,7 +211,7 @@ export default function Join() {
                   )}
 
                   {activeTab === "member" ? (
-                    /* CLUB MEMBERSHIP FORM */
+                    /* CLUB MEMBER FORM */
                     <form onSubmit={memberForm.handleSubmit(onMemberSubmit)} className="space-y-6">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
@@ -339,13 +325,13 @@ export default function Join() {
                         ) : (
                           <span className="flex items-center gap-2">
                             <Terminal size={16} />
-                            Submit Club Membership
+                            Submit Application
                           </span>
                         )}
                       </Button>
                     </form>
                   ) : (
-                    /* COMMITTEE APPLICATION FORM */
+                    /* COMMITTEE MEMBER FORM */
                     <form onSubmit={committeeForm.handleSubmit(onCommitteeSubmit)} className="space-y-6">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
@@ -484,7 +470,7 @@ export default function Join() {
                         <textarea
                           rows={4}
                           className="w-full bg-bg-primary border border-border-subtle rounded px-4 py-2 text-sm text-text-primary focus:border-mustard-500 focus:outline-none transition-colors resize-none font-sans"
-                          placeholder="Tell us what drives you and how you plan to contribute to organizing VAMINT..."
+                          placeholder="Tell us what drives you and how you plan to contribute to VAMINT..."
                           {...committeeForm.register("reason")}
                         />
                         {committeeForm.formState.errors.reason && (
@@ -522,7 +508,7 @@ export default function Join() {
                         ) : (
                           <span className="flex items-center gap-2">
                             <Terminal size={16} />
-                            Submit Committee Application
+                            Submit Application
                           </span>
                         )}
                       </Button>
