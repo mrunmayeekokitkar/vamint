@@ -145,7 +145,7 @@ export default function Team() {
                   <div className="font-mono text-xs text-yellow-500 uppercase tracking-wider mb-2">
                     {member.role}
                   </div>
-                  <p className="font-sans text-sm text-text-secondary leading-relaxed mb-4">
+                  <p className="font-sans text-sm text-text-secondary leading-relaxed mb-4 whitespace-pre-line">
                     {member.bio &&
                     typeof member.bio === "string" &&
                     member.bio.trim() !== ""
