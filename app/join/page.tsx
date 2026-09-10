@@ -10,34 +10,14 @@ import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 import { CheckCircle2, Terminal, AlertCircle } from "lucide-react";
 
-// ─── VALIDATION SCHEMAS ──────────────────────────────────────────────────────
-const membershipSchema = z.object({
-  name: z.string().trim().min(1, "Full Name is required"),
-  email: z.string().trim().email("Invalid email format"),
-  phone: z
-    .string()
-    .trim()
-    .regex(/^\d{10}$/, "Contact Number must be exactly 10 digits"),
-  year: z.string().trim().min(1, "Select your academic year"),
-  department: z.string().trim().min(1, "Select your department"),
-});
-
-const committeeSchema = z.object({
-  name: z.string().trim().min(1, "Full Name is required"),
-  email: z.string().trim().email("Invalid email format"),
-  phone: z
-    .string()
-    .trim()
-    .regex(/^\d{10}$/, "Contact Number must be exactly 10 digits"),
-  year: z.string().trim().min(1, "Select your academic year"),
-  department: z.string().trim().min(1, "Select your department"),
-  preferredArea: z.string().trim().min(1, "Preferred area is required"),
-  reason: z.string().trim().min(1, "Why do you want to join is required"),
-  experience: z.string().trim().min(1, "Past experience is required"),
-});
-
-type MembershipValues = z.infer<typeof membershipSchema>;
-type CommitteeValues = z.infer<typeof committeeSchema>;
+// ─── PREFERRED AREAS OPTIONS ────────────────────────────────────────────────
+const PREFERRED_AREAS = [
+  "Documentation",
+  "Events & Operations",
+  "Technical Team",
+  "PR & Social Media",
+  "Design & Creative",
+];
 
 const DEPARTMENTS = [
   "First Year Engineering",
@@ -52,6 +32,52 @@ const DEPARTMENTS = [
   "MCA",
   "MBA",
 ];
+
+// ─── VALIDATION SCHEMAS ──────────────────────────────────────────────────────
+const membershipSchema = z.object({
+  name: z.string().trim().min(1, "Full Name is required"),
+  email: z
+    .string()
+    .trim()
+    .min(1, "Email ID is required")
+    .email("Invalid email format")
+    .refine((val) => val.toLowerCase().endsWith("@gmail.com"), {
+      message: "Email must be a valid @gmail.com address",
+    }),
+  phone: z
+    .string()
+    .trim()
+    .min(1, "Contact Number is required")
+    .regex(/^\d{10}$/, "Contact Number must be exactly 10 digits"),
+  year: z.string().trim().min(1, "Select your academic year"),
+  department: z.string().trim().min(1, "Select your department"),
+});
+
+const committeeSchema = z.object({
+  name: z.string().trim().min(1, "Full Name is required"),
+  email: z
+    .string()
+    .trim()
+    .min(1, "Email ID is required")
+    .email("Invalid email format")
+    .refine((val) => val.toLowerCase().endsWith("@gmail.com"), {
+      message: "Email must be a valid @gmail.com address",
+    }),
+  phone: z
+    .string()
+    .trim()
+    .min(1, "Contact Number is required")
+    .regex(/^\d{10}$/, "Contact Number must be exactly 10 digits"),
+  year: z.string().trim().min(1, "Select your academic year"),
+  department: z.string().trim().min(1, "Select your department"),
+  preferredArea: z
+    .array(z.string())
+    .min(1, "Select at least one preferred area"),
+  experience: z.string().trim().min(1, "Past experience is required"),
+});
+
+type MembershipValues = z.infer<typeof membershipSchema>;
+type CommitteeValues = z.infer<typeof committeeSchema>;
 
 // ─── FORMS CONTAINER ──────────────────────────────────────────────────────────
 export default function Join() {
@@ -77,8 +103,7 @@ export default function Join() {
       phone: "",
       year: "",
       department: "",
-      preferredArea: "",
-      reason: "",
+      preferredArea: [],
       experience: "",
     },
   });
@@ -221,10 +246,21 @@ export default function Join() {
                       </div>
                     </div>
                   ) : (
-                    <p className="font-sans text-sm text-text-secondary max-w-sm mx-auto leading-relaxed">
-                      Thanks for applying. We&apos;ll review your application
-                      and be in touch soon.
-                    </p>
+                    <div className="space-y-4">
+                      <p className="font-sans text-sm text-text-secondary max-w-sm mx-auto leading-relaxed">
+                        Thanks for applying! Join our committee WhatsApp group to stay updated on announcements and next steps:
+                      </p>
+                      <div className="py-2">
+                        <a
+                          href="https://chat.whatsapp.com/LJjqfPW3Umd4dJ7cQR175x?s=sh&p=a&mlu=4&ilr=4"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-block px-6 py-2.5 bg-[#25D366] hover:bg-[#20ba59] text-white font-sans text-sm font-semibold rounded transition-colors"
+                        >
+                          Join Committee WhatsApp Group
+                        </a>
+                      </div>
+                    </div>
                   )}
                   <Button
                     variant="secondary"
@@ -274,7 +310,7 @@ export default function Join() {
                           <input
                             type="email"
                             className="w-full bg-bg-primary border border-border-subtle rounded px-4 py-2 text-sm text-text-primary focus:border-mustard-500 focus:outline-none transition-colors"
-                            placeholder="sanjay@college.edu"
+                            placeholder="sanjay@gmail.com"
                             {...memberForm.register("email")}
                           />
                           {memberForm.formState.errors.email && (
@@ -401,7 +437,7 @@ export default function Join() {
                           <input
                             type="email"
                             className="w-full bg-bg-primary border border-border-subtle rounded px-4 py-2 text-sm text-text-primary focus:border-mustard-500 focus:outline-none transition-colors"
-                            placeholder="sanjay@college.edu"
+                            placeholder="sanjay@gmail.com"
                             {...committeeForm.register("email")}
                           />
                           {committeeForm.formState.errors.email && (
@@ -455,95 +491,88 @@ export default function Join() {
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                          <label className="block font-mono text-xs text-text-secondary uppercase">
-                            Department
-                          </label>
-                          <select
-                            className="w-full bg-bg-primary border border-border-subtle rounded px-4 py-2.5 text-sm text-text-primary focus:border-mustard-500 focus:outline-none transition-colors"
-                            {...committeeForm.register("department")}
-                          >
-                            <option value="">Select department</option>
-                            {DEPARTMENTS.map((dept) => (
-                              <option key={dept} value={dept}>
-                                {dept}
-                              </option>
-                            ))}
-                          </select>
-                          {committeeForm.formState.errors.department && (
-                            <p className="font-mono text-xs text-error-500 flex items-center gap-1 mt-1">
-                              <AlertCircle size={12} />
-                              {
-                                committeeForm.formState.errors.department
-                                  .message
-                              }
-                            </p>
-                          )}
-                        </div>
-
-                        <div className="space-y-2">
-                          <label className="block font-mono text-xs text-text-secondary uppercase">
-                            Preferred area to work with
-                          </label>
-                          {/* Flag: Meaning of Options 1-6 is not specified, left TODO comments for the club to fill in */}
-                          <select
-                            className="w-full bg-bg-primary border border-border-subtle rounded px-4 py-2.5 text-sm text-text-primary focus:border-mustard-500 focus:outline-none transition-colors"
-                            {...committeeForm.register("preferredArea")}
-                          >
-                            <option value="">Select an area</option>
-                            <option value="Option 1">
-                              Option 1 (TODO: Club to define preferred area 1)
-                            </option>
-                            <option value="Option 2">
-                              Option 2 (TODO: Club to define preferred area 2)
-                            </option>
-                            <option value="Option 3">
-                              Option 3 (TODO: Club to define preferred area 3)
-                            </option>
-                            <option value="Option 4">
-                              Option 4 (TODO: Club to define preferred area 4)
-                            </option>
-                            <option value="Option 5">
-                              Option 5 (TODO: Club to define preferred area 5)
-                            </option>
-                            <option value="Option 6">
-                              Option 6 (TODO: Club to define preferred area 6)
-                            </option>
-                          </select>
-                          {committeeForm.formState.errors.preferredArea && (
-                            <p className="font-mono text-xs text-error-500 flex items-center gap-1 mt-1">
-                              <AlertCircle size={12} />
-                              {
-                                committeeForm.formState.errors.preferredArea
-                                  .message
-                              }
-                            </p>
-                          )}
-                        </div>
-                      </div>
-
                       <div className="space-y-2">
                         <label className="block font-mono text-xs text-text-secondary uppercase">
-                          Why do you want to join?
+                          Department
                         </label>
-                        <textarea
-                          rows={4}
-                          className="w-full bg-bg-primary border border-border-subtle rounded px-4 py-2 text-sm text-text-primary focus:border-mustard-500 focus:outline-none transition-colors resize-none font-sans"
-                          placeholder="Tell us what drives you and how you plan to contribute to VAMINT..."
-                          {...committeeForm.register("reason")}
-                        />
-                        {committeeForm.formState.errors.reason && (
+                        <select
+                          className="w-full bg-bg-primary border border-border-subtle rounded px-4 py-2.5 text-sm text-text-primary focus:border-mustard-500 focus:outline-none transition-colors"
+                          {...committeeForm.register("department")}
+                        >
+                          <option value="">Select department</option>
+                          {DEPARTMENTS.map((dept) => (
+                            <option key={dept} value={dept}>
+                              {dept}
+                            </option>
+                          ))}
+                        </select>
+                        {committeeForm.formState.errors.department && (
                           <p className="font-mono text-xs text-error-500 flex items-center gap-1 mt-1">
                             <AlertCircle size={12} />
-                            {committeeForm.formState.errors.reason.message}
+                            {
+                              committeeForm.formState.errors.department
+                                .message
+                            }
                           </p>
                         )}
                       </div>
 
                       <div className="space-y-2">
                         <label className="block font-mono text-xs text-text-secondary uppercase">
-                          Past experience
+                          Preferred area to work with
+                        </label>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                          {PREFERRED_AREAS.map((area) => {
+                            const currentSelected: string[] =
+                              committeeForm.watch("preferredArea") || [];
+                            const isSelected = currentSelected.includes(area);
+                            return (
+                              <button
+                                key={area}
+                                type="button"
+                                onClick={() => {
+                                  const updated = isSelected
+                                    ? currentSelected.filter(
+                                        (item) => item !== area,
+                                      )
+                                    : [...currentSelected, area];
+                                  committeeForm.setValue(
+                                    "preferredArea",
+                                    updated,
+                                    { shouldValidate: true },
+                                  );
+                                }}
+                                className={`flex items-center justify-between p-3.5 rounded-lg border text-left font-sans text-sm transition-all duration-200 ${
+                                  isSelected
+                                    ? "bg-mustard-500/10 border-mustard-500 text-mustard-500 font-medium shadow-sm"
+                                    : "bg-bg-primary border-border-subtle text-text-secondary hover:border-mustard-500/40 hover:text-text-primary"
+                                }`}
+                              >
+                                <span>{area}</span>
+                                {isSelected && (
+                                  <CheckCircle2
+                                    size={16}
+                                    className="text-mustard-500 shrink-0 ml-2"
+                                  />
+                                )}
+                              </button>
+                            );
+                          })}
+                        </div>
+                        {committeeForm.formState.errors.preferredArea && (
+                          <p className="font-mono text-xs text-error-500 flex items-center gap-1 mt-1">
+                            <AlertCircle size={12} />
+                            {
+                              committeeForm.formState.errors.preferredArea
+                                .message
+                            }
+                          </p>
+                        )}
+                      </div>
+
+                      <div className="space-y-2">
+                        <label className="block font-mono text-xs text-text-secondary uppercase">
+                          Past experience (if any)
                         </label>
                         <textarea
                           rows={4}

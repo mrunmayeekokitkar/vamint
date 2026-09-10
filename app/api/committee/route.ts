@@ -3,15 +3,25 @@ import { z } from "zod";
 
 const committeeSchema = z.object({
   name: z.string().trim().min(1, "Full Name is required"),
-  email: z.string().trim().email("Invalid email format"),
+  email: z
+    .string()
+    .trim()
+    .min(1, "Email address is required")
+    .email("Invalid email format")
+    .refine((val) => val.toLowerCase().endsWith("@gmail.com"), {
+      message: "Email must be a valid @gmail.com address",
+    }),
   phone: z
     .string()
     .trim()
+    .min(1, "Contact Number is required")
     .regex(/^\d{10}$/, "Contact Number must be exactly 10 digits"),
   year: z.string().trim().min(1, "Academic Year is required"),
   department: z.string().trim().min(1, "Department is required"),
-  preferredArea: z.string().trim().min(1, "Preferred area is required"),
-  reason: z.string().trim().min(1, "Why do you want to join is required"),
+  preferredArea: z.union([
+    z.array(z.string()).min(1, "Select at least one preferred area"),
+    z.string().min(1, "Select at least one preferred area"),
+  ]),
   experience: z.string().trim().min(1, "Past experience is required"),
 });
 
@@ -38,9 +48,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    const formattedPreferredArea = Array.isArray(validatedData.preferredArea)
+      ? validatedData.preferredArea.join(", ")
+      : validatedData.preferredArea;
+
     // Forward to Google Apps Script Web App
     const payload = {
       ...validatedData,
+      preferredArea: formattedPreferredArea,
       formType: "committee",
       secretKey: formSecretKey,
     };

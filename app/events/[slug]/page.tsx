@@ -363,7 +363,7 @@ export default function EventDetail() {
                         <input
                           type="email"
                           className="w-full bg-bg-primary border border-border-subtle rounded px-3 py-2 text-xs text-text-primary focus:border-mint-500 focus:outline-none"
-                          placeholder="you@college.edu"
+                          placeholder="you@gmail.com"
                           {...register("email")}
                         />
 

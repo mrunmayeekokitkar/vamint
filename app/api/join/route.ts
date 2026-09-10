@@ -3,10 +3,18 @@ import { z } from "zod";
 
 const joinSchema = z.object({
   name: z.string().trim().min(1, "Full Name is required"),
-  email: z.string().trim().email("Invalid email format"),
+  email: z
+    .string()
+    .trim()
+    .min(1, "Email address is required")
+    .email("Invalid email format")
+    .refine((val) => val.toLowerCase().endsWith("@gmail.com"), {
+      message: "Email must be a valid @gmail.com address",
+    }),
   phone: z
     .string()
     .trim()
+    .min(1, "Contact Number is required")
     .regex(/^\d{10}$/, "Contact Number must be exactly 10 digits"),
   year: z.string().trim().min(1, "Academic Year is required"),
   department: z.string().trim().min(1, "Department is required"),
