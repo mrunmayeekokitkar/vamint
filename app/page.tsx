@@ -28,6 +28,11 @@ const TerminalScene = dynamic(
   },
 );
 
+const KageBackground = dynamic(
+  () => import("@/components/three/KageBackground").then((m) => m.KageBackground),
+  { ssr: false }
+);
+
 export default function Home() {
   const [events, setEvents] = useState<
     {
@@ -96,7 +101,8 @@ export default function Home() {
         id="hero-section"
         className="relative min-h-[90vh] pt-28 overflow-hidden flex items-center"
       >
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 md:px-12 w-full">
+        <KageBackground />
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 md:px-12 w-full relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             {/* LEFT — Hero Content */}
             <div className="relative z-10 flex flex-col items-start">
