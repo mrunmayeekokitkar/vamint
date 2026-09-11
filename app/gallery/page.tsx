@@ -55,7 +55,11 @@ const galleryEvents = [
     title: "Debate Competition",
     category: "Soft Skills",
     desc: "Students sharing ideas and competing through debate.",
-    images: [],
+    images: [
+      "/gallery/debate/debate_1.jpg",
+      "/gallery/debate/debate_2.jpg",
+      "/gallery/debate/debate_3.jpg",
+    ],
   },
 
   {

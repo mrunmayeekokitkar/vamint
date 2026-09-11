@@ -96,7 +96,7 @@ export default function Team() {
     <div className="flex flex-col min-h-screen">
       <Navbar />
 
-      <main className="flex-grow pt-32 pb-24 max-w-4xl mx-auto px-6 w-full">
+      <main className="flex-grow pt-32 pb-24 max-w-6xl mx-auto px-6 w-full">
         {/* Header */}
         <div className="mb-16 text-center md:text-left">
           <div className="font-mono text-xs text-yellow-500 uppercase tracking-wider mb-3">
@@ -113,13 +113,13 @@ export default function Team() {
           </p>
         </div>
 
-        {/* Team Members Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Team Members Grid - 3 cards per row on large screens */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {teamMembers.map((member) => (
             <Card
               key={member.name}
               hoverGlow
-              className="group relative flex flex-col items-center text-center p-8 w-full transition-all duration-300 overflow-hidden min-h-[300px] justify-between"
+              className="group relative flex flex-col items-center text-center p-6 md:p-8 w-full transition-all duration-300 overflow-hidden min-h-[310px] justify-between"
             >
               {/* Photo, Name, Role & Socials - Always Visible */}
               <div className="flex flex-col items-center w-full transition-transform duration-300 group-hover:scale-95">
@@ -128,7 +128,12 @@ export default function Team() {
                     <img
                       src={member.image}
                       alt={member.name}
-                      className="w-full h-full object-cover object-top"
+                      className={`w-full h-full object-cover ${
+                        member.name.toLowerCase().includes("mrunmayee") ||
+                        member.name.toLowerCase().includes("sristi")
+                          ? "object-[center_35%]"
+                          : "object-top"
+                      }`}
                     />
                   ) : (
                     <UserIcon size={48} className="text-text-secondary" />
