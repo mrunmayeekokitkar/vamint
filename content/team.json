@@ -66,7 +66,17 @@
     "github": "https://github.com/Rishi6587",
     "linkedin": "https://www.linkedin.com/in/rishikeshsutar/",
     "instagram": "https://www.instagram.com/rishikesh_s1938/",
-    "image": null,
+    "image": "/team/rishikesh.jpg",
+    "category": "Core Committee"
+  },
+  {
+    "name": "Shreya Thorat",
+    "role": "Creative Head",
+    "bio": "A creative at heart who loves turning random ideas into something worth looking at. As Creative Head, I’m here to experiment, create, inspire, and make sure our club always has its own vibe!!!",
+    "github": null,
+    "linkedin": null,
+    "instagram": "https://www.instagram.com/shreya.thorat.06?stkn=Yjhnbmx2ZmMyenZk",
+    "image": "/team/shreya.jpg",
     "category": "Core Committee"
   }
 ]
