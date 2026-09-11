@@ -37,8 +37,8 @@ export default function Navbar() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-bg-surface/90 backdrop-blur-md border-b border-border-subtle py-4"
+        isScrolled || isOpen
+          ? "bg-bg-primary/95 backdrop-blur-md border-b border-border-subtle py-4"
           : "bg-transparent py-6"
       }`}
     >
@@ -107,7 +107,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="fixed inset-0 top-[73px] bg-bg-primary z-40 lg:hidden border-t border-border-subtle overflow-y-auto">
+        <div className="fixed inset-0 top-0 pt-24 bg-bg-primary z-40 lg:hidden border-t border-border-subtle overflow-y-auto min-h-screen">
           <nav className="flex flex-col px-8 pt-8">
             {navItems.map((item) => {
               const isActive = pathname === item.path;

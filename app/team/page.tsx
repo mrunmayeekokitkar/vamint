@@ -113,58 +113,47 @@ export default function Team() {
           </p>
         </div>
 
-        {/* Team Members List */}
-        <div className="flex flex-col gap-6">
+        {/* Team Members Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {teamMembers.map((member) => (
             <Card
               key={member.name}
               hoverGlow
-              className="flex flex-col md:flex-row items-center md:items-start text-center md:text-left p-6 md:p-8 gap-6 md:gap-8 w-full"
+              className="group relative flex flex-col items-center text-center p-8 w-full transition-all duration-300 overflow-hidden min-h-[300px] justify-between"
             >
-              {/* Left Column: Photo & Name */}
-              <div className="flex flex-col items-center flex-shrink-0 w-32">
-                <div className="w-24 h-24 rounded-full overflow-hidden bg-bg-surface-raised border border-border-subtle flex items-center justify-center mb-3">
+              {/* Photo, Name, Role & Socials - Always Visible */}
+              <div className="flex flex-col items-center w-full transition-transform duration-300 group-hover:scale-95">
+                <div className="w-28 h-28 rounded-full overflow-hidden bg-bg-surface-raised border-2 border-border-subtle group-hover:border-yellow-500 flex items-center justify-center mb-4 transition-colors duration-300 shadow-md">
                   {member.image ? (
                     <img
                       src={member.image}
                       alt={member.name}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover object-top"
                     />
                   ) : (
-                    <UserIcon size={40} className="text-text-secondary" />
+                    <UserIcon size={48} className="text-text-secondary" />
                   )}
                 </div>
-                <h3 className="font-display font-semibold text-lg text-text-primary text-center leading-tight">
+
+                <h3 className="font-display font-semibold text-xl text-text-primary text-center leading-tight mb-1">
                   {member.name}
                 </h3>
-              </div>
 
-              {/* Right Column: Role/Position, Bio, Socials */}
-              <div className="flex flex-col flex-grow w-full md:w-auto min-h-[96px] justify-between">
-                <div>
-                  <div className="font-mono text-xs text-yellow-500 uppercase tracking-wider mb-2">
-                    {member.role}
-                  </div>
-                  <p className="font-sans text-sm text-text-secondary leading-relaxed mb-4 whitespace-pre-line">
-                    {member.bio &&
-                    typeof member.bio === "string" &&
-                    member.bio.trim() !== ""
-                      ? member.bio
-                      : "Bio coming soon."}
-                  </p>
+                <div className="font-mono text-xs text-yellow-500 uppercase tracking-wider mb-4">
+                  {member.role}
                 </div>
 
-                {/* Socials */}
-                <div className="flex justify-center md:justify-start space-x-4 mt-auto">
+                {/* Social Links */}
+                <div className="flex justify-center space-x-4">
                   {member.github && (
                     <a
                       href={member.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-text-secondary hover:text-yellow-500 transition-colors p-1"
+                      className="text-text-secondary hover:text-yellow-500 transition-colors p-1.5 bg-bg-surface-raised/50 rounded-full hover:bg-bg-surface-raised"
                       aria-label={`${member.name}'s GitHub`}
                     >
-                      <GitHubIcon size={17} />
+                      <GitHubIcon size={18} />
                     </a>
                   )}
 
@@ -173,10 +162,10 @@ export default function Team() {
                       href={member.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-text-secondary hover:text-yellow-500 transition-colors p-1"
+                      className="text-text-secondary hover:text-yellow-500 transition-colors p-1.5 bg-bg-surface-raised/50 rounded-full hover:bg-bg-surface-raised"
                       aria-label={`${member.name}'s LinkedIn`}
                     >
-                      <LinkedInIcon size={17} />
+                      <LinkedInIcon size={18} />
                     </a>
                   )}
 
@@ -185,10 +174,66 @@ export default function Team() {
                       href={member.instagram}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-text-secondary hover:text-yellow-500 transition-colors p-1"
+                      className="text-text-secondary hover:text-yellow-500 transition-colors p-1.5 bg-bg-surface-raised/50 rounded-full hover:bg-bg-surface-raised"
                       aria-label={`${member.name}'s Instagram`}
                     >
-                      <InstagramIcon size={17} />
+                      <InstagramIcon size={18} />
+                    </a>
+                  )}
+                </div>
+              </div>
+
+              {/* Bio Hover Overlay (visible on hover or tap) */}
+              <div className="absolute inset-0 bg-bg-primary/95 backdrop-blur-md p-6 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-300 pointer-events-none group-hover:pointer-events-auto group-focus-within:pointer-events-auto">
+                <div className="font-mono text-xs text-yellow-500 uppercase tracking-wider mb-2">
+                  {member.role}
+                </div>
+                <h4 className="font-display font-semibold text-lg text-text-primary mb-3">
+                  {member.name}
+                </h4>
+                <p className="font-sans text-sm text-text-secondary leading-relaxed overflow-y-auto max-h-[180px] px-2 whitespace-pre-line">
+                  {member.bio &&
+                  typeof member.bio === "string" &&
+                  member.bio.trim() !== ""
+                    ? member.bio
+                    : "Bio coming soon."}
+                </p>
+
+                {/* Socials inside hover view as well for easy access */}
+                <div className="flex justify-center space-x-4 mt-4">
+                  {member.github && (
+                    <a
+                      href={member.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-text-secondary hover:text-yellow-500 transition-colors p-1.5 bg-bg-surface-raised rounded-full"
+                      aria-label={`${member.name}'s GitHub`}
+                    >
+                      <GitHubIcon size={16} />
+                    </a>
+                  )}
+
+                  {member.linkedin && (
+                    <a
+                      href={member.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-text-secondary hover:text-yellow-500 transition-colors p-1.5 bg-bg-surface-raised rounded-full"
+                      aria-label={`${member.name}'s LinkedIn`}
+                    >
+                      <LinkedInIcon size={16} />
+                    </a>
+                  )}
+
+                  {member.instagram && (
+                    <a
+                      href={member.instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-text-secondary hover:text-yellow-500 transition-colors p-1.5 bg-bg-surface-raised rounded-full"
+                      aria-label={`${member.name}'s Instagram`}
+                    >
+                      <InstagramIcon size={16} />
                     </a>
                   )}
                 </div>
