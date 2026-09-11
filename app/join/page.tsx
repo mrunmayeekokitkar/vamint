@@ -82,6 +82,7 @@ type CommitteeValues = z.infer<typeof committeeSchema>;
 // ─── FORMS CONTAINER ──────────────────────────────────────────────────────────
 export default function Join() {
   const [activeTab, setActiveTab] = useState<"member" | "committee">("member");
+  const [showForm, setShowForm] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submittedForm, setSubmittedForm] = useState<
     "member" | "committee" | null
@@ -110,6 +111,7 @@ export default function Join() {
 
   const handleSelectRole = (role: "member" | "committee") => {
     setActiveTab(role);
+    setShowForm(true);
     setSubmittedForm(null);
     setError(null);
     setTimeout(() => {
@@ -185,12 +187,7 @@ export default function Join() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {/* Card 1: Club Member */}
           <div
-            onClick={() => handleSelectRole("member")}
-            className={`cursor-pointer rounded-xl border p-6 md:p-8 flex flex-col justify-between transition-colors duration-200 ${
-              activeTab === "member"
-                ? "bg-bg-surface border-mustard-500"
-                : "bg-bg-surface/60 border-border-subtle"
-            }`}
+            className="rounded-xl border p-6 md:p-8 flex flex-col justify-between bg-bg-surface border-border-subtle"
           >
             <div className="space-y-3">
               <h2 className="font-display font-semibold text-2xl text-text-primary">
@@ -204,26 +201,18 @@ export default function Join() {
             <div className="pt-8">
               <Button
                 type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleSelectRole("member");
-                }}
-                variant={activeTab === "member" ? "primary" : "secondary"}
+                onClick={() => handleSelectRole("member")}
+                variant="secondary"
                 className="w-full"
               >
-                {activeTab === "member" ? "Apply for Club Member" : "Apply"}
+                Apply
               </Button>
             </div>
           </div>
 
           {/* Card 2: Committee Member */}
           <div
-            onClick={() => handleSelectRole("committee")}
-            className={`cursor-pointer rounded-xl border p-6 md:p-8 flex flex-col justify-between transition-colors duration-200 ${
-              activeTab === "committee"
-                ? "bg-bg-surface border-mustard-500"
-                : "bg-bg-surface/60 border-border-subtle"
-            }`}
+            className="rounded-xl border p-6 md:p-8 flex flex-col justify-between bg-bg-surface border-border-subtle"
           >
             <div className="space-y-3">
               <h2 className="font-display font-semibold text-2xl text-text-primary">
@@ -237,20 +226,18 @@ export default function Join() {
             <div className="pt-8">
               <Button
                 type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleSelectRole("committee");
-                }}
-                variant={activeTab === "committee" ? "primary" : "secondary"}
+                onClick={() => handleSelectRole("committee")}
+                variant="secondary"
                 className="w-full"
               >
-                {activeTab === "committee" ? "Apply for Committee Member" : "Apply"}
+                Apply
               </Button>
             </div>
           </div>
         </div>
 
-        {/* Application Form Section */}
+        {/* Application Form Section - only shown after clicking Apply */}
+        {showForm && (
         <div id="application-form" className="scroll-mt-28">
           <Card className="border border-border-subtle p-6 md:p-10">
             <div className="mb-8 border-b border-border-subtle pb-4">
@@ -654,6 +641,7 @@ export default function Join() {
             )}
           </Card>
         </div>
+        )}
       </main>
 
       <Footer />
