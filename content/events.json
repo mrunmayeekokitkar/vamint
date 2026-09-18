@@ -1,21 +1,5 @@
 [
   {
-    "slug": "orientation-2026-27",
-    "title": "Orientation 2026-27",
-    "date": "2026-09-11T10:00:00.000Z",
-    "location": "GSMCOE Campus",
-    "type": "Orientation",
-    "status": "upcoming",
-    "description": "VAMINT's orientation for the 2026-27 academic year is coming up. This is a chance to meet the team, learn about what we do, and find your place in the community.",
-    "organizers": ["VAMINT Core Committee"],
-    "prerequisites": null,
-    "whatToBring": null,
-    "image": null,
-    "highlights": null,
-    "outcome": null
-  },
-
-  {
     "slug": "debate-competition-2026",
     "title": "Debate Competition 2026",
     "date": "2026-04-07T14:00:00.000Z",
