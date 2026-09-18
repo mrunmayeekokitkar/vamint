@@ -183,58 +183,56 @@ export default function Join() {
           </p>
         </div>
 
-        {/* Two Column Clickable Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-          {/* Card 1: Club Member */}
-          <div
-            className="rounded-xl border p-6 md:p-8 flex flex-col justify-between bg-bg-surface border-border-subtle"
-          >
-            <div className="space-y-3">
-              <h2 className="font-display font-semibold text-2xl text-text-primary">
-                Club Member
-              </h2>
-              <p className="font-sans text-sm text-text-secondary leading-relaxed">
-                Join the Vamint Community, receive updates, and participate in activities
-              </p>
-            </div>
+      {/* Two Column Clickable Cards */}
+<div className="flex justify-center">
+  {/* Card 1: Club Member */}
+  <div
+    className="w-full max-w-2xl rounded-xl border p-6 md:p-8 flex flex-col justify-between bg-bg-surface border-border-subtle"
+  >
+    <div className="space-y-3">
+      <h2 className="font-display font-semibold text-2xl text-text-primary">
+        Club Member
+      </h2>
+      <p className="font-sans text-sm text-text-secondary leading-relaxed">
+        Join the Vamint Community, receive updates, and participate in activities
+      </p>
+    </div>
 
-            <div className="pt-8">
-              <Button
-                type="button"
-                onClick={() => handleSelectRole("member")}
-                variant="secondary"
-                className="w-full"
-              >
-                Apply
-              </Button>
-            </div>
-          </div>
+    <div className="pt-8">
+      <Button
+        type="button"
+        onClick={() => handleSelectRole("member")}
+        variant="secondary"
+        className="w-full"
+      >
+        Apply
+      </Button>
+    </div>
+  </div>
 
-          {/* Card 2: Committee Member */}
-          <div
-            className="rounded-xl border p-6 md:p-8 flex flex-col justify-between bg-bg-surface border-border-subtle"
-          >
-            <div className="space-y-3">
-              <h2 className="font-display font-semibold text-2xl text-text-primary">
-                Committee Member
-              </h2>
-              <p className="font-sans text-sm text-text-secondary leading-relaxed">
-                Join the Vamint Team, take up responsibilities and help organize the events
-              </p>
-            </div>
+  {/*
+  <div
+    className="rounded-xl border p-6 md:p-8 flex flex-col justify-between bg-bg-surface border-border-subtle"
+  >
+    <div className="space-y-3">
+      <h2 className="font-display font-semibold text-2xl text-text-primary">
+        Committee Member
+      </h2>
+      <p className="font-sans text-sm text-text-secondary leading-relaxed">
+        Join the Vamint Team, take up responsibilities and help organize the events
+      </p>
+    </div>
 
-            <div className="pt-8">
-              <Button
-                type="button"
-                onClick={() => handleSelectRole("committee")}
-                variant="secondary"
-                className="w-full"
-              >
-                Apply
-              </Button>
-            </div>
-          </div>
-        </div>
+    <div className="pt-8">
+      <p className="font-mono text-xs text-text-secondary text-center uppercase">
+        Sorry, we're not taking any more applications.
+        <br />
+        Please check back later.
+      </p>
+    </div>
+  </div>
+  */}
+</div>
 
         {/* Application Form Section - only shown after clicking Apply */}
         {showForm && (
