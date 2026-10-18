@@ -1,110 +1,17 @@
+
 [
   {
-    "slug": "debate-competition-2026",
-    "title": "Debate Competition 2026",
-    "date": "2026-04-07T14:00:00.000Z",
-    "location": "College Campus",
-    "type": "Soft Skills Event",
-    "status": "past",
-    "description": "A soft-skills-focused event because communication matters just as much as technical ability. Participants debated topics related to technology and society, developing their ability to think on their feet, argue constructively, and speak with confidence.",
-    "organizers": ["VAMINT Core Committee"],
-    "prerequisites": null,
-    "whatToBring": null,
-    "image": null,
-
-    "highlights": [
-      {
-        "value": "Soft Skills",
-        "label": "Primary Focus"
-      },
-      {
-        "value": "Tech & Society",
-        "label": "Discussion Topics"
-      },
-      {
-        "value": "Speaking",
-        "label": "Skills Developed"
-      }
-    ],
-
-    "outcome": "The event gave students an opportunity to develop communication, critical thinking, argumentation, and public speaking skills through structured debates on topics related to technology and society."
-  },
-
-  {
-    "slug": "technobash-2026",
-    "title": "Technobash 2026",
-    "date": "2026-02-13T09:00:00.000Z",
-    "location": "College Campus",
-    "type": "Technical Event",
-    "status": "past",
-    "description": "The college's main technical fest, a 2-day event (13-14 February 2026) run by the whole Computer Department, packed with games, challenges, activities, and events open to the entire college. VAMINT played a key role in organizing and running the technical events.",
-    "organizers": ["Computer Department", "VAMINT Core Committee"],
-    "prerequisites": null,
-    "whatToBring": null,
-    "image": null,
-
-    "highlights": [
-      {
-        "value": "2 Days",
-        "label": "Technical Fest"
-      },
-      {
-        "value": "Campus",
-        "label": "Wide Event"
-      },
-      {
-        "value": "Multiple",
-        "label": "Activities & Challenges"
-      }
-    ],
-
-    "outcome": "Technobash brought together students from across the college for two days of technical activities, challenges, games, and competitions. VAMINT contributed to organizing and running the technical events as part of the larger Computer Department festival."
-  },
-
-  {
-    "slug": "sitecraft-2025",
-    "title": "Sitecraft 2025",
-    "date": "2025-11-03T14:30:00.000Z",
-    "location": "College Campus",
-    "type": "Competition",
-    "status": "past",
-    "description": "A 2-hour web development event where participants were given screenshots and screen recordings of a website as their reference and had to recreate it from scratch within the time limit. Structured in phases, each with its own fun twist.",
-    "organizers": ["VAMINT Core Committee"],
-    "prerequisites": "Basic HTML, CSS, and JavaScript knowledge",
-    "whatToBring": "Laptop with a code editor installed",
-    "image": null,
-
-    "highlights": [
-      {
-        "value": "2 Hours",
-        "label": "Time Limit"
-      },
-      {
-        "value": "Web Dev",
-        "label": "Challenge"
-      },
-      {
-        "value": "Multiple",
-        "label": "Competition Phases"
-      }
-    ],
-
-    "outcome": "Participants recreated websites from provided screenshots and screen recordings within a two-hour time limit. The competition tested frontend development skills, attention to detail, problem-solving, and the ability to work efficiently under pressure."
-  },
-
-  {
     "slug": "sih-internal-hackathon-2025",
-    "title": "Smart India Hackathon (SIH): Internal College Hackathon",
+    "title": "Smart India Hackathon (SIH) — Internal College Hackathon",
     "date": "2025-09-17T10:00:00.000Z",
     "location": "College Campus",
     "type": "Hackathon",
     "status": "past",
-    "description": "VAMINT's internal hackathon open to the whole college, with 160+ participants across 25+ teams competing to solve real-world problems under time pressure. The event served as the internal selection round for Smart India Hackathon 2025.",
+    "description": "VAMINT's internal hackathon open to the whole college — 160+ participants across 25+ teams competed to solve real-world problems under time pressure. The event served as the internal selection round for Smart India Hackathon 2025.",
     "organizers": ["VAMINT Core Committee"],
     "prerequisites": null,
     "whatToBring": null,
     "image": null,
-
     "highlights": [
       {
         "value": "160+",
@@ -119,7 +26,124 @@
         "label": "Selection Round"
       }
     ],
-
     "outcome": "The internal hackathon brought together over 160 participants across more than 25 teams. Students worked under time pressure to develop solutions to real-world problems, with the event serving as the college's internal selection round for Smart India Hackathon 2025."
-  }
-]
+  },
+  {
+    "slug": "sitecraft-2025",
+    "title": "Sitecraft 2025",
+    "date": "2025-11-03T14:30:00.000Z",
+    "location": "College Campus",
+    "type": "Competition",
+    "status": "past",
+    "description": "A 2-hour web development event where participants were given screenshots and screen recordings of a website as their reference and had to recreate it from scratch within the time limit. Structured in phases, each with its own fun twist.",
+    "organizers": ["VAMINT Core Committee"],
+    "prerequisites": "Basic HTML, CSS, and JavaScript knowledge",
+    "whatToBring": "Laptop with a code editor installed",
+    "image": null,
+    "highlights": [
+      {
+        "value": "2 Hours",
+        "label": "Time Limit"
+      },
+      {
+        "value": "Web Dev",
+        "label": "Challenge"
+      },
+      {
+        "value": "Multiple",
+        "label": "Competition Phases"
+      }
+    ],
+    "outcome": "Participants recreated websites from provided screenshots and screen recordings within a two-hour time limit. The competition tested frontend development skills, attention to detail, problem-solving, and the ability to work efficiently under pressure."
+  },
+  {
+    "slug": "technobash-2026",
+    "title": "Technobash 2026",
+    "date": "2026-02-10T09:00:00.000Z",
+    "location": "College Campus",
+    "type": "Technical Event",
+    "status": "past",
+    "description": "The college's main technical fest — a 2-day event run by the whole Computer Department, packed with games, challenges, activities, and events open to the entire college. VAMINT played a key role in organizing and running the technical events.",
+    "organizers": ["Computer Department", "VAMINT Core Committee"],
+    "prerequisites": null,
+    "whatToBring": null,
+    "image": null,
+    "highlights": [
+      {
+        "value": "2 Days",
+        "label": "Technical Fest"
+      },
+      {
+        "value": "Campus",
+        "label": "Wide Event"
+      },
+      {
+        "value": "Multiple",
+        "label": "Activities & Challenges"
+      }
+    ],
+    "outcome": "Technobash brought together students from across the college for two days of technical activities, challenges, games, and competitions. VAMINT contributed to organizing and running the technical events as part of the larger Computer Department festival."
+  },
+  {
+    "slug": "debate-competition-2026",
+    "title": "Debate Competition 2026",
+    "date": "2026-01-15T14:00:00.000Z",
+    "location": "College Campus",
+    "type": "Soft Skills Event",
+    "status": "past",
+    "description": "A soft-skills-focused event because communication and soft skills matter just as much as technical ones. Participants debated topics related to technology and society, developing their ability to think on their feet, argue constructively, and speak with confidence.",
+    "organizers": ["VAMINT Core Committee"],
+    "prerequisites": null,
+    "whatToBring": null,
+    "image": null,
+    "highlights": [
+      {
+        "value": "Soft Skills",
+        "label": "Primary Focus"
+      },
+      {
+        "value": "Tech & Society",
+        "label": "Discussion Topics"
+      },
+      {
+        "value": "Speaking",
+        "label": "Skills Developed"
+      }
+    ],
+    "outcome": "The event gave students an opportunity to develop communication, critical thinking, argumentation, and public speaking skills through structured debates on topics related to technology and society."
+  },
+  
+
+{
+  "slug": "pitch-perfect-2026",
+  "title": "Pitch Perfect",
+  "date": "2026-10-24T09:00:00+05:30",
+  "location": "A101, GSMCOE, Balewadi",
+  "type": "Pitching & Innovation",
+  "status": "upcoming",
+  "description": "Got an idea that could solve a real-world problem? Pitch Perfect challenges you to turn creative thinking into an innovative product idea! In Round 1, your team will be randomly assigned one of six domains and figure out a problem statement to tackle. Brainstorm a solution, prepare a PPT, and pitch your product idea to a panel of judges. The most promising teams will advance to Round 2, where they'll turn their ideas into prototypes.",
+  "organizers": [
+    "VAMINT Core Committee"
+  ],
+  "prerequisites": "Team size: 1–3 members. Registration fee: ₹50 per participant. ",
+   "prizes": "Winner: cash prizes and a certificate. Participants: certificate.",
+  "whatToBring": "Bring your laptop for brainstorming, preparing your pitch deck, and developing your prototype if shortlisted.",
+  "image": null,
+  "highlights": [
+    {
+      "value": "6",
+      "label": "Randomly Assigned Domains"
+    },
+    {
+      "value": "₹50",
+      "label": "Fee per Person"
+    },
+    {
+      "value": "2 Rounds",
+      "label": "Pitch & Prototype"
+    }
+  ],
+  "outcome": "Participants can compete for cash prizes and receive a certificate of participation. The event helps develop creativity, teamwork, problem-solving, and presentation skills. Shortlisted teams also get the opportunity to develop their ideas into prototypes."
+}
+
+ ]
