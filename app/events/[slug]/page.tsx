@@ -129,7 +129,15 @@ export default function EventDetail() {
                       month: "long",
                       day: "numeric",
                       year: "numeric",
+                      timeZone: "Asia/Kolkata",
                     })}
+                {" · "}
+                {new Date(event.date).toLocaleTimeString("en-IN", {
+                  hour: "numeric",
+                  minute: "2-digit",
+                  hour12: true,
+                  timeZone: "Asia/Kolkata",
+                })}
               </span>
             </div>
           </div>
@@ -294,6 +302,17 @@ export default function EventDetail() {
                     </h4>
 
                     <p className="text-xs">{event.whatToBring}</p>
+                  </div>
+                )}
+
+                {/* PRIZES - ADDED */}
+                {event.prizes && (
+                  <div className="space-y-2">
+                    <h4 className="font-display font-semibold text-sm text-text-primary">
+                      Prizes & Certificates
+                    </h4>
+
+                    <p className="text-xs">{event.prizes}</p>
                   </div>
                 )}
               </div>
