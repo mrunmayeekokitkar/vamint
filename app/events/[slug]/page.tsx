@@ -1013,31 +1013,44 @@ export default function EventDetail() {
               </div>
             ) : isPitchPerfect ? (
               /* ─── PITCH PERFECT LAYOUT ─── */
-              <div className="space-y-10">
-                {/* 1. KEY EVENT DETAILS CONVEYED FIRST CLEARLY */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-4 p-5 md:p-6 rounded-xl bg-bg-surface border border-border-subtle shadow-sm">
-                  {/* Date & Time */}
-                  <div className="space-y-1">
-                    <span className="font-mono text-[11px] uppercase tracking-wider text-text-tertiary flex items-center gap-1.5">
-                      <Calendar size={13} className="text-mint-500" />
-                      Date &amp; Time
-                    </span>
-                    <p className="font-sans font-semibold text-sm md:text-base text-text-primary">
-                      Oct 24, 2026 · 9:00 AM
-                    </p>
+              <div className="space-y-8">
+                {/* 1. OVERVIEW PARAGRAPH AT THE TOP */}
+                <div className="p-6 md:p-8 rounded-xl bg-bg-surface border border-border-subtle shadow-sm space-y-4">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-mint-500/10 border border-mint-500/20 text-mint-500 text-xs font-mono">
+                    <Sparkles size={13} />
+                    Innovation &amp; Pitching Competition
                   </div>
 
-                  {/* Venue */}
-                  <div className="space-y-1">
-                    <span className="font-mono text-[11px] uppercase tracking-wider text-text-tertiary flex items-center gap-1.5">
-                      <MapPin size={13} className="text-mint-500" />
-                      Venue
-                    </span>
-                    <p className="font-sans font-semibold text-sm md:text-base text-text-primary">
-                      A101, GSMCOE, Balewadi
-                    </p>
-                  </div>
+                  <p className="font-sans text-sm md:text-base text-text-secondary leading-relaxed max-w-3xl">
+                    {event.description}
+                  </p>
 
+                  <div className="pt-2 flex flex-wrap items-center gap-4">
+                    <Button
+                      type="button"
+                      variant="primary"
+                      onClick={() => {
+                        setShowPitchForm(true);
+                        setTimeout(() => {
+                          document
+                            .getElementById("pitch-registration-section")
+                            ?.scrollIntoView({ behavior: "smooth" });
+                        }, 100);
+                      }}
+                    >
+                      Register Your Team
+                    </Button>
+                    <a
+                      href="#competition-flow"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-bg-surface border border-border-subtle text-text-secondary text-sm rounded hover:text-text-primary hover:border-mint-500/30 transition-colors"
+                    >
+                      View Competition Flow ↓
+                    </a>
+                  </div>
+                </div>
+
+                {/* 2. REMAINING 4 KEY DETAILS UNDER THE PARAGRAPH */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 p-5 md:p-6 rounded-xl bg-bg-surface border border-border-subtle shadow-sm">
                   {/* Team Members */}
                   <div className="space-y-1">
                     <span className="font-mono text-[11px] uppercase tracking-wider text-text-tertiary flex items-center gap-1.5">
@@ -1087,44 +1100,7 @@ export default function EventDetail() {
                   </div>
                 </div>
 
-                {/* 2. WHY PARTICIPATE / WHAT PARTICIPANTS GAIN */}
-                <div className="p-6 md:p-8 rounded-xl bg-bg-surface border border-border-subtle shadow-sm space-y-4">
-                  <div className="flex items-center gap-2">
-                    <Sparkles size={18} className="text-mint-500" />
-                    <h2 className="font-display font-semibold text-xl md:text-2xl text-text-primary">
-                      Why Participate?
-                    </h2>
-                  </div>
-
-                  <p className="font-sans text-sm md:text-base text-text-secondary leading-relaxed">
-                    {event.description}
-                  </p>
-
-                  <div className="pt-2 flex flex-wrap items-center gap-4">
-                    <Button
-                      type="button"
-                      variant="primary"
-                      onClick={() => {
-                        setShowPitchForm(true);
-                        setTimeout(() => {
-                          document
-                            .getElementById("pitch-registration-section")
-                            ?.scrollIntoView({ behavior: "smooth" });
-                        }, 100);
-                      }}
-                    >
-                      Register Your Team
-                    </Button>
-                    <a
-                      href="#competition-flow"
-                      className="inline-flex items-center gap-2 px-4 py-2 bg-bg-surface border border-border-subtle text-text-secondary text-sm rounded hover:text-text-primary hover:border-mint-500/30 transition-colors"
-                    >
-                      View Competition Flow ↓
-                    </a>
-                  </div>
-                </div>
-
-                {/* 3. COMPETITION FLOW (CONVEYED SEPARATELY) */}
+                {/* 3. COMPETITION FLOW */}
                 <section id="competition-flow" className="scroll-mt-24 space-y-6">
                   <div className="flex items-center gap-2">
                     <BrainCircuit size={20} className="text-mint-500" />
@@ -1194,7 +1170,7 @@ export default function EventDetail() {
                   <div className="p-4 bg-bg-surface border border-border-subtle rounded-lg flex items-center gap-3 text-xs text-text-secondary">
                     <Laptop size={16} className="text-mint-500 shrink-0" />
                     <span>
-                      <strong className="text-text-primary">Checklist:</strong> Every team must carry at least one laptop with charger and a mobile hotspot for blueprint submission and prototype deployment.
+                      <strong className="text-text-primary">Checklist:</strong> Every team must carry at least one laptop with charger and an active internet connection for blueprint submission and prototype deployment.
                     </span>
                   </div>
                 </section>
