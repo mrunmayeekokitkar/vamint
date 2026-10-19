@@ -1,37 +1,8 @@
 import type { Metadata } from "next";
-import {
-  Space_Grotesk,
-  Inter,
-  JetBrains_Mono,
-  Playfair_Display,
-} from "next/font/google";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-});
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  weight: ["400", "500"],
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
-  subsets: ["latin"],
-  weight: ["400"],
-});
-
-const playfairDisplay = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-});
-
 export const metadata: Metadata = {
+  metadataBase: new URL("https://vamintcommunity.vercel.app"),
   title: "VAMINT | Code. Collaborate. Evolve.",
   description:
     "VAMINT is the student tech community of our college — organizing hackathons, workshops, competitions, and soft-skills events to help students code, collaborate, and evolve together.",
@@ -69,13 +40,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} ${playfairDisplay.variable} h-full antialiased`}
-    >
+    <html lang="en" className="h-full antialiased">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body className="min-h-full flex flex-col bg-bg-primary text-text-primary selection:bg-mustard-500 selection:text-bg-primary">
         {children}
       </body>
     </html>
   );
 }
+
