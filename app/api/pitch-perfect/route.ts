@@ -95,15 +95,26 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify(payload),
     });
 
-    if (!response.ok) {
-      const responseText = await response.text();
+    const responseText = await response.text();
+    let result: { status?: string; message?: string } | null = null;
+    try {
+      result = JSON.parse(responseText);
+    } catch {
+      // Not JSON
+    }
+
+    if (!response.ok || (result && result.status === "error")) {
       console.error(
-        "Google Apps Script request failed:",
+        "Google Apps Script error:",
         response.status,
         responseText,
       );
       return NextResponse.json(
-        { error: "Failed to forward data to Google Sheet" },
+        {
+          error:
+            result?.message ||
+            "Failed to record data in Google Sheet. Please check Apps Script deployment.",
+        },
         { status: 502 },
       );
     }

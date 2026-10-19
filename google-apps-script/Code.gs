@@ -11,10 +11,99 @@
 // Replace with your secret key configured in .env (FORM_SECRET_KEY)
 var SECRET_KEY = "your_form_secret_key_here";
 
+// OPTIONAL: If this script is NOT bound to a Google Sheet (i.e. created from script.google.com instead of Extensions > Apps Script),
+// paste your Google Sheet ID or full URL below. If created inside your Google Sheet, leave this empty ("").
+var SPREADSHEET_ID = "";
+
+/**
+ * Helper to get the Google Spreadsheet (works for both bound and standalone scripts)
+ */
+function getTargetSpreadsheet() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  if (!ss && SPREADSHEET_ID) {
+    try {
+      var id = SPREADSHEET_ID.trim();
+      if (id.indexOf("https://") !== -1) {
+        var match = id.match(/\/d\/([a-zA-Z0-9-_]+)/);
+        if (match) id = match[1];
+      }
+      ss = SpreadsheetApp.openById(id);
+    } catch (err) {
+      Logger.log("Error opening spreadsheet by ID: " + err.toString());
+    }
+  }
+  return ss;
+}
+
+/**
+ * RUN THIS FUNCTION ONCE IN APPS SCRIPT TO INSTANTLY CREATE THE SHEET & GRANT PERMISSIONS!
+ * In Apps Script editor: Select "createPitchPerfectSheetNow" in the dropdown, then click "Run".
+ */
+function createPitchPerfectSheetNow() {
+  var ss = getTargetSpreadsheet();
+  if (!ss) {
+    throw new Error(
+      "❌ NO GOOGLE SHEET FOUND!\n" +
+      "If you opened Apps Script from script.google.com, please paste your Google Sheet ID into line 17 of Code.gs: var SPREADSHEET_ID = '...';\n" +
+      "Or open your Google Sheet directly and click 'Extensions' > 'Apps Script'."
+    );
+  }
+
+  var sheetName = "PitchPerfect";
+  var sheet = ss.getSheetByName(sheetName);
+
+  if (!sheet) {
+    sheet = ss.insertSheet(sheetName);
+  }
+
+  if (sheet.getLastRow() === 0) {
+    var headers = [
+      "Timestamp",
+      "Team Name",
+      "Team Size",
+      "Total Fee (₹)",
+      "P1 Name",
+      "P1 Email",
+      "P1 Phone",
+      "P1 College",
+      "P1 Department",
+      "P1 Year",
+      "P2 Name",
+      "P2 Email",
+      "P2 Phone",
+      "P2 College",
+      "P2 Department",
+      "P2 Year",
+      "P3 Name",
+      "P3 Email",
+      "P3 Phone",
+      "P3 College",
+      "P3 Department",
+      "P3 Year",
+      "Payment Screenshot URL"
+    ];
+    sheet.appendRow(headers);
+    var headerRange = sheet.getRange(1, 1, 1, headers.length);
+    headerRange.setFontWeight("bold");
+    headerRange.setBackground("#111827");
+    headerRange.setFontColor("#5eead4");
+    sheet.setFrozenRows(1);
+  }
+
+  // Authorize DriveApp & create payments folder
+  var folderName = "Pitch Perfect Payments";
+  var folders = DriveApp.getFoldersByName(folderName);
+  if (!folders.hasNext()) {
+    DriveApp.createFolder(folderName);
+  }
+
+  Logger.log("✅ SUCCESS: 'PitchPerfect' sheet tab and Drive folder created in " + ss.getName() + "!");
+}
+
 function doPost(e) {
   try {
     if (!e || !e.postData || !e.postData.contents) {
-      return responseJson({ status: "error", message: "No data received" }, 400);
+      return responseJson({ status: "error", message: "No data received in request" }, 400);
     }
 
     var data = JSON.parse(e.postData.contents);
@@ -22,11 +111,18 @@ function doPost(e) {
     // 1. Verify Secret Key (optional security check if configured)
     if (SECRET_KEY && SECRET_KEY !== "your_form_secret_key_here") {
       if (!data.secretKey || data.secretKey !== SECRET_KEY) {
-        return responseJson({ status: "error", message: "Unauthorized request" }, 401);
+        return responseJson({ status: "error", message: "Unauthorized request: Invalid secret key" }, 401);
       }
     }
 
-    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var ss = getTargetSpreadsheet();
+    if (!ss) {
+      return responseJson({
+        status: "error",
+        message: "No Google Sheet connected. If using standalone Apps Script, set SPREADSHEET_ID in Code.gs."
+      }, 500);
+    }
+
     var formType = data.formType;
 
     // ─── 1. PITCH PERFECT REGISTRATION ──────────────────────────────────────
