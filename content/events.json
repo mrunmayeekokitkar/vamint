@@ -121,29 +121,33 @@
   "location": "A101, GSMCOE, Balewadi",
   "type": "Pitching & Innovation",
   "status": "upcoming",
-  "description": "Got an idea that could solve a real-world problem? Pitch Perfect challenges you to turn creative thinking into an innovative product idea! In Round 1, your team will be randomly assigned one of six domains and figure out a problem statement to tackle. Brainstorm a solution, prepare a PPT, and pitch your product idea to a panel of judges. The most promising teams will advance to Round 2, where they'll turn their ideas into prototypes.",
+  "description": "Pitch Perfect is an innovation and pitching competition testing real-world problem solving. Teams receive an assigned industry vertical domain upon arrival, formulate a problem statement (verified by organizers to avoid duplicate topics), submit their solution blueprint via Google Form, and present their pitch deck to the panel. Shortlisted teams build and deploy a live technical prototype within the given time to compete for cash prizes.",
   "organizers": [
     "VAMINT Core Committee"
   ],
-  "prerequisites": "Team size: 1–3 members. Registration fee: ₹50 per participant. ",
-   "prizes": "Winner: cash prizes and a certificate. Participants: certificate.",
-  "whatToBring": "Bring your laptop for brainstorming, preparing your pitch deck, and developing your prototype if shortlisted.",
+  "prerequisites": "Team size: 1–3 members. Open to all branches and years. Registration fee: ₹50 per participant (1 member: ₹50, 2 members: ₹100, 3 members: ₹150).",
+  "prizes": "Exciting cash prizes and trophies for the winners. Certificates of merit for shortlisted teams and participation certificates for all. The decision of the judges will be final.",
+  "whatToBring": "Laptop with charger (mandatory) and mobile hotspot for blueprint submission and prototype development.",
   "image": null,
   "highlights": [
     {
-      "value": "6",
-      "label": "Randomly Assigned Domains"
+      "value": "1–3",
+      "label": "Team Members"
     },
     {
       "value": "₹50",
-      "label": "Fee per Person"
+      "label": "Per Participant"
     },
     {
       "value": "2 Rounds",
       "label": "Pitch & Prototype"
+    },
+    {
+      "value": "Cash Prizes",
+      "label": "For Top Winners"
     }
   ],
-  "outcome": "Participants can compete for cash prizes and receive a certificate of participation. The event helps develop creativity, teamwork, problem-solving, and presentation skills. Shortlisted teams also get the opportunity to develop their ideas into prototypes."
+  "outcome": null
 }
 
  ]
