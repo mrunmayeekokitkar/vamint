@@ -30,6 +30,9 @@ import {
   IndianRupee,
   BrainCircuit,
   Laptop,
+  ExternalLink,
+  Clock,
+  Phone,
 } from "lucide-react";
 
 // ─── GENERIC RSVP FORM VALIDATION ────────────────────────────────
@@ -308,20 +311,62 @@ function PitchPerfectForm() {
   // ─── SUCCESS STATE ────────────────────────────────────────────
   if (submitSuccess) {
     return (
-      <Card className="border border-border-subtle p-6 md:p-10">
-        <div className="py-16 text-center space-y-6">
-          <CheckCircle2 className="text-mustard-500 mx-auto" size={56} />
-          <h3 className="font-display font-semibold text-2xl text-text-primary">
-            Registration Successful!
-          </h3>
-          <p className="font-sans text-sm text-text-secondary max-w-sm mx-auto leading-relaxed">
-            Your team has been registered for Pitch Perfect. We&apos;ll verify
-            your payment and send a confirmation to the registered email
-            addresses.
-          </p>
-          <Button variant="secondary" onClick={resetForm}>
-            Submit another registration
-          </Button>
+      <Card className="border border-mint-500/30 p-6 md:p-10 bg-bg-surface">
+        <div className="py-8 text-center space-y-6 max-w-lg mx-auto">
+          <div className="w-16 h-16 rounded-full bg-mint-500/10 border border-mint-500/30 flex items-center justify-center mx-auto text-mint-500">
+            <CheckCircle2 size={36} />
+          </div>
+
+          <div className="space-y-2">
+            <h3 className="font-display font-semibold text-2xl md:text-3xl text-text-primary">
+              Your response has been recorded successfully
+            </h3>
+            <p className="font-sans text-sm text-text-secondary leading-relaxed">
+              Please join the official WhatsApp group to stay updated with your assigned domain, event schedule, and announcements.
+            </p>
+          </div>
+
+          {/* WhatsApp Group Box */}
+          <div className="p-6 rounded-xl bg-bg-primary border border-border-subtle space-y-4">
+            <div className="flex justify-center">
+              <div className="p-3 bg-white rounded-lg border border-border-subtle shadow-sm">
+                <Image
+                  src="/pitch-perfect-whatsapp-qr.jpg"
+                  alt="WhatsApp Group QR Code"
+                  width={200}
+                  height={200}
+                  style={{ height: "auto" }}
+                  className="rounded"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <a
+                href="https://chat.whatsapp.com/FCEU7xNen0f0WRL7i1EOv7?s=cl&p=a&mlu=4&ilr=4"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 w-full px-6 py-3 bg-[#25D366] hover:bg-[#20bd5a] text-black font-semibold text-sm rounded transition-colors shadow-sm"
+              >
+                Join WhatsApp Group
+                <ExternalLink size={16} />
+              </a>
+
+              <p className="font-mono text-[11px] text-text-tertiary">
+                Scan the QR code or tap the button above to join
+              </p>
+            </div>
+          </div>
+
+          <div className="pt-2 text-xs text-text-tertiary font-mono">
+            For queries, contact Coordinator <span className="text-text-secondary font-medium">Mrunmayee: 7588326720</span>
+          </div>
+
+          <div className="pt-2">
+            <Button variant="ghost" onClick={resetForm} className="text-xs text-text-secondary">
+              Register another team
+            </Button>
+          </div>
         </div>
       </Card>
     );
@@ -969,78 +1014,122 @@ export default function EventDetail() {
             ) : isPitchPerfect ? (
               /* ─── PITCH PERFECT LAYOUT ─── */
               <div className="space-y-10">
-                {/* 1. OVERVIEW */}
-                <div className="space-y-6">
-                  <div className="p-6 md:p-8 rounded-xl bg-bg-surface border border-border-subtle shadow-sm space-y-4">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-mint-500/10 border border-mint-500/20 text-mint-500 text-xs font-mono">
-                      <Sparkles size={13} />
-                      Innovation & Pitching Competition
-                    </div>
-
-                    <h2 className="font-display font-semibold text-2xl md:text-3xl text-text-primary">
-                      About Pitch Perfect 2026
-                    </h2>
-
-                    <p className="font-sans text-sm md:text-base text-text-secondary leading-relaxed max-w-3xl">
-                      {event.description}
+                {/* 1. KEY EVENT DETAILS CONVEYED FIRST CLEARLY */}
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-4 p-5 md:p-6 rounded-xl bg-bg-surface border border-border-subtle shadow-sm">
+                  {/* Date & Time */}
+                  <div className="space-y-1">
+                    <span className="font-mono text-[11px] uppercase tracking-wider text-text-tertiary flex items-center gap-1.5">
+                      <Calendar size={13} className="text-mint-500" />
+                      Date &amp; Time
+                    </span>
+                    <p className="font-sans font-semibold text-sm md:text-base text-text-primary">
+                      Oct 24, 2026 · 9:00 AM
                     </p>
-
-                    <div className="pt-2 flex flex-wrap items-center gap-4">
-                      <Button
-                        type="button"
-                        variant="primary"
-                        onClick={() => {
-                          setShowPitchForm(true);
-                          setTimeout(() => {
-                            document
-                              .getElementById("pitch-registration-section")
-                              ?.scrollIntoView({ behavior: "smooth" });
-                          }, 100);
-                        }}
-                      >
-                        Register Your Team
-                      </Button>
-                      <a
-                        href="#competition-structure"
-                        className="inline-flex items-center gap-2 px-4 py-2 bg-bg-surface border border-border-subtle text-text-secondary text-sm rounded hover:text-text-primary hover:border-mint-500/30 transition-colors"
-                      >
-                        View Structure
-                      </a>
-                    </div>
                   </div>
 
-                  {/* HIGHLIGHT STATS */}
-                  {event.highlights && (
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                      {event.highlights.map(
-                        (
-                          highlight: { value: string; label: string },
-                          index: number,
-                        ) => (
-                          <Card
-                            key={index}
-                            hoverGlow
-                            className="text-center py-5 px-3"
-                          >
-                            <div className="font-display font-semibold text-2xl text-mint-500 mb-1">
-                              {highlight.value}
-                            </div>
-                            <div className="font-mono text-[10px] md:text-xs uppercase tracking-wider text-text-tertiary">
-                              {highlight.label}
-                            </div>
-                          </Card>
-                        ),
-                      )}
-                    </div>
-                  )}
+                  {/* Venue */}
+                  <div className="space-y-1">
+                    <span className="font-mono text-[11px] uppercase tracking-wider text-text-tertiary flex items-center gap-1.5">
+                      <MapPin size={13} className="text-mint-500" />
+                      Venue
+                    </span>
+                    <p className="font-sans font-semibold text-sm md:text-base text-text-primary">
+                      A101, GSMCOE, Balewadi
+                    </p>
+                  </div>
+
+                  {/* Team Members */}
+                  <div className="space-y-1">
+                    <span className="font-mono text-[11px] uppercase tracking-wider text-text-tertiary flex items-center gap-1.5">
+                      <Users size={13} className="text-mint-500" />
+                      Team Members
+                    </span>
+                    <p className="font-sans font-semibold text-sm md:text-base text-text-primary">
+                      1 to 3 Members
+                    </p>
+                    <p className="text-[11px] text-text-tertiary">All branches &amp; years</p>
+                  </div>
+
+                  {/* Registration Fee */}
+                  <div className="space-y-1">
+                    <span className="font-mono text-[11px] uppercase tracking-wider text-text-tertiary flex items-center gap-1.5">
+                      <IndianRupee size={13} className="text-mint-500" />
+                      Registration Fee
+                    </span>
+                    <p className="font-sans font-semibold text-sm md:text-base text-text-primary">
+                      ₹50 per participant
+                    </p>
+                    <p className="text-[11px] text-text-tertiary">1 = ₹50 · 2 = ₹100 · 3 = ₹150</p>
+                  </div>
+
+                  {/* Prizes */}
+                  <div className="space-y-1">
+                    <span className="font-mono text-[11px] uppercase tracking-wider text-text-tertiary flex items-center gap-1.5">
+                      <Trophy size={13} className="text-mint-500" />
+                      Prizes &amp; Awards
+                    </span>
+                    <p className="font-sans font-semibold text-sm md:text-base text-text-primary">
+                      Cash Prizes for Winners
+                    </p>
+                    <p className="text-[11px] text-text-tertiary">Participation certificates for all</p>
+                  </div>
+
+                  {/* Contact */}
+                  <div className="space-y-1">
+                    <span className="font-mono text-[11px] uppercase tracking-wider text-text-tertiary flex items-center gap-1.5">
+                      <Phone size={13} className="text-mint-500" />
+                      Contact Coordinator
+                    </span>
+                    <p className="font-sans font-semibold text-sm md:text-base text-text-primary">
+                      Mrunmayee: <a href="tel:7588326720" className="text-mint-500 hover:underline">7588326720</a>
+                    </p>
+                    <p className="text-[11px] text-text-tertiary">Call / WhatsApp for queries</p>
+                  </div>
                 </div>
 
-                {/* 2. COMPETITION STRUCTURE */}
-                <section id="competition-structure" className="scroll-mt-24 space-y-6">
+                {/* 2. WHY PARTICIPATE / WHAT PARTICIPANTS GAIN */}
+                <div className="p-6 md:p-8 rounded-xl bg-bg-surface border border-border-subtle shadow-sm space-y-4">
+                  <div className="flex items-center gap-2">
+                    <Sparkles size={18} className="text-mint-500" />
+                    <h2 className="font-display font-semibold text-xl md:text-2xl text-text-primary">
+                      Why Participate?
+                    </h2>
+                  </div>
+
+                  <p className="font-sans text-sm md:text-base text-text-secondary leading-relaxed">
+                    {event.description}
+                  </p>
+
+                  <div className="pt-2 flex flex-wrap items-center gap-4">
+                    <Button
+                      type="button"
+                      variant="primary"
+                      onClick={() => {
+                        setShowPitchForm(true);
+                        setTimeout(() => {
+                          document
+                            .getElementById("pitch-registration-section")
+                            ?.scrollIntoView({ behavior: "smooth" });
+                        }, 100);
+                      }}
+                    >
+                      Register Your Team
+                    </Button>
+                    <a
+                      href="#competition-flow"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-bg-surface border border-border-subtle text-text-secondary text-sm rounded hover:text-text-primary hover:border-mint-500/30 transition-colors"
+                    >
+                      View Competition Flow ↓
+                    </a>
+                  </div>
+                </div>
+
+                {/* 3. COMPETITION FLOW (CONVEYED SEPARATELY) */}
+                <section id="competition-flow" className="scroll-mt-24 space-y-6">
                   <div className="flex items-center gap-2">
                     <BrainCircuit size={20} className="text-mint-500" />
                     <h2 className="font-display font-semibold text-xl md:text-2xl text-text-primary">
-                      Competition Structure
+                      Competition Flow
                     </h2>
                   </div>
 
@@ -1058,18 +1147,18 @@ export default function EventDetail() {
                       <h3 className="font-display font-semibold text-base text-text-primary">
                         Domain Allotment, Blueprint &amp; Pitch
                       </h3>
-                      <ul className="font-sans text-xs text-text-secondary space-y-2 leading-relaxed list-disc list-inside">
+                      <ul className="font-sans text-xs text-text-secondary space-y-2.5 leading-relaxed list-disc list-inside">
                         <li>
-                          <strong className="text-text-primary">Industry Vertical Domain:</strong> Teams receive an assigned industry vertical domain upon arrival.
+                          <strong className="text-text-primary">Industry Vertical Domain:</strong> Teams receive an assigned domain upon arrival.
                         </li>
                         <li>
-                          <strong className="text-text-primary">Problem Statement &amp; Verification:</strong> Teams formulate their problem statement and get it verified by the organizers to ensure no duplicate topics.
+                          <strong className="text-text-primary">Problem Statement &amp; Verification:</strong> Formulate your problem statement and verify with organizers to ensure no duplicate topics.
                         </li>
                         <li>
-                          <strong className="text-text-primary">Blueprint Submission:</strong> Submit domain, problem statement, and solution blueprint via Google Form for panel judging and record keeping.
+                          <strong className="text-text-primary">Blueprint Submission:</strong> Submit domain, problem statement, and solution blueprint via Google Form for panel judging and records.
                         </li>
                         <li>
-                          <strong className="text-text-primary">Panel Pitch:</strong> Present your pitch deck (PPT) to the panel. Scores are calculated and shortlisted teams are announced.
+                          <strong className="text-text-primary">Panel Pitch:</strong> Present your pitch deck (PPT) to the panel. Shortlisted teams advancing to Round 2 are announced.
                         </li>
                       </ul>
                     </Card>
@@ -1087,7 +1176,7 @@ export default function EventDetail() {
                       <h3 className="font-display font-semibold text-base text-text-primary">
                         Live Prototype Development
                       </h3>
-                      <ul className="font-sans text-xs text-text-secondary space-y-2 leading-relaxed list-disc list-inside">
+                      <ul className="font-sans text-xs text-text-secondary space-y-2.5 leading-relaxed list-disc list-inside">
                         <li>
                           <strong className="text-text-primary">Build &amp; Deploy:</strong> Shortlisted teams build and make their technical prototype live within the given time.
                         </li>
@@ -1095,50 +1184,18 @@ export default function EventDetail() {
                           <strong className="text-text-primary">Submit &amp; Conclude:</strong> Submit your live prototype link/repository and conclude (no panel demonstration required).
                         </li>
                         <li>
-                          <strong className="text-text-primary">Cash Prizes:</strong> Winners receive exciting cash prizes and certificates of excellence!
+                          <strong className="text-text-primary">Evaluation &amp; Awards:</strong> The decision of the judges will be final. Winners receive cash prizes and certificates, and all participants receive participation certificates!
                         </li>
                       </ul>
                     </Card>
                   </div>
-                </section>
 
-                {/* 3. GUIDELINES & NOTE */}
-                <section className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <Card className="p-4 border border-border-subtle space-y-1.5">
-                      <div className="flex items-center gap-2 text-text-primary font-semibold text-xs font-mono uppercase">
-                        <Users size={14} className="text-mint-500" />
-                        Team Size
-                      </div>
-                      <p className="text-xs text-text-secondary">
-                        1 to 3 members per team. Open to all branches and years.
-                      </p>
-                    </Card>
-
-                    <Card className="p-4 border border-border-subtle space-y-1.5">
-                      <div className="flex items-center gap-2 text-text-primary font-semibold text-xs font-mono uppercase">
-                        <Laptop size={14} className="text-mint-500" />
-                        Hardware
-                      </div>
-                      <p className="text-xs text-text-secondary">
-                        Laptop with charger (mandatory) and mobile hotspot required.
-                      </p>
-                    </Card>
-
-                    <Card className="p-4 border border-border-subtle space-y-1.5">
-                      <div className="flex items-center gap-2 text-text-primary font-semibold text-xs font-mono uppercase">
-                        <IndianRupee size={14} className="text-mint-500" />
-                        Registration Fee
-                      </div>
-                      <p className="text-xs text-text-secondary">
-                        ₹50 per participant (1 member = ₹50, 2 = ₹100, 3 = ₹150).
-                      </p>
-                    </Card>
-                  </div>
-
-                  {/* Judges decision notice */}
-                  <div className="p-3 bg-bg-surface border border-border-subtle rounded-lg text-center font-mono text-xs text-text-tertiary">
-                    ⚖️ <span className="text-text-secondary font-medium">Important Note:</span> The decision of the judges will be final.
+                  {/* Hardware requirement note */}
+                  <div className="p-4 bg-bg-surface border border-border-subtle rounded-lg flex items-center gap-3 text-xs text-text-secondary">
+                    <Laptop size={16} className="text-mint-500 shrink-0" />
+                    <span>
+                      <strong className="text-text-primary">Checklist:</strong> Every team must carry at least one laptop with charger and a mobile hotspot for blueprint submission and prototype deployment.
+                    </span>
                   </div>
                 </section>
 
@@ -1151,7 +1208,7 @@ export default function EventDetail() {
                           Ready to Pitch?
                         </h3>
                         <p className="font-sans text-sm text-text-secondary">
-                          Register your team for Pitch Perfect 2026. Entry fee is ₹50 per participant.
+                          Register your team (1–3 members) for Pitch Perfect 2026. Entry fee is ₹50 per participant.
                         </p>
                       </div>
 

@@ -121,30 +121,30 @@
   "location": "A101, GSMCOE, Balewadi",
   "type": "Pitching & Innovation",
   "status": "upcoming",
-  "description": "Pitch Perfect is an innovation and pitching competition testing real-world problem solving. Teams receive an assigned industry vertical domain upon arrival, formulate a problem statement (verified by organizers to avoid duplicate topics), submit their solution blueprint via Google Form, and present their pitch deck to the panel. Shortlisted teams build and deploy a live technical prototype within the given time to compete for cash prizes.",
+  "description": "Pitch Perfect is designed to push your creative and analytical boundaries. By participating, you will sharpen your public speaking, test your pitching skills in front of an expert panel, and learn to master time-critical problem solving under pressure. You will gain hands-on experience formulating impactful solutions, translating ideas into structured presentations, and building technical confidence alongside peers.",
   "organizers": [
-    "VAMINT Core Committee"
+    "VAMINT Core Committee",
+    "Contact: Mrunmayee (7588326720)"
   ],
-  "prerequisites": "Team size: 1–3 members. Open to all branches and years. Registration fee: ₹50 per participant (1 member: ₹50, 2 members: ₹100, 3 members: ₹150).",
-  "prizes": "Exciting cash prizes and trophies for the winners. Certificates of merit for shortlisted teams and participation certificates for all. The decision of the judges will be final.",
-  "whatToBring": "Laptop with charger (mandatory) and mobile hotspot for blueprint submission and prototype development.",
-  "image": null,
+  "prerequisites": "Team size: 1–3 members. Open to all branches and years. Fee: ₹50 per participant (1 = ₹50, 2 = ₹100, 3 = ₹150).",
+  "prizes": "Cash prizes and certificates for winners, and participation certificates for all participants.",
+  "whatToBring": "Laptop with charger (mandatory) and mobile hotspot.",
   "highlights": [
-    {
-      "value": "1–3",
-      "label": "Team Members"
-    },
     {
       "value": "₹50",
       "label": "Per Participant"
     },
     {
-      "value": "2 Rounds",
-      "label": "Pitch & Prototype"
+      "value": "1–3",
+      "label": "Team Members"
     },
     {
       "value": "Cash Prizes",
-      "label": "For Top Winners"
+      "label": "For Winners"
+    },
+    {
+      "value": "A101",
+      "label": "GSMCOE, Balewadi"
     }
   ],
   "outcome": null
